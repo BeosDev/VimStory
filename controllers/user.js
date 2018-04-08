@@ -26,10 +26,8 @@ function addUser(paramters) {
         connection.query(query,paramters, function (error, results, fields) {
             // And done with the connection.
             connection.release();
-
             // Handle error after the release.
             if (error) throw error;
-            console.log('ok');
             // Don't use the connection here, it has been returned to the pool.
             console.log(results);
         });
