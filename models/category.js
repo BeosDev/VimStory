@@ -19,13 +19,13 @@ function getCategories() {
     });
 }
 
-function getCategory(parameters) {
+function getCategory(C_ID) {
 
     pool.getConnection(function (err, connection) {
         // Use the connection
-        parameters = pool.standardized(parameters, 1);
-        var query = 'SELECT * FROM category where C_ID = ?';
-        connection.query(query, parameters, function (error, results, fields) {
+        //parameters = pool.standardized(parameters, 1);
+        var query = `SELECT * FROM category where C_ID = ${C_ID}`;
+        connection.query(query, function (error, results, fields) {
             // And done with the connection.
             connection.release();
 
@@ -34,6 +34,7 @@ function getCategory(parameters) {
                 throw error;
             }
             // Don't use the connection here, it has been returned to the pool
+            console.log(results);
             return results;
         });
     });
@@ -41,13 +42,13 @@ function getCategory(parameters) {
 
 //getCategory(["1"]);
 
-function addCategory(parameters) {
+function addCategory(category) {
 
     pool.getConnection(function (err, connection) {
         // Use the connection
-        parameters = pool.standardized(parameters, 2);
-        var query = 'INSERT INTO category VALUES(null,?)';
-        connection.query(query, parameters, function (error, results, fields) {
+        //parameters = pool.standardized(parameters, 2);
+        var query = 'INSERT INTO category SET ?';
+        connection.query(query, category, function (error, results, fields) {
             // And done with the connection.
             connection.release();
 
@@ -56,20 +57,45 @@ function addCategory(parameters) {
                 throw error;
             }
             // Don't use the connection here, it has been returned to the pool
+            console.log(results);
+            return results;
+        });
+    });
+}
+// var C_Name = "aaa";
+// addCategory({C_Name});
+
+function updateCategory(category, C_ID) {
+
+    pool.getConnection(function (err, connection) {
+        // Use the connection
+        //parameters = pool.standardized(parameters, 1);
+        var query = `UPDATE category SET ? where C_ID = ${C_ID}`;
+        connection.query(query, category, function (error, results, fields) {
+            // And done with the connection.
+            connection.release();
+
+            // Handle error after the release.
+            if (error) {
+                throw error;
+            }
+            // Don't use the connection here, it has been returned to the pool
+            console.log(results);
             return results;
         });
     });
 }
 
-//addCategory(["aaa"]);
+// var C_ID = 1, C_Name = "AGV";
+// updateCategory({C_Name},C_ID);
 
-function updateCategory(parameters) {
+function deleteCategory(C_ID) {
 
     pool.getConnection(function (err, connection) {
         // Use the connection
-        parameters = pool.standardized(parameters, 1);
-        var query = 'UPDATE category SET C_Name = ? where C_ID = ?';
-        connection.query(query, parameters, function (error, results, fields) {
+        //parameters = pool.standardized(parameters, 1);
+        var query = `DELETE category where C_ID = ${C_ID}`;
+        connection.query(query, function (error, results, fields) {
             // And done with the connection.
             connection.release();
 
@@ -78,28 +104,7 @@ function updateCategory(parameters) {
                 throw error;
             }
             // Don't use the connection here, it has been returned to the pool
-            return results;
-        });
-    });
-}
-
-//updateCategory(["aa","6"]);
-
-function deleteCategory(parameters) {
-
-    pool.getConnection(function (err, connection) {
-        // Use the connection
-        parameters = pool.standardized(parameters, 1);
-        var query = 'DELETE category where C_ID = ?';
-        connection.query(query, parameter, function (error, results, fields) {
-            // And done with the connection.
-            connection.release();
-
-            // Handle error after the release.
-            if (error) {
-                throw error;
-            }
-            // Don't use the connection here, it has been returned to the pool
+            console.log(results);
             return results;
         });
     });
