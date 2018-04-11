@@ -1,5 +1,6 @@
 var pool = require('../config/database');
 
+
 function getBooks() {
     pool.getConnection(function (err, connection) {
         // Use the connection
@@ -8,6 +9,24 @@ function getBooks() {
             // And done with the connection.
             connection.release();
 
+            // Handle error after the release.
+            if (error) {
+                throw error;
+            }
+            // Don't use the connection here, it has been returned to the pool
+            return results;
+        });
+    });
+}
+
+
+function getBook(id) {
+    pool.getConnection(function (err, connection) {
+        // Use the connection
+        var query = `SELECT * FROM book WHERE B_ID = ${id};`;
+        connection.query(query , function (error, results, fields) {
+            // And done with the connection.
+            connection.release();
             // Handle error after the release.
             if (error) {
                 throw error;
@@ -77,5 +96,8 @@ function deleteBook(id) {
 //deleteBook(B_ID)
 module.exports = {
     getBooks,
-    addBook
+    addBook,
+    getBook,
+    updateBook,
+    deleteBook
 }
