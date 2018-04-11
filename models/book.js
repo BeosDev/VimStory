@@ -1,6 +1,8 @@
 var pool = require('../config/database');
+var EventEmitter = require('events').EventEmitter;
 
 function getBooks() {
+    var emitter = this;
     pool.getConnection(function (err, connection) {
         // Use the connection
         var query = 'SELECT * FROM book';
@@ -13,10 +15,17 @@ function getBooks() {
                 throw error;
             }
             // Don't use the connection here, it has been returned to the pool
-            return results;
+            emitter.emit('results',results);
         });
     });
 }
+
+getBooks.prototype = new EventEmitter();
+
+//var k = new getBooks();
+//k.on('results',results => console.log(results));
+
+
 
 function addBook(book) {
     pool.getConnection(function (err, connection) {
@@ -77,5 +86,6 @@ function deleteBook(id) {
 //deleteBook(B_ID)
 module.exports = {
     getBooks,
-    addBook
+    addBook,
+    deleteBook
 }
