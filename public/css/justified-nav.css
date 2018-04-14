@@ -1,0 +1,101 @@
+body {
+  padding-top: 20px;
+}
+
+.footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  border-top: 1px solid #eee;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  background-color: transparent;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+.navbar {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7),to(#eee));
+  background-image: -webkit-linear-gradient(top, #f7f7f7 0%,#eee 100%);
+  background-image: -o-linear-gradient(top, #f7f7f7 0%,#eee 100%);
+  background-image: linear-gradient(to bottom, #f7f7f7 0%,#eee 100%);
+  border: 1px solid #e5e5e5;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .navbar-nav .nav-item {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+        -ms-flex: 1 0 auto;
+            flex: 1 0 auto;
+  }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .masthead,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+.max-lines-des{
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3; /*số dòng muốn hiện */
+   font-size: 1rem;          /*cỡ chữ, đơn vị px */
+   line-height: 1.5;        /* khoảng cách giữa các dòng, đơn vị em*/
+   max-height: 1rem*3*125px;   /* chiều cao tối đa đoạn văn bản = (cỡ chữ) x (số dòng) x (chiều cao) */
+}
+.max-lines-title{
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2; /*số dòng muốn hiện */
+   font-size: 1.5rem;          /*cỡ chữ, đơn vị px */
+   line-height: 1.2;        /* khoảng cách giữa các dòng, đơn vị em*/
+   max-height: 1.5rem*2*125px;   /* chiều cao tối đa đoạn văn bản = (cỡ chữ) x (số dòng) x (chiều cao) */
+}
+.updTm {
+    font-size: 10px;
+    color: #999;
+    padding-bottom: 5px;
+    font-weight: 500;
+}
+
+input[type=search-text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('/searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    margin-bottom:1;
+}
+
+input[type=search-text]:focus {
+    width: 100%;
+}
