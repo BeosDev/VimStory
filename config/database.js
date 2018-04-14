@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var EventEmitter = require('events').EventEmitter;
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -8,30 +9,15 @@ var con = mysql.createConnection({
 
 function executeQuery(cmd,paramters){
     con.connect();
-    var query = con.query(cmd,paramters);
-    con.end();
-    return query;
-}
-/*
-var query = connection.query('SELECT * FROM posts');
-query
-  .on('error', function(err) {
-    // Handle error, an 'end' event will be emitted after this as well
-  })
-  .on('fields', function(fields) {
-    // the field packets for the rows to follow
-  })
-  .on('result', function(row) {
-    // Pausing the connnection is useful if your processing involves I/O
-    connection.pause();
- 
-    processRow(row, function() {
-      connection.resume();
+    var emitter = this;
+    con.query(cmd,paramters,function(err,results){
+      if (err){
+        emitter.emit('error',error);
+        throw err;
+      }
+      emitter.emit('results',results);
     });
-  })
-  .on('end', function() {
-    // all rows have been received
-  });
-*/
-
+    con.end();
+}
+executeQuery.prototype = new EventEmitter();
 module.exports = executeQuery;
