@@ -1,71 +1,24 @@
-var pool = require('../config/database');
+var executeQuery = require('../config/database');
 
 function getUsers() {
-    pool.getConnection(function (err, connection) {
-        // Use the connection
-        var query = 'SELECT * FROM user';
-        connection.query(query , function (error, results, fields) {
-            // And done with the connection.
-            connection.release();
-
-            // Handle error after the release.
-            if (error) {
-                throw error;
-            }
-            // Don't use the connection here, it has been returned to the pool
-            return results;
-        });
-    });
+    var query = 'SELECT * FROM user';
+    return executeQuery(query);
 }
 
 function addUser(paramters) {
-    pool.getConnection(function (err, connection) {
-        // Use the connection
-//        paramters = pool.standardized(paramters,8);
-        var query = 'INSERT INTO user SET ?;';
-        connection.query(query,paramters, function (error, results, fields) {
-            // And done with the connection.
-            connection.release();
-            // Handle error after the release.
-            if (error) throw error;
-            // Don't use the connection here, it has been returned to the pool.
-            console.log(results);
-        });
-    });
+    var query = 'INSERT INTO user SET ?;';
+    return executeQuery(query, paramters);
 }
 
-function updateUser(paramters,id) {
-    pool.getConnection(function (err, connection) {
-        // Use the connection
-//        paramters = pool.standardized(paramters,8);
-        var query =  `UPDATE user SET ? WHERE U_ID = ${id};`;
-        connection.query(query,paramters, function (error, results, fields) {
-            // And done with the connection.
-            connection.release();
-            // Handle error after the release.
-            if (error) throw error;
-            // Don't use the connection here, it has been returned to the pool.
-            console.log(results);
-        });
-    });
+function updateUser(paramters, id) {
+    var query = `UPDATE user SET ? WHERE U_ID = ${id};`;
+    return executeQuery(query, paramters);
 }
 
 function deleteUser(id) {
-    pool.getConnection(function (err, connection) {
-        // Use the connection
-//        paramters = pool.standardized(paramters,8);
-        var query =  `Delete FROM user WHERE U_ID = ${id};`;
-        connection.query(query, function (error, results, fields) {
-            // And done with the connection.
-            connection.release();
-            // Handle error after the release.
-            if (error) throw error;
-            // Don't use the connection here, it has been returned to the pool.
-            console.log(results);
-        });
-    });
+    var query = `Delete FROM user WHERE U_ID = ${id};`;
+    return executeQuery(query);
 }
-
 
 module.exports = {
     getUsers,
