@@ -37,7 +37,8 @@ SpeechToText.prototype = new EventEmitter();
 var k = new SpeechToText('Xin chào các bạn');
 k.on('data', (data) => {
     console.log(data);
-})*/
+})
+*/
 module.exports = {
     SpeechToText
 }
