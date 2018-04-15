@@ -1,19 +1,23 @@
 var mysql = require('mysql');
-var pool = mysql.createPool({
-  connectionLimit: 10,
+var EventEmitter = require('events').EventEmitter;
+var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'root',
   database: 'vimstory'
 });
 
-pool.standardized = function (paramters,len) {
-  if (paramters.length !== len) {
-    for (var i = paramters.length; i < len; i++) {
-      paramters[i] = null;
-    }
-  }
-  return paramters;
+function executeQuery(cmd,paramters){
+    con.connect();
+    var emitter = this;
+    con.query(cmd,paramters,function(err,results){
+      if (err){
+        emitter.emit('error',error);
+        throw err;
+      }
+      emitter.emit('results',results);
+    });
+    con.end();
 }
-
-module.exports = pool;
+executeQuery.prototype = new EventEmitter();
+module.exports = executeQuery;
