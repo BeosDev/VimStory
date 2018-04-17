@@ -3,11 +3,10 @@ var EventEmitter = require('events').EventEmitter;
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'root',
   database: 'vimstory'
 });
 function executeQuery(cmd,paramters){
-    //con.connect();
     var emitter = this;
     con.query(cmd,paramters,function(err,results){
       if (err){
@@ -16,7 +15,7 @@ function executeQuery(cmd,paramters){
       }
       emitter.emit('results',results);
     });
-    //con.end();
+    
 }
 executeQuery.prototype = new EventEmitter();
 module.exports = executeQuery;
