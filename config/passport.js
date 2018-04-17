@@ -17,7 +17,7 @@ module.exports = function(){
         passwordField: 'password'
     },function(username,password,done){
         var User = new UserModel.getOneUser();
-        User.on('result',function(result){
+        User.on('results',function(result){
             done(null,result);
         })
         User.on('error',function(err){
