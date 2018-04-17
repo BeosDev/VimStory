@@ -5,6 +5,11 @@ function getUsers() {
     return new executeQuery(query);
 }
 
+function getOneUser(username){
+    var query = `SELECT * FROM user WHERE username = '${username}'`;
+    return new executeQuery(query);
+}
+
 function addUser(paramters) {
     var query = 'INSERT INTO user SET ?;';
     return new executeQuery(query, paramters);
@@ -20,14 +25,13 @@ function deleteUser(id) {
     return new executeQuery(query);
 }
 
-var k = new getUsers();
-k.on('results',function(results){
-    console.log(results[0]);
-})
+var k = new getOneUser('admin');
+k.on('results',result => console.log(result));
 
 module.exports = {
     getUsers,
     addUser,
     deleteUser,
-    updateUser
+    updateUser,
+    getOneUser
 }

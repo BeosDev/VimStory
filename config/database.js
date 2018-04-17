@@ -6,14 +6,8 @@ var con = mysql.createConnection({
   password: 'root',
   database: 'vimstory'
 });
-<<<<<<< HEAD
-
-=======
-con.connect();
->>>>>>> nana
-function executeQuery(cmd,paramters){
-    con.connect();
-    var emitter = this;
+function executeQuery(cmd,paramters){ 
+    var emitter = this; 
     con.query(cmd,paramters,function(err,results){
       if (err){
         emitter.emit('error',error);
@@ -21,7 +15,6 @@ function executeQuery(cmd,paramters){
       }
       emitter.emit('results',results);
     });
-    con.end();
 }
 executeQuery.prototype = new EventEmitter();
 module.exports = executeQuery;
