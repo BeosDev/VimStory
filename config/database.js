@@ -6,7 +6,11 @@ var con = mysql.createConnection({
   password: 'root',
   database: 'vimstory'
 });
+<<<<<<< HEAD
 
+=======
+con.connect();
+>>>>>>> nana
 function executeQuery(cmd,paramters){
     con.connect();
     var emitter = this;
