@@ -16,14 +16,6 @@ function getBooks(req, res, next) {
         }
         else res.end('error');
 
-<<<<<<< HEAD
-function getBooks(req,res,next){
-    var books = new bookModel.getBooks;
-    books.on('results',function (data){
-        //console.log(data);
-        res.render('admin/adminBook', { title: 'Manage book - Vimstory',data:data});
-    })
-=======
     });
 }
 
@@ -98,7 +90,6 @@ function updateBook(req,res,next){
     books.on('error', function (err) {
         next();
     });
->>>>>>> master
 }
 
 module.exports = {
