@@ -20,10 +20,10 @@ function deleteBook(id) {
     return new executeQuery(query);
 }
 
-var k = new getBooks();
-k.on('results',function(results){
-    console.log(results[0]);
-})
+//var k = new getBooks();
+//k.on('results',function(results){
+  //  console.log(results[1]);
+//})
 
 module.exports = {
     getBooks,
