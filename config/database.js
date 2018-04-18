@@ -8,7 +8,7 @@ var con = mysql.createConnection({
 });
 con.connect();
 function executeQuery(cmd,paramters){
-   // con.connect();
+    con.connect();
     var emitter = this;
     con.query(cmd,paramters,function(err,results){
       if (err){
@@ -17,7 +17,7 @@ function executeQuery(cmd,paramters){
       }
       emitter.emit('results',results);
     });
-   // con.end();
+    con.end();
 }
 executeQuery.prototype = new EventEmitter();
 module.exports = executeQuery;
