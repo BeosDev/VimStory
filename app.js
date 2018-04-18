@@ -24,7 +24,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 //add temporary route
-app.use('/adminBook', adminBookRouter);
+app.use('/', adminBookRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

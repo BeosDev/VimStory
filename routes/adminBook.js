@@ -3,10 +3,17 @@ var router = express.Router();
 var bookController = require('../controllers/book')
 /* GET home page. */
 
-router.get('/', function(req, res, next) {
+router.get('/adminBook', function(req, res, next) {
    bookController.getBooks(req,res,next);
-   //console.log("awn lz roi");
    //res.render('admin/adminBook', { title: 'Add new book - Vimstory'});
+});
+
+
+router.get('/addBook', function(req, res, next) {
+    res.render('admin/addBook', { title: 'Add new book - Vimstory'});
+ });
+router.post('/addnewbook',function(req,res,next){
+    bookController.addBook(req,res,next);
 });
 
 module.exports = router;
