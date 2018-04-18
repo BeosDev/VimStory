@@ -1,4 +1,6 @@
 var bookModel = require('../models/book');
+var formidable = require('formidable'); 
+var fs = require('fs');
 
 function getBooks(req, res, next) {
     var books = new bookModel.getBooks;
@@ -18,26 +20,43 @@ function getBooks(req, res, next) {
 }
 
 function addBook(req, res, next) {
-    var B_Name = req.body.B_Name;
-    var B_Content = req.body.B_Content;
-    var books = new bookModel.addBook({
-        B_Name: B_Name,
-        B_Content: B_Content
-    });
-    req.isRedirect = false;
-    books.on('results', function (results) {
-        //       console.log(req);
-        //res.send('add successfully');
 
-        if (results.affectedRows > 0) {
-            req.isRedirect = true;
+    var form =  new formidable.IncomingForm();
+    var newpath;
+    form.uploadDir = '../public/img/';
+    Name= req.body.B_Name,
+    Content= req.body.B_Content,
+    Description= req.body.B_Description;
+
+    form.parse(req,function (err, fields, file) {
+        var path = file.B_imageurl.path;
+        newpath = form.uploadDir + file.B_imageurl.name;
+        var books = new bookModel.addBook({
+            B_Name: Name,
+            B_Content: Content,
+            B_Description: Description,
+            B_imageurl :newpath
+        });
+        
+       // console.log('newpath= '+books.B_imageurl);
+        fs.rename(path, newpath, function (err) {
+            if (err) throw err;
+        });
+        req.isRedirect = false;
+        books.on('results', function (results) {
+            if (results.affectedRows > 0) {
+                req.isRedirect = true;
+                next();
+            }
+        })
+        books.on('error', function (err) {
             next();
-        }
-        //getBooks();
-    })
-    books.on('error', function (err) {
-        next();
-    })
+        });
+        
+    });
+    
+
+    
 }
 
 function deleteBook(req,res,next){

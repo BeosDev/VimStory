@@ -9,9 +9,11 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <form action="/addBook" method="post">
-        <input type="text" id = "B_Name" name="B_Name"/>
-        <input type="text" id = "B_Content" name = "B_Content"/>
+    <form action="/addBook" method="post" enctype="multipart/form-data">
+        Name: <input type="text" id = "B_Name" name="B_Name"/>
+        Content:<input type="text" id = "B_Content" name = "B_Content"/>
+        Description:<input type="text" id = "B_Description" name = "B_Description"/>
+        img:<input type="file" id = "B_imageurl" name = "B_imageurl"/>
         <input type="submit" id = "submit" value="submit"/>
     </form>
 </body>
