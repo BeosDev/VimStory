@@ -6,7 +6,7 @@ var con = mysql.createConnection({
   password: '',
   database: 'vimstory'
 });
-con.connect();
+//con.connect();
 function executeQuery(cmd,paramters){
     con.connect();
     var emitter = this;
