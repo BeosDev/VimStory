@@ -150,119 +150,20 @@
       <div class="container">
         <div class="row">
           
-
+        <%for(var i=0;i<data.length;i++)
+        { %>
           <div class="card">
-            <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="img/salt.jpg" data-holder-rendered="true">
+            <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="<%=data[i].B_imageurl%>" data-holder-rendered="true">
             <div style="min-height: 170px;">
-              <h4 id="book-title" class="max-lines-title">Người đàn ông rắc muối lên bãi biển, điều kỳ diệu xảy ra vào sáng hôm sau</h4>
-              <span class="updTm" datetime="2018-04-04 10:38:46">04/04/2018 10:38:46</span>
-              <p id="book-description" class="max-lines-des">Nhìn người đàn ông này bắt ốc móng tay thật dễ dàng nhưng chúng ta không nên học theo vì rất có thể cách bắt này sẽ làm ảnh hưởng đến cân bằng sinh thái. Bởi vì lượng muối dùng để đánh bắt sẽ khiến độ mặn ở khu vực nước nông tăng lên.</p>
+              <h4 id="book-title" class="max-lines-title"><%=data[i].B_Name%></h4>
+              <span class="updTm" datetime="2018-04-04 10:38:46"><%=data[i].B_PublishDate%></span>
+              <p id="book-description" class="max-lines-des"><%=data[i].B_Description%></p>
             </div>
             <div><a href="#" style="float: right;"> >>Read more</a></div>
           </div>
+        <% } %>
 
-          <div class="card">
-            <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="img/meo1.jpg" data-holder-rendered="true">
-            <div style="min-height: 170px;">
-              <h4 id="book-title" class="max-lines-title">Chuyện Moè dạy hooman how to bay</h4>
-              <span class="updTm" datetime="2018-04-04 10:38:46">04/04/2018 10:38:46</span>
-              <p id="book-description" class="max-lines-des">Câu chuyện đậm chất nhân văn về chú moè vượt qua trở ngại về giống loài để dạy cho con người cách bay lắk like a Vinaheyer</p>
-            </div>
-            <div><a href="#" style="float: right;"> >>Read more</a></div>
-          </div>
-
-          <div class="card">
-            <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="img/ic1.jpg" data-holder-rendered="true">
-            <div style="min-height: 170px;">
-              <h4 id="book-title" class="max-lines-title">Ice Cube bên bờ biển</h4>
-              <span class="updTm" datetime="2018-04-04 10:38:46">04/04/2018 10:38:46</span>
-              <p id="book-description" class="max-lines-des">Ice Cube bên bờ biển là câu chuyện về chàng trai da màu Ice Cube với ước mơ trở thành ráp bơ hàng đầu thế giới. Với đam mê cháy bỏng của mình, Ice Cube một mình chuyển đến bờ tây nước mỹ hào nhoáng với 2 bàn tay trắng</p>
-            </div>
-            <div><a href="#" style="float: right;"> >>Read more</a></div>
-          </div>
-
-          <div class="card">
-            <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="img/salt.jpg" data-holder-rendered="true">
-            <div style="min-height: 170px;">
-              <h4 id="book-title" class="max-lines-title">Người đàn ông rắc muối lên bãi biển, điều kỳ diệu xảy ra vào sáng hôm sau</h4>
-              <span class="updTm" datetime="2018-04-04 10:38:46">04/04/2018 10:38:46</span>
-              <p id="book-description" class="max-lines-des">Nhìn người đàn ông này bắt ốc móng tay thật dễ dàng nhưng chúng ta không nên học theo vì rất có thể cách bắt này sẽ làm ảnh hưởng đến cân bằng sinh thái. Bởi vì lượng muối dùng để đánh bắt sẽ khiến độ mặn ở khu vực nước nông tăng lên.</p>
-            </div>
-            <div><a href="#" style="float: right;"> >>Read more</a></div>
-          </div>
-
-          <div class="card">
-            <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="img/meo1.jpg" data-holder-rendered="true">
-            <div style="min-height: 170px;">
-              <h4 id="book-title" class="max-lines-title">Chuyện Moè dạy hooman how to bay</h4>
-              <span class="updTm" datetime="2018-04-04 10:38:46">04/04/2018 10:38:46</span>
-              <p id="book-description" class="max-lines-des">Câu chuyện đậm chất nhân văn về chú moè vượt qua trở ngại về giống loài để dạy cho con người cách bay lắk like a Vinaheyer</p>
-            </div>
-            <div><a href="#" style="float: right;"> >>Read more</a></div>
-          </div>
-
-          <div class="card">
-            <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="img/ic1.jpg" data-holder-rendered="true">
-            <div style="min-height: 170px;">
-              <h4 id="book-title" class="max-lines-title">Ice Cube bên bờ biển</h4>
-              <span class="updTm" datetime="2018-04-04 10:38:46">04/04/2018 10:38:46</span>
-              <p id="book-description" class="max-lines-des">Ice Cube bên bờ biển là câu chuyện về chàng trai da màu Ice Cube với ước mơ trở thành ráp bơ hàng đầu thế giới. Với đam mê cháy bỏng của mình, Ice Cube một mình chuyển đến bờ tây nước mỹ hào nhoáng với 2 bàn tay trắng</p>
-            </div>
-            <div><a href="#" style="float: right;"> >>Read more</a></div>
-          </div>
-
-          <div class="card">
-            <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="img/salt.jpg" data-holder-rendered="true">
-            <div style="min-height: 170px;">
-              <h4 id="book-title" class="max-lines-title">Người đàn ông rắc muối lên bãi biển, điều kỳ diệu xảy ra vào sáng hôm sau</h4>
-              <span class="updTm" datetime="2018-04-04 10:38:46">04/04/2018 10:38:46</span>
-              <p id="book-description" class="max-lines-des">Nhìn người đàn ông này bắt ốc móng tay thật dễ dàng nhưng chúng ta không nên học theo vì rất có thể cách bắt này sẽ làm ảnh hưởng đến cân bằng sinh thái. Bởi vì lượng muối dùng để đánh bắt sẽ khiến độ mặn ở khu vực nước nông tăng lên.</p>
-            </div>
-            <div><a href="#" style="float: right;"> >>Read more</a></div>
-          </div>
-
-          <div class="card">
-            <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="img/meo1.jpg" data-holder-rendered="true">
-            <div style="min-height: 170px;">
-              <h4 id="book-title" class="max-lines-title">Chuyện Moè dạy hooman how to bay</h4>
-              <span class="updTm" datetime="2018-04-04 10:38:46">04/04/2018 10:38:46</span>
-              <p id="book-description" class="max-lines-des">Câu chuyện đậm chất nhân văn về chú moè vượt qua trở ngại về giống loài để dạy cho con người cách bay lắk like a Vinaheyer</p>
-            </div>
-            <div><a href="#" style="float: right;"> >>Read more</a></div>
-          </div>
-
-          <div class="card">
-            <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="img/ic1.jpg" data-holder-rendered="true">
-            <div style="min-height: 170px;">
-              <h4 id="book-title" class="max-lines-title">Ice Cube bên bờ biển</h4>
-              <span class="updTm" datetime="2018-04-04 10:38:46">04/04/2018 10:38:46</span>
-              <p id="book-description" class="max-lines-des">Ice Cube bên bờ biển là câu chuyện về chàng trai da màu Ice Cube với ước mơ trở thành ráp bơ hàng đầu thế giới. Với đam mê cháy bỏng của mình, Ice Cube một mình chuyển đến bờ tây nước mỹ hào nhoáng với 2 bàn tay trắng</p>
-            </div>
-            <div><a href="#" style="float: right;"> >>Read more</a></div>
-          </div>
-
-
-
-
-        
-          
-        
-        
-        
-        
-        
-        
-        
-        
-        
-          
-          
-        
-        
-        
-        
         </div>
-
       </div>
     </div>
       <!-- <div class="row">
