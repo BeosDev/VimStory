@@ -25,8 +25,6 @@ function deleteUser(id) {
     return new executeQuery(query);
 }
 
-var k = new getOneUser('admin');
-k.on('results',result => console.log(result));
 
 module.exports = {
     getUsers,
