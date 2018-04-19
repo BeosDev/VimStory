@@ -20,27 +20,40 @@ function getBooks(req, res, next) {
 }
 
 function addBook(req, res, next) {
+    var Name;
+    var Content;
+    var Description;
+    var newpath;
 
     var form =  new formidable.IncomingForm();
-    var newpath;
-    form.uploadDir = '../public/img/';
-    Name= req.body.B_Name,
-    Content= req.body.B_Content,
-    Description= req.body.B_Description;
-
+    //set directory folder
+    form.uploadDir = "../public/img/";
+    //xử lý upload
     form.parse(req,function (err, fields, file) {
+        Name = fields.B_Name;
+        Content= fields.B_Content;
+        Description = fields.B_Description;
+        //path tmp in server
         var path = file.B_imageurl.path;
-        newpath = form.uploadDir + file.B_imageurl.name;
+        if(file.B_imageurl.name.toString()!=''){
+        //set up new path
+            console.log('save img file')
+            newpath = form.uploadDir + file.B_imageurl.name;
+            fs.rename(path, newpath, function (err) {
+                if (err) throw err;    
+            });
+        }
+        else{
+            fs.unlink(path, (err) => {
+                if (err) throw err;
+                console.log(path+' was deleted');
+            });
+        }
         var books = new bookModel.addBook({
             B_Name: Name,
             B_Content: Content,
             B_Description: Description,
             B_imageurl :newpath
-        });
-        
-       // console.log('newpath= '+books.B_imageurl);
-        fs.rename(path, newpath, function (err) {
-            if (err) throw err;
         });
         req.isRedirect = false;
         books.on('results', function (results) {
@@ -48,14 +61,11 @@ function addBook(req, res, next) {
                 req.isRedirect = true;
                 next();
             }
-        })
+        });
         books.on('error', function (err) {
             next();
         });
-        
     });
-    
-
     
 }
 
