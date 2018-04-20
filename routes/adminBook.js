@@ -23,9 +23,6 @@ router.get('/pageUpdateBook/:id', function (req, res, next) {
 
 router.post('/updateBook',function(req,res,next){
     bookController.updateBook(req,res,next);
-}, function (req, res, next) {
-    if (req.isRedirect === true)
-        res.redirect('/adminBook');
 });
 
 

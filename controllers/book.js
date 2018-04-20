@@ -91,14 +91,13 @@ function updateBook(req,res,next){
     }
     var books  = new bookModel.updateBook(data,B_ID);
     req.isRedirect = false;
-    books.on('results',function(results){
+    books.once('results',function(results){
         if(results.affectedRows > 0){
-            req.isRedirect = true;
-            next();
+            res.redirect('/adminBook');
         }
     });
-    books.on('error', function (err) {
-        next();
+    books.once('error', function (err) {
+        res.redirect('/adminBook');
     });
 }
 
