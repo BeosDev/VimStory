@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title><%=title></title>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1><%=title%></h1>
+    </div>
+    <form action="/addCategory" method="post">
+        <div class="form-group">
+            <label>ID:</label>
+            <input type="text" name="C_ID" id="form-control">
+        </div>
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" name="C_Name" id="form-control">
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+    <h2>Number of records:<%=data.length%></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID:</th>
+                <th>Name:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for(var i=0;i < data.length; i++){ %>
+                <tr>
+                    <td>data.C_ID</td>
+                    <td>data.C_Name</td>
+                    <td><a>Sửa</a></td>
+                    <td><a>Xóa</a></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

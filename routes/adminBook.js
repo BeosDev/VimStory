@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var bookController = require('../controllers/book');
+var categoryController = require('../controllers/category');
 /* GET home page. */
 
 router.get('/adminBook', function (req, res) {
@@ -43,5 +44,16 @@ router.get('/deleteBook/:id', function (req, res, next) {
     if (req.isRedirect === true)
         res.redirect('/adminBook');
 });
+
+//Category
+router.get("/adminCategory", function(req,res,next){
+    console.log("b");
+    categoryController.getCategories(req,res);
+})
+
+router.post("/addBook",function(req,res,next){
+
+})
+
 
 module.exports = router;
