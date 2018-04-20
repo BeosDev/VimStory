@@ -5,7 +5,7 @@ var fs = require('fs');
 function getBooks(req, res, next) {
     var books = new bookModel.getBooks;
 
-    books.on('results', function (data) {
+    books.once('results', function (data) {
         if (data.length > 0) {
             res.render('admin/adminBook', {
                 title: 'Manage book - Vimstory',
@@ -56,13 +56,13 @@ function addBook(req, res, next) {
             B_imageurl :newpath
         });
         req.isRedirect = false;
-        books.on('results', function (results) {
+        books.once('results', function (results) {
             if (results.affectedRows > 0) {
                 req.isRedirect = true;
                 next();
             }
         });
-        books.on('error', function (err) {
+        books.once('error', function (err) {
             next();
         });
     });
@@ -72,13 +72,13 @@ function addBook(req, res, next) {
 function deleteBook(req,res,next){
     var books = new bookModel.deleteBook(req.params.id);
     req.isRedirect = false;
-    books.on('results',function(results){
+    books.once('results',function(results){
         if(results.affectedRows > 0){
             req.isRedirect = true;
             next();
         }
     });
-    books.on('error', function (err) {
+    books.once('error', function (err) {
         next();
     });
 }
