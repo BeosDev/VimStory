@@ -6,18 +6,16 @@ var con = mysql.createConnection({
   password: '',
   database: 'vimstory'
 });
-
-function executeQuery(cmd,paramters){
-    con.connect();
-    var emitter = this;
+function executeQuery(cmd,paramters){ 
+    var emitter = this; 
     con.query(cmd,paramters,function(err,results){
+      console.log(cmd);
       if (err){
         emitter.emit('error',err);
         throw err;
       }
       emitter.emit('results',results);
     });
-    con.end();
 }
 executeQuery.prototype = new EventEmitter();
 module.exports = executeQuery;
