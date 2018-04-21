@@ -33,6 +33,7 @@ function addBook(req, res, next) {
         Name = fields.B_Name;
         Content= fields.B_Content;
         Description = fields.B_Description;
+        console.log('add book');
         //path tmp in server
         var path = file.B_imageurl.path;
         if(file.B_imageurl.name.toString()!=''){
