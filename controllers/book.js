@@ -24,7 +24,7 @@ function addBook(req, res, next) {
     var Content;
     var Description;
     var newpath;
-
+    console.log('ok');
     var form =  new formidable.IncomingForm();
     //set directory folder
     form.uploadDir = "../public/img/";
