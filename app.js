@@ -6,11 +6,7 @@ var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var adminBookRouter = require('./routes/adminBook');
-var loginRouter = require('./routes/login');
-var readBookRouter = require('./routes/readBook');
+var routes = require('./routes');
 
 var app = express();
 
@@ -30,13 +26,7 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-//add temporary route
-app.use('/', adminBookRouter);
-app.use('/', loginRouter);
-app.use('/', readBookRouter);
+app.use('/',routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
