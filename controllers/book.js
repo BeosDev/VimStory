@@ -58,12 +58,11 @@ function addBook(req, res, next) {
         req.isRedirect = false;
         books.once('results', function (results) {
             if (results.affectedRows > 0) {
-                req.isRedirect = true;
-                next();
+                res.redirect('/admin/books');
             }
         });
         books.once('error', function (err) {
-            next();
+            res.redirect('/admin/books');
         });
     });
     
@@ -93,11 +92,11 @@ function updateBook(req,res,next){
     req.isRedirect = false;
     books.once('results',function(results){
         if(results.affectedRows > 0){
-            res.redirect('/adminBook');
+            res.redirect('/admin/books');
         }
     });
     books.once('error', function (err) {
-        res.redirect('/adminBook');
+        res.redirect('/admin/books');
     });
 }
 

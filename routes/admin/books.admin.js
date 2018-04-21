@@ -17,9 +17,6 @@ router.get('/add', function (req, res, next) {
 
 router.post('/add', function (req, res, next) {
     bookController.addBook(req, res, next);
-}, function (req, res, next) {
-    if (req.isRedirect === true)
-        res.redirect('./adminBook');
 });
 
 

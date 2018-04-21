@@ -15,8 +15,14 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>U_authorization</th>
+                <th>U_Fullname</th>
+                <th>U_Address</th>
+                <th>U_Phone</th>
+                <th>U_Sex</th>
+                <th>U_Email</th>
                 <th>xoa</th>
                 <th>sua</th>
             </tr>
@@ -25,11 +31,12 @@
             <%for(var i=0;i<data.length;i++)
             { %>
                 <tr>
-                    <td><%= data[i].B_ID %></td>
-                    <td><%= data[i].B_Name %></td>
-                    <td><%= data[i].B_Description %></td>
-                    <td><a href='/delete/<%=data[i].B_ID%>'>Xoa</a></td>
-                    <td><a href='update/<%=data[i].B_ID%>'>sua</a></td>
+                    <td><%= data[i].U_ID %></td>
+                    <td><%= data[i].Username %></td>
+                    <td><%= data[i].Password %></td>
+                    <td><%= data[i].U_Authoriztion %></td>
+                    <td><a href='books/delete/<%=data[i].B_ID%>'>Xoa</a></td>
+                    <td><a href='books/update/<%=data[i].B_ID%>'>sua</a></td>
                 </tr>
             <% } %>
         </tbody>
