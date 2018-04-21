@@ -33,12 +33,14 @@ function addBook(req, res, next) {
         Name = fields.B_Name;
         Content= fields.B_Content;
         Description = fields.B_Description;
+        console.log('add book');
         //path tmp in server
         var path = file.B_imageurl.path;
         if(file.B_imageurl.name.toString()!=''){
         //set up new path
             console.log('save img file')
             newpath = form.uploadDir + file.B_imageurl.name;
+            
             fs.rename(path, newpath, function (err) {
                 if (err) throw err;    
             });
@@ -53,7 +55,7 @@ function addBook(req, res, next) {
             B_Name: Name,
             B_Content: Content,
             B_Description: Description,
-            B_imageurl :newpath
+            B_imageurl :'img/'+file.B_imageurl.name
         });
         req.isRedirect = false;
         books.once('results', function (results) {

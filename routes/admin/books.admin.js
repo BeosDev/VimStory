@@ -39,4 +39,8 @@ router.get('/delete/:id', function (req, res, next) {
         res.redirect('/admin/books');
 });
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> nana
