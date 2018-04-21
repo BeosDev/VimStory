@@ -17,7 +17,7 @@ function getSpeech(text) {
                 reject('error');
                 throw new Error(error);
             }
-            resolve(body);
+            resolve(JSON.parse(body).async);
         });
     })
 }
@@ -50,15 +50,50 @@ function TextToSpeech(text) {
     }
     Promise.all(promises)
         .then(result => {
-            if (result.length > 0) {
-                var rawlink = JSON.parse(result[0]).async;
-                for (var i = 1; i < result.length ; i++)
-                    rawlink += '|' + JSON.parse(result[i]).async;
-                emitter.emit('result', rawlink)
-            } else emitter.emit('error')
+            emitter.emit('result', result.join('|'));
         })
         .catch(err => emitter.emit('error'));
 }
 TextToSpeech.prototype = new EventEmitter();
+
+var k = `
+Trả lời câu hỏi của Tuổi Trẻ Online về việc show diễn Ký ức Hội An diễn ra ở Quảng Nam nhưng lại do Sở Văn hóa - thể thao Hà Nội cấp phép là đúng hay sai quy trình, ông Cường cho rằng như vậy "là đúng".
+
+Ông Cường nói nghị định 79 của Chính phủ về quy định biểu diễn nghệ thuật đã quy định rõ, do doanh nghiệp sản xuất Ký ức Hội An nằm trên địa bàn TP Hà Nội nên Sở Văn hóa, thể thao Hà Nội cấp phép là hợp lý.
+
+"Ví dụ như chúng tôi cấp cho một đơn vị diễn ở đây nhưng ra Hà Nội diễn vẫn được. Chương trình diễn ở đây, Sở Văn hóa - thể thao và du lịch Quảng Nam cũng phải tham gia duyệt nội dung" - ông Cường nói thêm.
+
+Đúng thẩm quyền nhưng… sai quy trình
+
+Trong khi đó, tại buổi làm việc của lãnh đạo UBND TP Hội An với các phòng ban sáng 14-4, khi đề cập về chương trình Ký ức Hội An, chủ tịch UBND TP Hội An Nguyễn Văn Dũng nói bản thân ông là chủ tịch TP nhưng không được lấy ý kiến, không được biết gì về show diễn này trên địa bàn mà chính ông đứng đầu khối chính quyền.
+
+Ông Dũng bức xúc rằng hiện tại người dân Hội An phản ứng rất dữ dội về những chi tiết "không đúng, không thật" trong chương trình, thậm chí ông Dũng đề nghị cần xem xét… trả lại tên gọi Ký ức Hội An.
+Trả lời câu hỏi của Tuổi Trẻ Online về việc show diễn Ký ức Hội An diễn ra ở Quảng Nam nhưng lại do Sở Văn hóa - thể thao Hà Nội cấp phép là đúng hay sai quy trình, ông Cường cho rằng như vậy "là đúng".
+
+Ông Cường nói nghị định 79 của Chính phủ về quy định biểu diễn nghệ thuật đã quy định rõ, do doanh nghiệp sản xuất Ký ức Hội An nằm trên địa bàn TP Hà Nội nên Sở Văn hóa, thể thao Hà Nội cấp phép là hợp lý.
+
+"Ví dụ như chúng tôi cấp cho một đơn vị diễn ở đây nhưng ra Hà Nội diễn vẫn được. Chương trình diễn ở đây, Sở Văn hóa - thể thao và du lịch Quảng Nam cũng phải tham gia duyệt nội dung" - ông Cường nói thêm.
+
+Đúng thẩm quyền nhưng… sai quy trình
+
+Trong khi đó, tại buổi làm việc của lãnh đạo UBND TP Hội An với các phòng ban sáng 14-4, khi đề cập về chương trình Ký ức Hội An, chủ tịch UBND TP Hội An Nguyễn Văn Dũng nói bản thân ông là chủ tịch TP nhưng không được lấy ý kiến, không được biết gì về show diễn này trên địa bàn mà chính ông đứng đầu khối chính quyền.
+
+Ông Dũng bức xúc rằng hiện tại người dân Hội An phản ứng rất dữ dội về những chi tiết "không đúng, không thật" trong chương trình, thậm chí ông Dũng đề nghị cần xem xét… trả lại tên gọi Ký ức Hội An.
+Trả lời câu hỏi của Tuổi Trẻ Online về việc show diễn Ký ức Hội An diễn ra ở Quảng Nam nhưng lại do Sở Văn hóa - thể thao Hà Nội cấp phép là đúng hay sai quy trình, ông Cường cho rằng như vậy "là đúng".
+
+Ông Cường nói nghị định 79 của Chính phủ về quy định biểu diễn nghệ thuật đã quy định rõ, do doanh nghiệp sản xuất Ký ức Hội An nằm trên địa bàn TP Hà Nội nên Sở Văn hóa, thể thao Hà Nội cấp phép là hợp lý.
+
+"Ví dụ như chúng tôi cấp cho một đơn vị diễn ở đây nhưng ra Hà Nội diễn vẫn được. Chương trình diễn ở đây, Sở Văn hóa - thể thao và du lịch Quảng Nam cũng phải tham gia duyệt nội dung" - ông Cường nói thêm.
+
+Đúng thẩm quyền nhưng… sai quy trình
+
+Trong khi đó, tại buổi làm việc của lãnh đạo UBND TP Hội An với các phòng ban sáng 14-4, khi đề cập về chương trình Ký ức Hội An, chủ tịch UBND TP Hội An Nguyễn Văn Dũng nói bản thân ông là chủ tịch TP nhưng không được lấy ý kiến, không được biết gì về show diễn này trên địa bàn mà chính ông đứng đầu khối chính quyền.
+
+Ông Dũng bức xúc rằng hiện tại người dân Hội An phản ứng rất dữ dội về những chi tiết "không đúng, không thật" trong chương trình, thậm chí ông Dũng đề nghị cần xem xét… trả lại tên gọi Ký ức Hội An.
+
+`;
+
+var t = new TextToSpeech(k);
+t.on('result',res => console.log(res));
 
 module.exports = TextToSpeech;
