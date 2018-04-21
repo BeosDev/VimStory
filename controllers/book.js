@@ -101,9 +101,29 @@ function updateBook(req,res,next){
     });
 }
 
+function getOneBook(req, res, next,path,titleBook) {
+    var books = new bookModel.getOneBook(req.params.id);
+
+    books.once('results', function (data) {
+        if (data.length > 0) {
+            var titleBook = data[0].B_Name;
+            console.log(data[0].B_PublishDate);
+            res.render(path, {
+                title: titleBook,
+                data: data[0]
+            }, function (err, html) {
+                res.end(html);
+            })
+        }
+        else res.end('error');
+
+    });
+}
+
 module.exports = {
     getBooks,
     addBook,
     deleteBook,
-    updateBook
+    updateBook,
+    getOneBook
 }
