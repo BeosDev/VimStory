@@ -1,6 +1,7 @@
 var bookModel = require('../models/book');
 var formidable = require('formidable'); 
 var fs = require('fs');
+var createHTML = require('create-html');
 
 function getBooks(req, res, next) {
     var books = new bookModel.getBooks;
@@ -106,8 +107,21 @@ function getOneBook(req, res, next,path,titleBook) {
     var books = new bookModel.getOneBook(req.params.id);
 
     books.once('results', function (data) {
+        
         if (data.length > 0) {
             var titleBook = data[0].B_Name;
+            var html = createHTML({
+                title: 'Content',
+                head: '<meta name="description" content="example">',
+                body: data[0].B_Content
+                })
+                
+                fs.writeFile('../views/index/readBookContent.ejs', html, function (err) {
+                if (err) console.log(err)
+                })
+            
+    
+
             console.log(data[0].B_PublishDate);
             res.render(path, {
                 title: titleBook,

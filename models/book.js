@@ -1,7 +1,7 @@
 var executeQuery = require('../config/database');
 
 function getBooks() {
-    var query = 'SELECT * FROM book';
+    var query = 'SELECT * FROM v_book';
     return new executeQuery(query);
 }
 

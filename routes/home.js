@@ -6,6 +6,10 @@ var indexController = require('../controllers/index');
 router.get('/', function(req, res, next) {
   indexController.getBooks(req,res,next);
 });
-
+router.get('/bookContent', function(req, res, next) {
+  //var path = 'index/readBookContent';
+  //bookController.getOneBook(req,res,next,path);
+  res.render('index/readBookContent');
+});
 
 module.exports = router;

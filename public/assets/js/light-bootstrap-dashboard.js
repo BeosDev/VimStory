@@ -29,6 +29,15 @@ var mobile_menu_visible = 0,
     isWindows;
 
 $(document).ready(function() {
+    $('#table').DataTable({
+        "language": {
+            "lengthMenu": "Display _MENU_ records per page",
+            "zeroRecords": "Nothing found - sorry",
+            "info": "Showing page _PAGE_ of _PAGES_",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtered from _MAX_ total records)"
+        }
+    } );
     window_width = $(window).width();
 
     // check if there is an image set for the sidebar's background
