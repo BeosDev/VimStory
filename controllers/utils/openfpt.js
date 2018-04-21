@@ -49,8 +49,15 @@ function TextToSpeech(text) {
         promises.push(getSpeech(texts[i]));
     }
     Promise.all(promises)
-        .then(result => emitter.emit('result', result))
-            .catch(err => emitter.emit('error'));
+        .then(result => {
+            if (result.length > 0) {
+                var rawlink = JSON.parse(result[0]).async;
+                for (var i = 1; i < result.length ; i++)
+                    rawlink += '|' + JSON.parse(result[i]).async;
+                emitter.emit('result', rawlink)
+            } else emitter.emit('error')
+        })
+        .catch(err => emitter.emit('error'));
 }
 TextToSpeech.prototype = new EventEmitter();
 
