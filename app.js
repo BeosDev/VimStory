@@ -8,9 +8,8 @@ var passport = require('passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var adminBookRouter = require('./routes/adminBook');
 var loginRouter = require('./routes/login');
-var readBookRouter = require('./routes/readBook');
+
 
 var app = express();
 
@@ -34,9 +33,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 //add temporary route
-app.use('/', adminBookRouter);
 app.use('/', loginRouter);
-app.use('/', readBookRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
