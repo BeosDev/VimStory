@@ -4,7 +4,7 @@ var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'root',
-  database: 'vimstory'
+  database: 'vimstory2'
 });
 function executeQuery(cmd,paramters){ 
     var emitter = this; 

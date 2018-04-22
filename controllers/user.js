@@ -1,6 +1,7 @@
 var UserModel = require('../models/user');
 
 function getUsers(req, res) {
+    console.log('ok');
     var user = UserModel.getUsers();
     user.once('results', function (results) {
         if (results.length > 0) {
