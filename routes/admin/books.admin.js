@@ -10,9 +10,8 @@ router.get('/', function (req, res) {
 
 
 router.get('/add', function (req, res, next) {
-    res.render('admin/addBook', {
-        title: 'Add new book - Vimstory'
-    });
+    bookController.getAddBookPage(req,res,next);
+    
 });
 
 router.post('/add', function (req, res, next) {
