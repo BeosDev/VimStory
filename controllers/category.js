@@ -29,9 +29,8 @@ function addCategory(req,res,next){
         });
 
         req.isRedirect = false;
-
-        categories.on("results", function(results){
-            if(results.affectedRow > 0){
+        categories.on('results',function(results){
+            if(results.affectedRows > 0){
                 req.isRedirect = true;
                 next();
             }
