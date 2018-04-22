@@ -135,10 +135,36 @@ function getOneBook(req, res, next,path,titleBook) {
     });
 }
 
+
+var categoryModel = require('../models/category');
+//var authorModel = require('../models/author');
+ function getAddBookPage(req,res,next)
+ {  
+    var category = new categoryModel.getCategories;
+    //var listCategory;
+    //var Author = new authorModel.get
+    category.once('results', function (data) {
+        if (data.length > 0) {
+            //listCategory = data;
+            console.log(data);
+            res.render('admin/addBook', {
+                title: 'Add new book - Vimstory',
+                categories : data
+            });
+        }
+        else res.end('error');
+
+    });
+
+    
+
+ }
+
 module.exports = {
     getBooks,
     addBook,
     deleteBook,
     updateBook,
-    getOneBook
+    getOneBook,
+    getAddBookPage
 }

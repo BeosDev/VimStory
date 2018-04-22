@@ -15,7 +15,7 @@
     <!-- CSS Files -->
     
     
-    <link href="/assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
+    
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="/assets/css/demo.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
@@ -25,7 +25,9 @@
    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
    <link rel="stylesheet" type="text/css" href="/assets/css/jquery.dataTables.min.css"/>
    <script type="text/javascript" src="/assets/js/jquery.dataTables.min.js"></script>
+    <link href="/assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
 
+     
 </head>
 
 <body>
@@ -116,12 +118,12 @@
         <tbody>
         <%for(var i=0;i<data.length;i++)
         { %>
-            <tr role="row" class="odd">
-            <td><%= data[i].B_ID %></td>
-            <td><%= data[i].B_Name %></td>
-            <td><%= data[i].C_Name %></td>
-            <td><%= data[i].B_Age %></td>
-            <td><%= data[i].B_PublishDate %></td>
+            <tr role="row" class="odd"  id ="tr<%=i%>">
+            <td id ="td_idtr<%=i%>"><%= data[i].B_ID %></td>
+            <td id ="td_nametr<%=i%>"><%= data[i].B_Name %></td>
+            <td id ="td_c_nametr<%=i%>"><%= data[i].C_Name %></td>
+            <td id ="td_agetr<%=i%>"><%= data[i].B_Age %></td>
+            <td id ="td_pubdatetr<%=i%>"><%= data[i].B_PublishDate %></td>
             <td><a href='/admin/books/update/<%=data[i].B_ID%>' ><i class="fas fa-edit"></a></td>
             <td><a href='/admin/books/delete/<%=data[i].B_ID%>' ><i class="fas fa-trash-alt"></a></td>
             </tr>
@@ -158,13 +160,10 @@
           </div>
       </div>
     </div>
+
+    
+
     
 </body>
 <script src="/assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
 </html>
-<script>
-
-    $(document).ready(function() {
-    
-} );
-</script>
