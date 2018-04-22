@@ -6,7 +6,7 @@ router.get('/',function(req,res){
 });
 
 router.post('/add',function(req,res){
-    userController.addUser(req,res,);
+    userController.addUser(req,res);
 })
 
 router.get('/delete/:id',function (req,res){
