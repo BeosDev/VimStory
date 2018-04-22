@@ -112,11 +112,12 @@
                         <div class="form-group">
                           <label for="pwd">Author:</label>
                            <div class="form-group">
-                                  <select class="form-control" id="sel1">
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
+                                  <select class="form-control" id="A_ID" name = "A_ID" multiple onchange="getSelected(this)">
+                                    <%for(var i=0;i<authors.length;i++)
+                                     { %>
+                                    <option value ="<%=authors[i].A_ID%>"><%=authors[i].A_Name%></option>
+                                    <%}%>
+                                    
                                   </select>
                             </div>
                         </div>
@@ -124,7 +125,7 @@
                           <label for="usr">Type:</label>
                           
                             <div class="form-group">
-                                  <select class="form-control" id="C_ID">
+                                  <select class="form-control" id="C_ID" name="C_ID">
                                   <%for(var i=0;i<categories.length;i++)
                                 { %>
                                     <option value ="<%=categories[i].C_ID%>"><%=categories[i].C_Name%></option>
@@ -136,23 +137,23 @@
                         <div class="form-group">
                           <label for="pwd">Agetag:</label>
                            <div class="form-group">
-                                  <select class="form-control" id="sel1">
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
+                                  <select class="form-control" id="B_Age" name = "B_Age">
+                                    <option value ="0">0</option>
+                                    <option value ="12">12</option>
+                                    <option value ="15">15</option>
+                                    <option value ="18">18</option>
                                   </select>
                             </div>
                         </div>
                         <div class="form-group">
                           <label for="usr">PublishDate:</label>
-                          <input type="date" class="form-control" id="B_PublishDate">
+                          <input type="date" class="form-control" id="B_PublishDate" name = "B_PublishDate">
                         </div>
                         
                         
                         <div class="form-group">
                             <label for="usr">Short Description:</label>
-                            <textarea name="message" class="form-control" id = "B_Description" name = "B_Description"></textarea>
+                            <textarea class="form-control" id = "B_Description" name = "B_Description"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="usr">Content:</label>
@@ -167,11 +168,12 @@
                             <input type="file" name="B_audiourl" accept="audio/*" />
                         </div>
                         
-                            <input type="button" class="btn btn-outline-secondary " value="ADD" onclick ="submit();"> 
+                            <input type="submit" class="btn btn-outline-secondary " value="ADD"> 
                         
                             <a href="/admin/books" class="btn btn-outline-secondary ">CLOSE</a>
 
                         </div>
+                        <input type="hidden" name ="hidden" id ="hidden"/>
                       </form>
 <footer class="footer">
                 <div class="container">
@@ -199,6 +201,25 @@
       </div>
     </div>
     
+    <script>
+   
+    function getSelected(select) {
+        
+        var result = [];
+        var options = select && select.options;
+        var opt;
+
+        for (var i=0, iLen=options.length; i<iLen; i++) {
+         opt = options[i];
+
+        if (opt.selected) {
+          result.push(opt.value || opt.text);
+         }
+        }
+        document.getElementById("hidden").value = result;
+        
+    }
+</script>
 </body>
 
 <!--   Core JS Files   -->
@@ -206,14 +227,3 @@
 
 <script src="/assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
 </html>
-<script>
-    function submit()
-    {
-        alert('a');
-        var data = CKEDITOR.instances.B_Content.getData();
-        var B_Content = document.getElementByID("B_Content");
-        B_Content.value = data;
-        alert(B_Content.value);
-       
-    }
-</script>

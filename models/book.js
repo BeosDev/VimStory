@@ -21,7 +21,15 @@ function updateBook(paramters, id) {
 }
 
 function deleteBook(id) {
-    var query = `Delete FROM book WHERE B_ID = ${id};`;
+    var query = `call deleteBook(${id});`;
+    return new executeQuery(query);
+}
+function getMaxID() {
+    var query = 'SELECT MAX(B_ID) as MaxVL FROM book;';
+    return new executeQuery(query);
+}
+function setAuthor(book_id,author_id) {
+    var query = `INSERT INTO a_b_relationship VALUES(${book_id},${author_id})`;
     return new executeQuery(query);
 }
 
@@ -35,6 +43,8 @@ module.exports = {
     addBook,
     deleteBook,
     updateBook,
-    getOneBook
+    getOneBook,
+    getMaxID,
+    setAuthor
 }
 

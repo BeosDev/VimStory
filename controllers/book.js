@@ -15,7 +15,10 @@ function getBooks(req, res, next) {
                 res.end(html);
             })
         }
-        else res.end('error');
+        else{
+            res.redirect('/admin/books');
+            //res.end('error');
+        } 
 
     });
 }
@@ -34,7 +37,7 @@ function addBook(req, res, next) {
         Name = fields.B_Name;
         Content= fields.B_Content;
         Description = fields.B_Description;
-        console.log('add book');
+        
         //path tmp in server
         var path = file.B_imageurl.path;
         if(file.B_imageurl.name.toString()!=''){
@@ -52,14 +55,31 @@ function addBook(req, res, next) {
                 console.log(path+' was deleted');
             });
         }
+    
         var books = new bookModel.addBook({
             B_Name: Name,
             B_Content: Content,
             B_Description: Description,
-            B_imageurl :'img/'+file.B_imageurl.name
+            B_imageurl :'img/'+file.B_imageurl.name,
+            C_ID : fields.C_ID,
+            B_audiourl : fields.B_audiourl,
+            B_Age : fields.B_Age,
+            B_PublishDate : fields.B_PublishDate
         });
+        var maxBookID = new bookModel.getMaxID;
+        
         req.isRedirect = false;
         books.once('results', function (results) {
+            maxBookID.once('results',function(data){
+                //console.log('maxbookid'+data[0].MaxVL);
+                var authorArr = fields.hidden.split(",");
+                if(fields.hidden!="")
+                for(var i=0;i<authorArr.length;i++)
+                {
+                    var rela = bookModel.setAuthor(data[0].MaxVL,authorArr[i]);
+                    console.log(data[0].MaxVL+'x'+authorArr[i])
+                }
+            });
             if (results.affectedRows > 0) {
                 res.redirect('/admin/books');
             }
@@ -137,27 +157,33 @@ function getOneBook(req, res, next,path,titleBook) {
 
 
 var categoryModel = require('../models/category');
-//var authorModel = require('../models/author');
+var authorModel = require('../models/author');
  function getAddBookPage(req,res,next)
  {  
-    var category = new categoryModel.getCategories;
-    //var listCategory;
-    //var Author = new authorModel.get
+    var category = new categoryModel.getCategories();
+    var author = new authorModel.getAuthors();
     category.once('results', function (data) {
         if (data.length > 0) {
-            //listCategory = data;
             console.log(data);
-            res.render('admin/addBook', {
-                title: 'Add new book - Vimstory',
-                categories : data
-            });
+            //console.log(listCategory);
+            author.once('results', function (results) {
+                if (results.length > 0) {
+                        
+                     console.log(results);
+                    res.render('admin/addBook', {
+                        title: 'Add new book - Vimstory',
+                        categories : data,
+                        authors : results
+            
+                    });
+                }
+                else res.end('error');
+            
+            })
         }
         else res.end('error');
 
     });
-
-    
-
  }
 
 module.exports = {
