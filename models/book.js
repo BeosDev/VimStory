@@ -5,6 +5,11 @@ function getBooks() {
     return new executeQuery(query);
 }
 
+function getOneBook(id) {
+    var query = `SELECT * FROM book WHERE B_ID = ${id};`;
+    return new executeQuery(query);
+}
+
 function addBook(paramters) {
     var query = 'INSERT INTO book SET ?;';
     return new executeQuery(query, paramters);
@@ -29,6 +34,7 @@ module.exports = {
     getBooks,
     addBook,
     deleteBook,
-    updateBook
+    updateBook,
+    getOneBook
 }
 

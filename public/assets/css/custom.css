@@ -1,0 +1,162 @@
+.dropdown:hover>.dropdown-menu{
+  display:block;
+}
+.footertext{
+  display: inline-block;
+  color: #333;
+}
+.footertext h5{
+  margin: 0 0 5px;
+  font-size: 12px;
+  font-weight: 500;
+
+}
+.footertext p{
+  font-size: 11px;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+.ico-bocongthuong{
+    background-position: 0 -99px;
+    width: 120px;
+    height: 46px;
+    display: inline-block;
+    float: right;
+    margin-top: -7px;
+}
+.col-nopadding{
+    padding-right: 0px;
+    padding-left:0px;
+}
+
+.bookcard {
+  float: left;
+  width: 33.333%;
+  padding: .75rem;
+  margin-bottom: 2rem;
+  border: 0;
+}
+
+.bookcard > img {
+  margin-bottom: .75rem;
+}
+
+.bookcard-text {
+  font-size: 85%;
+}
+.bookimg{
+    height: 280px; 
+    width: 100%; 
+    display: block;
+}
+.booktext{
+    min-height: 170px;
+}
+.max-lines-des{
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3; /*số dòng muốn hiện */
+   font-size: 1rem;          /*cỡ chữ, đơn vị px */
+   line-height: 1.5;        /* khoảng cách giữa các dòng, đơn vị em*/
+   max-height: 1rem*3*125px;   /* chiều cao tối đa đoạn văn bản = (cỡ chữ) x (số dòng) x (chiều cao) */
+}
+.max-lines-title{
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2; /*số dòng muốn hiện */
+   font-size: 1.5rem;          /*cỡ chữ, đơn vị px */
+   line-height: 1.2;        /* khoảng cách giữa các dòng, đơn vị em*/
+   max-height: 1.5rem*2*125px;   /* chiều cao tối đa đoạn văn bản = (cỡ chữ) x (số dòng) x (chiều cao) */
+}
+.updTm {
+    font-size: 10px;
+    color: #999;
+    padding-bottom: 5px;
+    font-weight: 500;
+}
+.album {
+  min-height: 50rem; /* Can be removed; just added for demo purposes */
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  background-color: #f7f7f7;
+}
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: 4rem;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+  bottom: 3rem;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
+  background-color: #777;
+}
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
+}
+
+.btnEditDelete
+{
+  width: 30px;
+  height: 30px;
+}
+.add
+{
+  width:  300px;
+  height: 63px;
+  background-color : #28272b;
+  margin-right: 17px;
+}
+.content-title
+{
+  font-size: 3em;
+  display: block;
+  padding-top: 35px;
+  color: #000;
+  font-family: Cambria,Time New Roman,Georgia,serif;
+  line-height: 1.2;
+}
+.pull-left{
+  
+  width:100%;
+  margin-bottom: 1rem;
+}
+
+.time-author__item{
+  font-size:.6875em}
+
+.content-short-desc{
+    padding-bottom:0px;
+    font-size:1.125em;
+    color: #000;
+    line-height: 25px;
+    font-style: italic;
+    font-weight: 500;
+    padding-top: 0px;
+
+}
+.content-detail{
+    padding-bottom:0px;
+    font-size:1em;
+    color: #000;
+    
+    padding-top: 30px;
+
+}
+.reading-api{
+  padding-top: 15px;
+  }
+

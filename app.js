@@ -6,10 +6,7 @@ var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var adminBookRouter = require('./routes/adminBook');
-var loginRouter = require('./routes/login');
+var routes = require('./routes');
 
 var app = express();
 
@@ -26,21 +23,10 @@ app.use(session({secret: 'vimstory'}));
 app.use(passport.initialize());;
 app.use(passport.session());
 
-app.use(function (req, res, next) {
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.header('Expires', '-1');
-  res.header('Pragma', 'no-cache');
-  next()
-});
 
 require('./config/passport')(passport);
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-//add temporary route
-app.use('/', adminBookRouter);
-app.use('/', loginRouter);
+app.use('/',routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
