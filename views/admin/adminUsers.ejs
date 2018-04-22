@@ -35,8 +35,13 @@
                     <td><%= data[i].Username %></td>
                     <td><%= data[i].Password %></td>
                     <td><%= data[i].U_Authoriztion %></td>
-                    <td><a href='books/delete/<%=data[i].B_ID%>'>Xoa</a></td>
-                    <td><a href='books/update/<%=data[i].B_ID%>'>sua</a></td>
+                    <th><%= data[i].U_Fullname %></th>
+                    <th><%= data[i].U_Address %></th>
+                    <th><%= data[i].U_Phone %></th>
+                    <th><%= data[i].U_Sex %></th>
+                    <th><%= data[i].U_Email %></th>
+                    <td><a href='/admin/user/delete/<%=data[i].B_ID%>'>Xoa</a></td>
+                    <td><a href='/admin/user/update/<%=data[i].B_ID%>'>sua</a></td>
                 </tr>
             <% } %>
         </tbody>
