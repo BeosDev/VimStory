@@ -105,7 +105,7 @@
                 <div class="container">
                       <h2>Update Book </h2>
                       
-                      <form action="/admin/books/update" method="post" enctype="multipart/form-data">
+                      <form action="/admin/books/update" method="post" enctype="multipart/form-data" id="updateBookForm">
                         <div class="form-group">
                           <label for="usr">BookName:</label>
                           <input type="text" class="form-control" id = "B_Name" name="B_Name" value = "<%=book[0].B_Name%>">
@@ -164,13 +164,14 @@
                             <label for="usr">Image files:</label>
                             <input type="file" id = "B_imageurl" name = "B_imageurl" accept="image/*" />
                         </div>
-                            <input type="submit" class="btn btn-outline-secondary " value="UPDATE"> 
+                            <button type="button" class="btn btn-outline-secondary " onclick = "getText();">UPDATE</button>
                         
                             <a href="/admin/books" class="btn btn-outline-secondary ">CLOSE</a>
 
                         </div>
                         <input type="hidden" name ="hidden" id ="hidden"/>
                         <input type="hidden" name ="B_ID" id ="B_ID"/>
+                        <input type="hidden" name ="B_Text" id ="B_Text"/>
                       </form>
 <footer class="footer">
                 <div class="container">
@@ -215,6 +216,12 @@
         }
         document.getElementById("hidden").value = result;
         
+    }
+     function getText()
+    {
+        var B_Text = document.getElementById("B_Text");
+        B_Text.value = CKEDITOR.instances.B_Content.document.getBody().getText();
+        document.getElementById("updateBookForm").submit();
     }
 </script>
 </body>

@@ -2,7 +2,8 @@ var bookModel = require('../models/book');
 var formidable = require('formidable'); 
 var fs = require('fs');
 var createHTML = require('create-html');
-
+var openfpt = require('./utils/openfpt');
+var http = require('http');
 function getBooks(req, res, next) {
     var books = new bookModel.getBooks;
 
@@ -38,7 +39,6 @@ function addBook(req, res, next) {
         Name = fields.B_Name;
         Content= fields.B_Content;
         Description = fields.B_Description;
-        
         //path tmp in server
         var path = file.B_imageurl.path;
         if(file.B_imageurl.name.toString()!=''){
@@ -56,7 +56,6 @@ function addBook(req, res, next) {
                 console.log(path+' was deleted');
             });
         }
-    
         var books = new bookModel.addBook({
             B_Name: Name,
             B_Content: Content,
@@ -66,30 +65,55 @@ function addBook(req, res, next) {
             B_Age : fields.B_Age,
             B_PublishDate : fields.B_PublishDate
         });
+        console.log('text'+fields.B_Text);
+        var textToSp = new openfpt(fields.B_Text);
         var maxBookID = new bookModel.getMaxID;
         
         req.isRedirect = false;
         books.once('results', function (results) {
-            maxBookID.once('results',function(data){
-                //console.log('maxbookid'+data[0].MaxVL);
-                var authorArr = fields.hidden.split(",");
-                if(fields.hidden!="")
-                for(var i=0;i<authorArr.length;i++)
-                {
-                    var rela = bookModel.setAuthor(data[0].MaxVL,authorArr[i]);
-                    console.log(data[0].MaxVL+'x'+authorArr[i])
+                //console.log(mp3Link);
+                maxBookID.once('results',function(data){
+                    //console.log('maxbookid'+data[0].MaxVL);
+                    var authorArr = fields.hidden.split(",");
+                    if(fields.hidden!="")
+                    for(var i=0;i<authorArr.length;i++)
+                    {
+                        var rela = bookModel.setAuthor(data[0].MaxVL,authorArr[i]);
+                        console.log(data[0].MaxVL+'x'+authorArr[i])
+                    }
+                    textToSp.once('result',function(mp3Link){
+                        //save mp3 file
+                        console.log(mp3Link);
+                        var file = fs.createWriteStream("file.mp3");
+                        var request = http.get(trim(mp3Link), function(response) {
+                            response.pipe(file);
+                            fs.rename("file.mp3", "../public/audio/"+data[0].MaxVL+".mp3", function (err) {
+                                var updateAudioUrl = bookModel.updateBook({B_audiourl : '/audio/'+data[0].MaxVL+'.mp3'},data[0].MaxVL);
+                                if (err) throw err;    
+                            });
+                        });
+                    });
+                });
+                if (results.affectedRows > 0) {
+                    res.redirect('/admin/books');
                 }
-            });
-            if (results.affectedRows > 0) {
-                res.redirect('/admin/books');
-            }
         });
         books.once('error', function (err) {
             res.redirect('/admin/books');
         });
     });
-    
 }
+
+//
+function trim(text)
+{
+    if(text[4]==='s')
+    {
+        text = text.slice(0, 4)+text.substr(5);
+    }
+    return text;
+}
+//
 
 function deleteBook(req,res,next){
     var books = new bookModel.deleteBook(req.params.id);
@@ -151,7 +175,7 @@ function updateBook(req,res,next){
             B_PublishDate : fields.B_PublishDate
         },fields.B_ID);
         var maxBookID = new bookModel.getMaxID;
-        
+        var textToSp = new openfpt(fields.B_Text);
         req.isRedirect = false;
         books.once('results', function (results) {
                 //console.log('maxbookid'+data[0].MaxVL);
@@ -162,7 +186,22 @@ function updateBook(req,res,next){
                 var rela = bookModel.updateBookAuthor(fields.B_ID,authorArr[i]);
                  console.log(fields.B_ID+' update '+authorArr[i])
             }
-           
+            textToSp.once('result',function(mp3Link){
+                //save mp3 file
+                console.log(mp3Link);
+                var file = fs.createWriteStream("file.mp3");
+                var request = http.get(trim(mp3Link), function(response) {
+                    response.pipe(file);
+                    fs.unlink("../public/audio/"+fields.B_ID+".mp3", (err) => {
+                        if (err) throw err;
+                        console.log("../public/audio/"+fields.B_ID+".mp3"+' was deleted');
+                    });
+                    fs.rename("file.mp3", "../public/audio/"+fields.B_ID+".mp3", function (err) {
+                        var updateAudioUrl = bookModel.updateBook({B_audiourl : '/audio/'+fields.B_ID+'.mp3'},fields.B_ID);
+                        if (err) throw err;    
+                    });
+                });
+            });
             if (results.affectedRows > 0) {
                 res.redirect('/admin/books');
             }
