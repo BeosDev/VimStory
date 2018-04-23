@@ -33,6 +33,10 @@ function setAuthor(book_id,author_id) {
     return new executeQuery(query);
 }
 
+function updateBookAuthor(book_id,author_id) {
+    var query = `UPDATE a_b_relationship SET A_ID = ${author_id} WHERE B_ID =  ${book_id}`;
+    return new executeQuery(query);
+}
 //var k = new getBooks();
 //k.on('results',function(results){
   //  console.log(results[1]);
@@ -45,6 +49,7 @@ module.exports = {
     updateBook,
     getOneBook,
     getMaxID,
-    setAuthor
+    setAuthor,
+    updateBookAuthor
 }
 
