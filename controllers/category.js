@@ -33,8 +33,6 @@ function addCategory(req,res,next){
 }
 
 
-
-
 function deleteCategory(req,res,next){
     var categories = categoryMoldel.deleteCategory(req.params.id);
     categories.once('results',function(results){
