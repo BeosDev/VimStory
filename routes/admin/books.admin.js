@@ -20,10 +20,7 @@ router.post('/add', function (req, res, next) {
 
 
 router.get('/update/:id', function (req, res, next) {
-    res.render('admin/updateBook', {
-        title: 'updatebook - Vimstory',
-        id:req.params.id
-    });
+    bookController.getUpdateBookPage(req, res, next);
 });
 
 router.post('/update',function(req,res,next){

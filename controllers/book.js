@@ -139,9 +139,6 @@ function getOneBook(req, res, next,path,titleBook) {
                 fs.writeFile('../views/index/readBookContent.ejs', html, function (err) {
                 if (err) console.log(err)
                 })
-            
-    
-
             console.log(data[0].B_PublishDate);
             res.render(path, {
                 title: titleBook,
@@ -186,11 +183,48 @@ var authorModel = require('../models/author');
     });
  }
 
+ function getUpdateBookPage(req,res,next)
+ {  
+    var category = new categoryModel.getCategories();
+    var author = new authorModel.getAuthors();
+    var book = new bookModel.getOneBook(req.params.id);
+    
+    
+
+    category.once('results', function (data) {
+        if (data.length > 0) {
+            //console.log(data);
+            //console.log(listCategory);
+            author.once('results', function (results) {
+                if (results.length > 0) {
+                    book.once('results',function(bookData){
+                        //console.log(bookData);
+                        res.render('admin/updateBook', {
+                        title: 'Update book - Vimstory',
+                        categories : data,
+                        authors : results,
+                        book : bookData
+            
+                    });
+                    });  
+                     
+                }
+                else res.end('error');
+            
+            })
+        }
+        else res.end('error');
+
+    });
+//});
+ }
+ 
 module.exports = {
     getBooks,
     addBook,
     deleteBook,
     updateBook,
     getOneBook,
-    getAddBookPage
+    getAddBookPage,
+    getUpdateBookPage
 }
