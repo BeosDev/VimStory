@@ -14,7 +14,7 @@
         <h1><%=title%></h1>
     </div>
     <br>
-    <form action="category/add" method="post" class="form-inline" enctype="multipart/form-data">
+    <form action="categories/add" method="post" class="form-inline">
         <div class="form-group">
             <label for="">Name:</label>
             <input type="text" name="C_Name" id="" class="form-control">
@@ -35,7 +35,7 @@
                     <td><%=data[i].C_ID%></td>
                     <td><%=data[i].C_Name%></td>
                     <td><a href="#" data-toggle="modal" data-target="#myModal" onclick="btnUpdateClick('<%=data[i].C_ID%>','<%=data[i].C_Name%>')">Update</a></td>
-                    <td><a href='category/delete/<%=data[i].C_ID%>'>Delete</a></td>
+                    <td><a href='categories/delete/<%=data[i].C_ID%>'>Delete</a></td>
                 </tr>
             <%}%>
         </tbody>
@@ -51,7 +51,7 @@
               <h4 class="modal-title">Update</h4>
             </div>
             <div class="modal-body">
-              <form action="category/update" method="post" enctype="multipart/form-data" class="form-inline">
+              <form action="categories/update" method="post" class="form-inline">
                 <div class="form-group">
                     <label>Name:</label>
                     <input type="hidden" name="C_ID" id="txtUpdateID">

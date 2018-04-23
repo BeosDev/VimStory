@@ -24,7 +24,7 @@ function updateCategory(category, C_ID) {
 
 
 function deleteCategory(C_ID) {
-        var query = `DELETE from category where C_ID = ${C_ID}`;
+        var query = `call deleteCategory(${C_ID})`;
         return new executeQuery(query);
 }
 

@@ -9,24 +9,14 @@ router.get("/", function(req,res,next){
 
 router.post("/add",function(req,res,next){
     categoryController.addCategory(req,res,next);
-}, function(req,res,next){
-    if(req.isRedirect == true){
-        res.redirect('/admin/category');
-    }
 })
 
 router.post('/update',function(req,res,next){
     categoryController.updateCategory(req,res,next);
-}, function (req, res, next) {
-    if (req.isRedirect === true)
-        res.redirect('/admin/category');
 });
 
 router.get('/delete/:id', function (req, res, next) {
     categoryController.deleteCategory(req,res,next);
-}, function (req, res, next) {
-    if (req.isRedirect === true)
-    res.redirect('/admin/category');
 });
 
 module.exports = router;
