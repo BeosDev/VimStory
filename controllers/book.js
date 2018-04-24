@@ -186,11 +186,26 @@ var authorModel = require('../models/author');
     });
  }
 
+function searchBooks(req,res,next){
+    var name = req.query['search'];
+    var books = bookModel.searchBooks(name);
+    books.once('results', function(results){
+        res.render('index/searchBook',{
+            title: 'Search book - Vimstory',
+            data : results
+        })
+    });
+    books.once('error',function(err){
+        res.end('err');
+    })
+}
+
 module.exports = {
     getBooks,
     addBook,
     deleteBook,
     updateBook,
     getOneBook,
-    getAddBookPage
+    getAddBookPage,
+    searchBooks
 }

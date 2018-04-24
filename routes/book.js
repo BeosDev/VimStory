@@ -13,4 +13,8 @@ router.get('/bookContent', function(req, res, next) {
     res.render('index/readBookContent');
 });
 
+router.get('/',function(req,res,next){
+    bookController.searchBooks(req,res,next);
+})
+
 module.exports = router;
