@@ -3,8 +3,8 @@ var EventEmitter = require('events').EventEmitter;
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'root',
-  database: 'vimstory2'
+  password: '',
+  database: 'vimstory'
 });
 function executeQuery(cmd,paramters){ 
     var emitter = this; 
