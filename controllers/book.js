@@ -239,7 +239,6 @@ var authorModel = require('../models/author');
     
     
 
-<<<<<<< HEAD
     category.once('results', function (data) {
         if (data.length > 0) {
             //console.log(data);
@@ -269,32 +268,11 @@ var authorModel = require('../models/author');
 //});
  }
  module.exports = {
-=======
-function searchBooks(req,res,next){
-    var name = req.query['search'];
-    var books = bookModel.searchBooks(name);
-    books.once('results', function(results){
-        res.render('index/searchBook',{
-            title: 'Search book - Vimstory',
-            data : results
-        })
-    });
-    books.once('error',function(err){
-        res.end('err');
-    })
-}
-
-module.exports = {
->>>>>>> tim
     getBooks,
     addBook,
     deleteBook,
     updateBook,
     getOneBook,
     getAddBookPage,
-<<<<<<< HEAD
-    getUpdateBookPage
-=======
     searchBooks
->>>>>>> tim
 }
