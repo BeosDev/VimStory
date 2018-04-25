@@ -258,7 +258,7 @@ function getUpdateBookPage(req, res, next) {
     //});
 }
 
-function searchBook(req, res, next){
+function searchBooks(req, res, next){
     var name = req.query['search'];
     var books = bookModel.searchBook(name);
     books.once('results', function(results){
@@ -279,5 +279,6 @@ module.exports = {
     updateBook,
     getOneBook,
     getAddBookPage,
-    getUpdateBookPage
+    getUpdateBookPage,
+    searchBooks
 }
