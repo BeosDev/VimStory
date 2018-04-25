@@ -17,12 +17,13 @@ module.exports = function () {
         passwordField: 'password'
     }, function (username, password, done) {
         var User = new UserModel.getOneUser(username);
-        User.on('results', function (result) {
-            if (result.length === 0)
-                return done(null, false);
-            return done(null, result[0]);
+        User.once('results', function (results) {
+            if (results.length !== 0 &&UserModel.validPassword(password,results[0].Password)){
+                return done(null,results[0]);
+            }
+            return done(null, false);
         })
-        User.on('error', function (err) {
+        User.once('error', function (err) {
             return done(null, false);
         })
     }))
