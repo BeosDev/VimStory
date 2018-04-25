@@ -270,15 +270,21 @@ var authorModel = require('../models/author');
  function searchBooks(req,res,next){
     var name = req.query['search'];
     var books = bookModel.searchBooks(name);
-    books.once('results', function(results){
-        res.render('index/searchBook',{
-            title: 'Search book - Vimstory',
-            data : results
+    var categories = categoryModel.getCategories();
+
+    categories.once('results', function(ca){
+        books.once('results', function(results){
+            res.render('index/searchBook',{
+                title: 'Search book - Vimstory',
+                categories: ca,
+                data : results
+            })
+        });
+        books.once('error',function(err){
+            res.end('err');
         })
     });
-    books.once('error',function(err){
-        res.end('err');
-    })
+    
 }
  module.exports = {
     getBooks,
