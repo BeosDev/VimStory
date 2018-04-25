@@ -56,10 +56,6 @@ module.exports = {
     getOneBook,
     getMaxID,
     setAuthor,
-<<<<<<< HEAD
     updateBookAuthor
-=======
-    searchBooks
->>>>>>> tim
 }
 
