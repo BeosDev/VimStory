@@ -2,6 +2,7 @@ var bookModel = require('../models/book');
 var formidable = require('formidable'); 
 var fs = require('fs');
 var createHTML = require('create-html');
+var openfpt = require('./utils/openfpt');
 
 function getBooks(req, res, next) {
     var books = new bookModel.getBooks;
@@ -79,6 +80,8 @@ function addBook(req, res, next) {
                     var rela = bookModel.setAuthor(data[0].MaxVL,authorArr[i]);
                     console.log(data[0].MaxVL+'x'+authorArr[i])
                 }
+                var textToSpeech = new openfpt(data[0].MaxVL,fields.B_Text);
+                
             });
             if (results.affectedRows > 0) {
                 res.redirect('/admin/books');
