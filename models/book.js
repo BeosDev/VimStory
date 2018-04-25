@@ -5,6 +5,11 @@ function getBooks() {
     return new executeQuery(query);
 }
 
+function searchBooks(name){
+    var query = `select * from book where B_Name like '%${name}%'`;
+    return new executeQuery(query);
+}
+
 function getOneBook(id) {
     var query = `SELECT * FROM book WHERE B_ID = ${id};`;
     return new executeQuery(query);
@@ -51,6 +56,10 @@ module.exports = {
     getOneBook,
     getMaxID,
     setAuthor,
+<<<<<<< HEAD
     updateBookAuthor
+=======
+    searchBooks
+>>>>>>> tim
 }
 
