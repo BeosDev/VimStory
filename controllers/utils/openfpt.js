@@ -99,7 +99,7 @@ function ConcatAudio(id,emitter) {
 
 function TextToSpeech(id,text) {
     var Speech = new ApiTextToSpeech(text);
-    Speech.on('result', links => {
+    Speech.once('result', links => {
         CombineAudio(id, links,this);
     })
 }
