@@ -33,12 +33,12 @@ function addBook(req, res, next) {
     var form =  new formidable.IncomingForm();
     //set directory folder
     form.uploadDir = "../public/img/";
+    //form.uploadDir = path.join (__dirname, '/public/img');
     //xử lý upload
     form.parse(req,function (err, fields, file) {
         Name = fields.B_Name;
         Content= fields.B_Content;
         Description = fields.B_Description;
-        
         //path tmp in server
         var path = file.B_imageurl.path;
         if(file.B_imageurl.name.toString()!=''){
@@ -56,14 +56,12 @@ function addBook(req, res, next) {
                 console.log(path+' was deleted');
             });
         }
-    
         var books = new bookModel.addBook({
             B_Name: Name,
             B_Content: Content,
             B_Description: Description,
             B_imageurl :'img/'+file.B_imageurl.name,
             C_ID : fields.C_ID,
-            B_audiourl : fields.B_audiourl,
             B_Age : fields.B_Age,
             B_PublishDate : fields.B_PublishDate
         });
@@ -71,27 +69,26 @@ function addBook(req, res, next) {
         
         req.isRedirect = false;
         books.once('results', function (results) {
-            maxBookID.once('results',function(data){
-                //console.log('maxbookid'+data[0].MaxVL);
-                var authorArr = fields.hidden.split(",");
-                if(fields.hidden!="")
-                for(var i=0;i<authorArr.length;i++)
-                {
-                    var rela = bookModel.setAuthor(data[0].MaxVL,authorArr[i]);
-                    console.log(data[0].MaxVL+'x'+authorArr[i])
+                //console.log(mp3Link);
+                maxBookID.once('results',function(data){
+                    //console.log('maxbookid'+data[0].MaxVL);
+                    var authorArr = fields.hidden.split(",");
+                    if(fields.hidden!="")
+                    for(var i=0;i<authorArr.length;i++)
+                    {
+                        var rela = bookModel.setAuthor(data[0].MaxVL,authorArr[i]);
+                        console.log(data[0].MaxVL+'x'+authorArr[i])
+                    }
+                    var textToSpeech = new openfpt(data[0].MaxVL,fields.B_Text);
+                });
+                if (results.affectedRows > 0) {
+                    res.redirect('/admin/books');
                 }
-                var textToSpeech = new openfpt(data[0].MaxVL,fields.B_Text);
-                
-            });
-            if (results.affectedRows > 0) {
-                res.redirect('/admin/books');
-            }
         });
         books.once('error', function (err) {
             res.redirect('/admin/books');
         });
     });
-    
 }
 
 function deleteBook(req,res,next){
@@ -109,23 +106,72 @@ function deleteBook(req,res,next){
 }
 
 function updateBook(req,res,next){
-    var B_ID = req.body.B_ID;
-    var data = {
-        B_Name : req.body.B_Name,
-        B_Description : req.body.B_Description
-    }
-    var books  = new bookModel.updateBook(data,B_ID);
-    req.isRedirect = false;
-    books.once('results',function(results){
-        if(results.affectedRows > 0){
-            res.redirect('/admin/books');
+    
+    var Name;
+    var Content;
+    var Description;
+    var newpath;
+    console.log('ok');
+    var form =  new formidable.IncomingForm();
+    //set directory folder
+    form.uploadDir = "../public/img/";
+    //form.uploadDir = path.join (__dirname, '/public/img');
+    //xử lý upload
+    form.parse(req,function (err, fields, file) {
+        Name = fields.B_Name;
+        Content= fields.B_Content;
+        Description = fields.B_Description;
+        
+        //path tmp in server
+        var path = file.B_imageurl.path;
+        if(file.B_imageurl.name.toString()!=''){
+        //set up new path
+            console.log('save img file')
+            newpath = form.uploadDir + file.B_imageurl.name;
+            
+            fs.rename(path, newpath, function (err) {
+                if (err) throw err;    
+            });
         }
-    });
-    books.once('error', function (err) {
-        res.redirect('/admin/books');
-    });
-}
 
+        else{
+            fs.unlink(path, (err) => {
+                if (err) throw err;
+                console.log(path+' was deleted');
+            });
+        }
+    
+        var books = new bookModel.updateBook({
+            B_Name: Name,
+            B_Content: Content,
+            B_Description: Description,
+            B_imageurl :'img/'+file.B_imageurl.name,
+            C_ID : fields.C_ID,
+            B_Age : fields.B_Age,
+            B_PublishDate : fields.B_PublishDate
+        },fields.B_ID);
+        var maxBookID = new bookModel.getMaxID;
+        req.isRedirect = false;
+        books.once('results', function (results) {
+                //console.log('maxbookid'+data[0].MaxVL);
+            var authorArr = fields.hidden.split(",");
+            if(fields.hidden!="")
+            for(var i=0;i<authorArr.length;i++)
+            {
+                var rela = bookModel.updateBookAuthor(fields.B_ID,authorArr[i]);
+                 console.log(fields.B_ID+' update '+authorArr[i])
+            }
+           var textToSpeech = new openfpt(fields.B_ID,fields.B_Text);
+            if (results.affectedRows > 0) {
+                res.redirect('/admin/books');
+            }
+        });
+        books.once('error', function (err) {
+            res.redirect('/admin/books');
+        });
+    });
+    
+}
 function getOneBook(req, res, next,path,titleBook) {
     var books = new bookModel.getOneBook(req.params.id);
 
@@ -142,9 +188,6 @@ function getOneBook(req, res, next,path,titleBook) {
                 fs.writeFile('../views/index/readBookContent.ejs', html, function (err) {
                 if (err) console.log(err)
                 })
-            
-    
-
             console.log(data[0].B_PublishDate);
             res.render(path, {
                 title: titleBook,
@@ -188,12 +231,48 @@ var authorModel = require('../models/author');
 
     });
  }
+ function getUpdateBookPage(req,res,next)
+ {  
+    var category = new categoryModel.getCategories();
+    var author = new authorModel.getAuthors();
+    var book = new bookModel.getOneBook(req.params.id);
+    
+    
 
-module.exports = {
+    category.once('results', function (data) {
+        if (data.length > 0) {
+            //console.log(data);
+            //console.log(listCategory);
+            author.once('results', function (results) {
+                if (results.length > 0) {
+                    book.once('results',function(bookData){
+                        //console.log(bookData);
+                        res.render('admin/updateBook', {
+                        title: 'Update book - Vimstory',
+                        categories : data,
+                        authors : results,
+                        book : bookData
+                        
+            
+                    });
+                    });  
+                     
+                }
+                else res.end('error');
+            
+            })
+        }
+        else res.end('error');
+
+    });
+//});
+ }
+ module.exports = {
     getBooks,
     addBook,
     deleteBook,
     updateBook,
     getOneBook,
-    getAddBookPage
+    getAddBookPage,
+    getUpdateBookPage
 }
