@@ -1,5 +1,5 @@
 var bookModel = require('../models/book');
- var categoryModel = require('../models/category');
+var categoryModel = require('../models/category');
 
 function getBooks(req, res, next,num) {
     var books = new bookModel.getBooks;
