@@ -56,6 +56,10 @@ module.exports = {
     getOneBook,
     getMaxID,
     setAuthor,
+<<<<<<< HEAD
+=======
+    searchBooks,
+>>>>>>> nana
     updateBookAuthor
 }
 

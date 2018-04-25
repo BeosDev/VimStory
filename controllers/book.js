@@ -229,8 +229,6 @@ function getUpdateBookPage(req, res, next) {
     var author = new authorModel.getAuthors();
     var book = new bookModel.getOneBook(req.params.id);
 
-
-
     category.once('results', function (data) {
         if (data.length > 0) {
             //console.log(data);
@@ -255,30 +253,34 @@ function getUpdateBookPage(req, res, next) {
         } else res.end('error');
 
     });
-    //});
-}
-
-function searchBooks(req, res, next){
+//});
+ }
+ function searchBooks(req,res,next){
     var name = req.query['search'];
-    var books = bookModel.searchBook(name);
-    books.once('results', function(results){
-        res.render('index/searchBook',{
-            title:'Search book - Vimstory',
-            data: results
+    var books = bookModel.searchBooks(name);
+    var categories = categoryModel.getCategories();
+
+    categories.once('results', function(ca){
+        books.once('results', function(results){
+            res.render('index/searchBook',{
+                title: 'Search book - Vimstory',
+                categories: ca,
+                data : results
+            })
+        });
+        books.once('error',function(err){
+            res.end('err');
         })
     });
-    books.once('error', function(err){
-        res.end('err');
-    });
+    
 }
-
-module.exports = {
+ module.exports = {
     getBooks,
     addBook,
     deleteBook,
     updateBook,
     getOneBook,
     getAddBookPage,
-    getUpdateBookPage,
-    searchBooks
+    searchBooks,
+    getUpdateBookPage
 }
