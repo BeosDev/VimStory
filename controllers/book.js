@@ -259,21 +259,23 @@ function getUpdateBookPage(req, res, next) {
     var name = req.query['search'];
     var books = bookModel.searchBooks(name);
     var categories = categoryModel.getCategories();
-
-    categories.once('results', function(ca){
-        books.once('results', function(results){
-            res.render('index/searchBook',{
-                title: 'Search book - Vimstory',
-                categories: ca,
-                data : results
-            })
-        });
-        books.once('error',function(err){
-            res.end('err');
+    var categoriesData;
+    categories.once('results', function(data){
+        categoriesData = data;
+    });
+    books.once('results', function(results){
+        res.render('index/searchBook',{
+            title: 'Search book - Vimstory',
+            categories: categoriesData,
+            data : results,
+            pageNum: 1
         })
     });
-    
+    books.once('error',function(err){
+        res.end('err');
+    })
 }
+
  module.exports = {
     getBooks,
     addBook,
