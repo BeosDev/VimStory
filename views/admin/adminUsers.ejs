@@ -12,10 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <!-- CSS Files -->
-    
-    
-    
+    <!-- CSS Files --> 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="/assets/css/demo.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
@@ -60,12 +57,12 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="UserManagement.html">
+                        <a class="nav-link active" href="UserManagement.html">
                             <i class="nc-icon nc-notes"></i>
                             <p>User Management</p>
                         </a>
                     </li>
-                    <li class =" nav-item active">
+                    <li class =" nav-item">
                         <a class="nav-link" href="BookManagement.html">
                             <i class="nc-icon nc-notes"></i>
                             <p>Book Management</p>
@@ -100,12 +97,11 @@
                     <div class="content">
                 
                     <div class="container">
-                    <a href="/admin/users/add"><button type="button" class="btn btn-outline-secondary"><p style="font-size:30px;margin:auto;">ADD New-Book</p></button></a>      
+                    <a href="/admin/users/add"><button type="button" class="btn btn-outline-secondary"><p style="font-size:30px;margin:auto;">New user</p></button></a>      
     <table id="table" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
         <thead><tr role="row">
             <th>ID</th>
             <th>Username</th>
-            <th>Password</th>
             <th>U_authorization</th>
             <th>U_Fullname</th>
             <th>U_Address</th>
@@ -121,7 +117,6 @@
             <tr role="row" class="odd"  id ="tr<%=i%>">
             <td id ="td_idtr<%=i%>"><%= data[i].U_ID %></td>
             <td id ="td_nametr<%=i%>"><%= data[i].Username %></td>
-            <td><%= data[i].Password %></td>
             <td id ="td_U_authorizationtr<%=i%>"><%= data[i].U_authorization %></td>
             <td id ="td_U_Fullnametr<%=i%>"><%= data[i].U_Fullname %></td>
             <td id ="td_U_Addresstr<%=i%>"><%= data[i].U_Address %></td>

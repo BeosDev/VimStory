@@ -31,6 +31,8 @@ U_Email
 */
 
 function addUser(req,res){
+    console.log(req.body);
+    delete req.body.RePassword;
     var user = UserModel.addUser(req.body);
     user.once('results',function(results){
         console.log(results);
@@ -41,6 +43,10 @@ function addUser(req,res){
     user.once('error',function(err){
         res.end('error');
     })
+}
+
+function getAddUserPage(req,res){
+    res.render('admin/addUser');
 }
 
 function updateUser(req,res){
@@ -73,5 +79,6 @@ module.exports = {
     getUsers,
     addUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getAddUserPage
 }
