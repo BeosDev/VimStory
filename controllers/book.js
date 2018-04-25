@@ -239,7 +239,6 @@ var authorModel = require('../models/author');
     
     
 
-<<<<<<< HEAD
     category.once('results', function (data) {
         if (data.length > 0) {
             //console.log(data);
@@ -268,9 +267,7 @@ var authorModel = require('../models/author');
     });
 //});
  }
- module.exports = {
-=======
-function searchBooks(req,res,next){
+ function searchBooks(req,res,next){
     var name = req.query['search'];
     var books = bookModel.searchBooks(name);
     books.once('results', function(results){
@@ -283,18 +280,13 @@ function searchBooks(req,res,next){
         res.end('err');
     })
 }
-
-module.exports = {
->>>>>>> tim
+ module.exports = {
     getBooks,
     addBook,
     deleteBook,
     updateBook,
     getOneBook,
     getAddBookPage,
-<<<<<<< HEAD
+    searchBooks,
     getUpdateBookPage
-=======
-    searchBooks
->>>>>>> tim
 }
