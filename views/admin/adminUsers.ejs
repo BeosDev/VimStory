@@ -102,12 +102,12 @@
         <thead><tr role="row">
             <th>ID</th>
             <th>Username</th>
-            <th>U_authorization</th>
-            <th>U_Fullname</th>
-            <th>U_Address</th>
-            <th>U_Phone</th>
-            <th>U_Sex</th>
-            <th>U_Email</th>
+            <th>Authorization</th>
+            <th>Full Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Sex</th>
+            <th>Email</th>
             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" >Edit</th>
             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" >Delete</th>            </tr>
         </thead>
@@ -117,11 +117,11 @@
             <tr role="row" class="odd"  id ="tr<%=i%>">
             <td id ="td_idtr<%=i%>"><%= data[i].U_ID %></td>
             <td id ="td_nametr<%=i%>"><%= data[i].Username %></td>
-            <td id ="td_U_authorizationtr<%=i%>"><%= data[i].U_authorization %></td>
-            <td id ="td_U_Fullnametr<%=i%>"><%= data[i].U_Fullname %></td>
+            <td id ="td_U_authorizationtr<%=i%>"><%= data[i].U_Authorization === 0 ? "Admin":"Mod"  %></td>
+            <td id ="td_U_Fullnametr<%=i%>"><%= data[i].U_FullName  %></td>
             <td id ="td_U_Addresstr<%=i%>"><%= data[i].U_Address %></td>
             <td id ="td_U_Phonetr<%=i%>"><%= data[i].U_Phone %></td>
-            <td id ="td_U_Sextr<%=i%>"><%= data[i].U_Sex %></td>
+            <td id ="td_U_Sextr<%=i%>"><%= data[i].U_Sex === 1 ? "Male":"Female" %></td>
             <td id ="td_U_Emailtr<%=i%>"><%= data[i].U_Email %></td>
             <td><a href='/admin/users/update/<%=data[i].U_ID%>' ><i class="fas fa-edit"></a></td>
             <td><a href='/admin/users/delete/<%=data[i].U_ID%>' ><i class="fas fa-trash-alt"></a></td>
@@ -130,9 +130,6 @@
         </tbody></table>
         </div></div>
 </div>
-
-
-
             <footer class="footer">
                 <div class="container">
                     <nav>                       
@@ -147,15 +144,8 @@
                 </div>
             </footer>
         </div>
-         
-              </div>
-              
-                
-                
+              </div>               
           </div>
-
-         
-
           </div>
       </div>
     </div>
