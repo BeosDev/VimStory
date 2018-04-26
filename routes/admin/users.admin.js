@@ -9,6 +9,10 @@ router.post('/add',function(req,res){
     userController.addUser(req,res);
 })
 
+router.get('/add',function(req,res){
+    userController.getAddUserPage(req,res);
+})
+
 router.get('/delete/:id',function (req,res){
     console.log(req.params);
     userController.deleteUser(req,res);
