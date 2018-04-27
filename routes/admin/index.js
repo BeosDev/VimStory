@@ -1,10 +1,10 @@
 var router = require('express').Router();;
-var isLoggined = require('../auth').isLoggined;
+var Auth = require('../auth');
 
-router.use(isLoggined);
+router.use(Auth.isLoggined);
 
 router.use('/books',require('./books.admin'));
 router.use('/categories',require('./category.admin'));
-router.use('/users',require('./users.admin'));
+router.use('/users',Auth.isAdmin,require('./users.admin'));
 
 module.exports = router;

@@ -7,7 +7,8 @@ function getUsers(req, res) {
         if (results.length > 0) {
             res.render('admin/adminUsers', {
                 title: "Manage Category - vimstory",
-                data: results
+                data: results,
+                title: 'User Management'
             })
         }
         else
@@ -46,7 +47,7 @@ function addUser(req,res){
 }
 
 function getAddUserPage(req,res){
-    res.render('admin/addUser');
+    res.render('admin/addUser',{title: 'New User'});
 }
 
 function updateUser(req,res){
@@ -65,7 +66,7 @@ function updateUser(req,res){
 function getUpdateUserPage(req,res){
     var user = new UserModel.getOneUserViaId(req.params.id);
     user.once('results',results => {
-        res.render('admin/updateUser',{User: results[0]});
+        res.render('admin/updateUser',{User: results[0], title: 'Update User'});
     })
     user.once('error',err => res.end('err'));
 }
