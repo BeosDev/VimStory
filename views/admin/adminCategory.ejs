@@ -155,18 +155,13 @@
                         <div class="unit w-2-3">
                             <div class="hero-callout">
                                 <div id="example_wrapper" class="dataTables_wrapper">
-                                    <div class="dataTables_length" id="example_length"></div>
-                                    <div id="example_filter" class="dataTables_filter"></div>
-
-                                    <table id="example" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
+                                    <table id="table" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 126px;" aria-sort="ascending"
-                                                    aria-label="ID_Agetag: activate to sort column descending">ID</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 201px;" aria-label="Name_Agetag: activate to sort column ascending">Name</th>
-
-                                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" aria-label="Phone number: activate to sort column ascending">Edit</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" aria-label="Phone number: activate to sort column ascending">Delete</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 126px;" aria-sort="ascending">ID</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 201px;" aria-label="">Name</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" aria-label="">Edit</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" aria-label="">Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -226,21 +221,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <center>
-                                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                                            <a class="paginate_button previous disabled" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_previous">Previous</a>
-                                            <span>
-                                                <a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">1</a>
-                                                <a class="paginate_button " aria-controls="example" data-dt-idx="2" tabindex="0">2</a>
-                                                <a class="paginate_button " aria-controls="example" data-dt-idx="3" tabindex="0">3</a>
-                                                <a class="paginate_button " aria-controls="example" data-dt-idx="4" tabindex="0">4</a>
-                                                <a class="paginate_button " aria-controls="example" data-dt-idx="5" tabindex="0">5</a>
-                                                <a class="paginate_button " aria-controls="example" data-dt-idx="6" tabindex="0">6</a>
-                                            </span>
-                                            <a class="paginate_button next" aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next">Next</a>
-                                        </div>
-                                </div>
-                                </center>
                             </div>
                         </div>
                     </div>
@@ -344,6 +324,10 @@
         <script src="/assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
         <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
         <script src="/assets/js/demo.js"></script>
+        <link rel="stylesheet" type="text/css" href="/assets/css/jquery.dataTables.min.css"/>
+        <script type="text/javascript" src="/assets/js/jquery.dataTables.min.js"></script>
+
+
         </body>
 
 </html>

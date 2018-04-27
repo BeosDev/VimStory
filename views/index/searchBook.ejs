@@ -234,8 +234,7 @@
                                     <div class="row">
                                         <%var maxNum = (pageNum*9 > data.length) ? data.length : pageNum*9%>
                                             <%var minNum = (pageNum===1) ? 0 : (pageNum-1)*9%>
-                                                <%for(var i=minNum;i<maxNum;i++)
-						{ %>
+                                                <%for(var i=minNum;i<maxNum;i++){ %>
                                                     <div class="bookcard">
                                                         <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="/<%=data[i].B_imageurl%>" data-holder-rendered="true">
                                                         <div style="min-height: 170px;">
