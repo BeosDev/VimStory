@@ -3,6 +3,7 @@ var formidable = require('formidable');
 var fs = require('fs');
 var createHTML = require('create-html');
 var openfpt = require('./utils/openfpt');
+var utils = require('util');
 
 function getBooks(req, res, next) {
     var books = new bookModel.getBooks;
@@ -257,6 +258,9 @@ function getUpdateBookPage(req, res, next) {
  }
  function searchBooks(req,res,next){
     var name = req.query['search'];
+    if(utils.isNullOrUndefined(name)) name = "";
+    var page = req.query['page'];
+    if(utils.isNullOrUndefined(page)) page = 1;
     var books = bookModel.searchBooks(name);
     var categories = categoryModel.getCategories();
     var categoriesData;
@@ -268,7 +272,8 @@ function getUpdateBookPage(req, res, next) {
             title: 'Search book - Vimstory',
             categories: categoriesData,
             data : results,
-            pageNum: 1
+            pageNum: page,
+            keyword: name
         })
     });
     books.once('error',function(err){
