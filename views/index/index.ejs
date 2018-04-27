@@ -4,11 +4,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title><%=title%></title>
-	<link rel="stylesheet" href="/assets/css/bootstrap.min.css" class="css">
+	
 	<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" class="css">
 	<link rel="stylesheet" href="/assets/img/Pokeball.ico" class="favicon">
 	<link rel="shortcut icon" type="image/x-icon" href="/assets/img/Pokeball.ico">
     <link rel="stylesheet" href="/assets/css/custom.css" class="css"> 
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" class="css">
 </head>
 <body>
 
@@ -17,20 +18,16 @@
         <div class="row">
             <div class="col-md-12 col-nopadding">
                 <header>
-
                     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
                         <!-- logo -->
                         <a class="navbar-brand" href="/">
                             <img src="/assets/img/logo1.jpg" alt="Logo" style="width:50px;">
                         </a>
-                        <ul class="navbar-nav">
+                 
+<ul class="navbar-nav">
                             <!-- home -->
                             <li class="nav-item">
-
-                                
-
                                 <a class="nav-link" href="/">Home</a>
-
                             </li>
                             <!-- Category -->
                             <li class="nav-item dropdown">
@@ -38,8 +35,7 @@
                                 <div class="dropdown-menu">
                                     <%for(var i=0;i<categories.length;i++)
                                     { %>
-                                    <a class="dropdown-item" href="#"><%=categories[i].C_Name%></a>
-                                    
+                                    <a class="dropdown-item" href="/category/<%=categories[i].C_ID%>/page/1"><%=categories[i].C_Name%></a>
                                     <%}%>
                                 </div>
                             </li>
@@ -47,10 +43,10 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Age Group</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Super NewBorn (0+)</a>
-                                    <a class="dropdown-item" href="#">Grade School (12+)</a>
-                                    <a class="dropdown-item" href="#">Teenager (15+)</a>
-                                    <a class="dropdown-item" href="#">Adult (18+)</a>
+                                    <a class="dropdown-item" href="/age/0/page/1">Super NewBorn (0+)</a>
+                                    <a class="dropdown-item" href="/age/12/page/1">Grade School (12+)</a>
+                                    <a class="dropdown-item" href="/age/15/page/1">Teenager (15+)</a>
+                                    <a class="dropdown-item" href="/age/18/page/1">Adult (18+)</a>
                                 </div>
                             </li>
                             <!--about-->
@@ -65,13 +61,18 @@
                                 </div>
                             </li>
                         </ul>
-
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item" style="margin-right: 5px">
                                 <div class="nav-item">
                                     <form action="book" method="GET">
                                     <div class="input-group">
+<<<<<<< HEAD
                                             <input type="search-text" name="search" placeholder="Search.." class = "form-control">
+=======
+                                    <form action="book" method="GET">
+                                        <input class="form-control" style="width:250px;" type="text" placeholder="Search" name="search">
+                                    </form>
+>>>>>>> nana
                                         <div class="input-group-append">
                                             <button type="button" class="btn btn-outline-secondary">
                                                 <i class="fa fa-search"></i>
@@ -254,14 +255,13 @@
             
         </div>
     </div>
-    <div class="container text-center">
-    <p>Lớp .active để kích hoạt trang đang hoạt động</p>
-    <ul class="pagination">
+    <div class="container" align="center" >
         <% for(var i=0;i<data.length/9;i++)
-        {%>
-            <li><a href="/page/<%=(i+1)%>"><%=(i+1)%></a></li>
-        <%}%>
-    </ul>
+        { if((i+1)==pageNum){%>
+            <a href="../page/<%=(i+1)%>" class="btn btn-default"><u><%=(i+1)%></u></a>
+            <%}else{%>
+            <a href="../page/<%=(i+1)%>" class="btn btn-default"><%=(i+1)%></a>
+        <%}}%>   
 </div>
     <!--footer-->
     <div class="container">

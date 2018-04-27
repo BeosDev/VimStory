@@ -43,6 +43,15 @@ function updateBookAuthor(book_id,author_id) {
     return new executeQuery(query);
 }
 
+function getBooksAge(ageNum) {
+    var query = `SELECT * FROM v_book WHERE B_Age =  ${ageNum}`;
+    return new executeQuery(query);
+}
+
+function getBooksCategory(C_ID) {
+    var query = `SELECT * FROM v_book WHERE C_ID =  ${C_ID}`;
+    return new executeQuery(query);
+}
 //var k = new getBooks();
 //k.on('results',function(results){
   //  console.log(results[1]);
@@ -57,6 +66,8 @@ module.exports = {
     getMaxID,
     setAuthor,
     searchBooks,
-    updateBookAuthor
+    updateBookAuthor,
+    getBooksAge,
+    getBooksCategory
 }
 

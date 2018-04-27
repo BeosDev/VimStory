@@ -18,7 +18,12 @@ router.get('/delete/:id',function (req,res){
     userController.deleteUser(req,res);
 })
 
+router.get('/update/:id',function(req,res){
+    userController.getUpdateUserPage(req,res);
+})
+
 router.post('/update',function (req,res){
+    delete req.body.RePassword;
     userController.updateUser(req,res);
 })
 

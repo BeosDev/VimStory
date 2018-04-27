@@ -1,11 +1,15 @@
 var EventEmitter = require('events').EventEmitter,
     request = require("request"),
     fs = require('fs'),
-    pathDownload = '../../public/mp3/download/',
-    pathFinal = '../../public/mp3/final/',
-    CombinedStream = require('combined-stream');
+    path = require('path'),
+    pathDownload = path.join(__dirname, '../../', '/public/mp3/download/'),
+    pathFinal = path.join(__dirname, '../../', '/public/mp3/final/'),
+    CombinedStream = require('combined-stream'),
+    bookModel = require('../../models/book');
 
 function getSpeech(text) {
+    console.log(pathDownload);
+    console.log(pathFinal);
     return new Promise((resolve, reject) => {
         var options = {
             method: 'POST',
@@ -71,18 +75,20 @@ function CombineAudio(id, links, emitter) {
         fs.mkdirSync(pathDownload + id);
     var count = 0;
     for (var i = 0; i < links.length; i++) {
+        console.log(links[i]);
         request.get(links[i])
-            .pipe(fs.createWriteStream(`../../public/mp3/download/${id}/audio${i}.mp3`))
-            .on('finish', function () {
+            .pipe(fs.createWriteStream(path.join(pathDownload, `/${id}/audio${i}.mp3`)))
+            .once('finish', function () {
                 count++;
                 if (count === links.length) {
-                    ConcatAudio(id,emitter);
+                    ConcatAudio(id, emitter);
                 }
             })
+            .once('error', (err) => console.log(err));
     }
 }
 
-function ConcatAudio(id,emitter) {
+function ConcatAudio(id, emitter) {
     var files = fs.readdirSync(pathDownload + id + '/');
     if (fs.existsSync(pathFinal + `audio${id}`))
         fs.rmdirSync(pathFinal + `audio${id}`);
@@ -92,22 +98,25 @@ function ConcatAudio(id,emitter) {
     });
     combinedStream
         .pipe(fs.createWriteStream(pathFinal + `audio${id}.mp3`))
-        .on('finish',() => {
+        .once('finish', () => {
+            var book = new bookModel.updateBook({
+                'B_audiourl': `audio${id}.mp3`
+            }, id);
             emitter.emit('done');
         });
 }
 
-function TextToSpeech(id,text) {
+function TextToSpeech(id, text) {
     var Speech = new ApiTextToSpeech(text);
+    var emitter = this;
     Speech.once('result', links => {
-        CombineAudio(id, links,this);
+        CombineAudio(id, links, emitter);
     })
 }
 
-/*
-TextToSpeech.prototype = new EventEmitter();
 
-var k = new TextToSpeech(1,`
+TextToSpeech.prototype = new EventEmitter();
+/*var k = new TextToSpeech(3, `
 Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
 Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
 Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
@@ -126,6 +135,6 @@ Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia là
 Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
 Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
 `);
-k.on('done',()=> console.log('exported'));
-*/
+k.on('done', () => console.log('exported'));*/
+
 module.exports = TextToSpeech;

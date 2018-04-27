@@ -6,8 +6,8 @@ function getUsers() {
     return new executeQuery(query);
 }
 
-function getOneUser(username) {
-    var query = `SELECT * FROM user WHERE username = '${username}'`;
+function getOneUser(id) {
+    var query = `SELECT * FROM user WHERE U_ID = '${id}'`;
     return new executeQuery(query);
 }
 
