@@ -259,8 +259,10 @@ function getUpdateBookPage(req, res, next) {
  function searchBooks(req,res,next){
     var name = req.query['search'];
     if(utils.isNullOrUndefined(name)) name = "";
+    console.log(name);
     var page = req.query['page'];
     if(utils.isNullOrUndefined(page)) page = 1;
+    console.log(page);
     var books = bookModel.searchBooks(name);
     var categories = categoryModel.getCategories();
     var categoriesData;
