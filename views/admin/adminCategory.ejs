@@ -139,10 +139,8 @@
       </div>
     </form>
     </div>
-
   </div>
 </div>
-
             <div class="unit w-2-3"><div class="hero-callout">
                 <div id="example_wrapper" class="dataTables_wrapper"><div class="dataTables_length" id="example_length"></div><div id="example_filter" class=           "dataTables_filter"></div>
                 
@@ -157,10 +155,10 @@
                         <tbody>
                             <%for(var i = 0; i < data.length; i++){%>
                             <tr role="row" class="odd">
+                                <td><%=data[i].C_ID%></td>
                                 <td><%=data[i].C_Name%></td>
-                                <td><%=data[i].C_Name%></td>
-                                <td><a href="EditCategory.html"><button  type="button" style="margin:auto;display: block;"><i class="fas fa-edit"></i></button> </a></td>
-                                <td><button  type="button" style="margin:auto;display: block;"><i class="fas fa-trash-alt"></i></button> </td>
+                                <td><a href="EditCategory.html"><button  type="button" style="margin:auto;display: block;"><i class="fas fa-edit"></i></button></a></td>
+                                <td><a href="categories/delete/<%=data[i].C_ID%>"><button  type="button" style="margin:auto;display: block;"><i class="fas fa-trash-alt"></i></button></a></td>
                             </tr>
                             <%}%>
                         </tbody></table>
