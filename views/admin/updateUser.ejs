@@ -102,13 +102,14 @@
             <div class="container">
                 <h2>New Account</h2>
                 <form method="POST" action="/admin/users/update">
+                    <input type="text" class="form-control hidden" id="UM-A-UserName" name="U_ID" value="<%= User.U_ID %>">
                     <div class="form-group">
                         <label for="usr">User Name:</label>
                         <input type="text" class="form-control" id="UM-A-UserName" name="Username" value="<%= User.Username %>">
                     </div>
                     <div class="form-group">
                         <label for="usr">Full Name:</label>
-                        <input type="text" class="form-control" id="UM-A-FullName" name="U_Fullname" value="<%= User.U_Fullname %>">
+                        <input type="text" class="form-control" id="UM-A-FullName" name="U_FullName" value="<%= User.U_FullName %>">
                     </div>
                     <div class="form-group">
                         <label for="usr">Password:</label>
@@ -142,9 +143,9 @@
                     <div class="form-group">
                         <label for="usr">Authorize:</label>
                         <div class="form-group">
-                            <select class="form-control" id="UM-A-Authorize" name="U_authorization" >
-                                <option title="Admin">0</option>
-                                <option title="Admin">1</option>
+                            <select class="form-control" id="UM-A-Authorize" name="U_Authorization" >
+                                <option value="0">Admin</option>
+                                <option title="1">Mod</option>
                             </select>
                         </div>
                     </div>
