@@ -1,7 +1,7 @@
-function authAdmin(req,res,next){
+function isAdmin(req,res,next){
     if (req.user.U_Authorization === 0)
         return next();
-    res.redirect('/');
+    res.redirect('/admin/books');
 }
 
 function isLoggined(req,res,next){
@@ -10,14 +10,14 @@ function isLoggined(req,res,next){
     res.redirect('/login');
 }
 
-function authMod(req,res,next){
+function isMod(req,res,next){
     if (req.user.U_Authorization === 1)
         return next();
-    res.redirect('/');
+    res.redirect('/admin/books');
 }
 
 module.exports = {
-    authAdmin,
-    authMod,
+    isAdmin,
+    isMod,
     isLoggined
 }
