@@ -169,27 +169,42 @@ function updateBook(req, res, next) {
 
 function getOneBook(req, res, next, path, titleBook) {
     var books = new bookModel.getOneBook(req.params.id);
+    var author = new authorModel.getAuthorsByBookId(req.params.id);
+    var category = new categoryModel.getCategories();
 
     books.once('results', function (data) {
-
         if (data.length > 0) {
-            var titleBook = data[0].B_Name;
-            var html = createHTML({
-                title: 'Content',
-                head: '<meta name="description" content="example">',
-                body: data[0].B_Content
-            })
+            author.once('results',function(authorsData){
+                if(authorsData.length > 0)
+                {
+                    category.once('results',function(categoryData){
+                        var titleBook = data[0].B_Name;
+                        var html = createHTML({
+                            title: 'Content',
+                            head: '<meta name="description" content="example">',
+                            body: data[0].B_Content,
+                        })
 
-            fs.writeFile('../views/index/readBookContent.ejs', html, function (err) {
-                if (err) console.log(err)
-            })
-            console.log(data[0].B_PublishDate);
-            res.render(path, {
-                title: titleBook,
-                data: data[0]
-            }, function (err, html) {
-                res.end(html);
-            })
+                        fs.writeFile('../views/index/readBookContent.ejs', html, function (err) {
+                            if (err) console.log(err)
+                        })
+                        console.log(data[0].B_PublishDate);
+                        res.render(path, {
+                            title: titleBook,
+                            data: data[0],
+                            authors : authorsData,
+                            categories: categoryData
+                        }, function (err, html) {
+                            res.end(html);
+                        })
+                    });
+                    
+                }
+                else{
+                    res.end('error');
+                }
+        });
+            
         } else res.end('error');
 
     });

@@ -22,53 +22,33 @@
 
                     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
                         <!-- logo -->
-                        <a class="navbar-brand" href="HomePage.html">
+                        <a class="navbar-brand" href="/">
                             <img src="/assets/img/logo1.jpg" alt="Logo" style="width:50px;">
                         </a>
                         <ul class="navbar-nav">
                             <!-- home -->
                             <li class="nav-item">
-                                <a class="nav-link" href="HomePage.html">Home</a>
+                                <a class="nav-link" href="/">Home</a>
                             </li>
                             <!-- Category -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Category</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Science fiction</a>
-                                    <a class="dropdown-item" href="#">Satire</a>
-                                    <a class="dropdown-item" href="#">Drama</a>
-                                    <a class="dropdown-item" href="#">Action and Adventure</a>
-                                    <a class="dropdown-item" href="#">Romance</a>
-                                    <a class="dropdown-item" href="#">Mystery</a>
-                                    <a class="dropdown-item" href="#">Self help</a>
+                                    <%for(var i=0;i<categories.length;i++)
+                                    { %>
+                                    <a class="dropdown-item" href="/category/<%=categories[i].C_ID%>/page/1"><%=categories[i].C_Name%></a>
+                                    <%}%>
                                 </div>
                             </li>
                             <!-- Age Group -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Age Group</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Super NewBorn (0+)</a>
-                                    <a class="dropdown-item" href="#">Infant (1+)</a>
-                                    <a class="dropdown-item" href="#">Toddler (3+)</a>
-                                    <a class="dropdown-item" href="#">Kindergarterr Kids (5+)</a>
-                                    <a class="dropdown-item" href="#">Grade School (12+)</a>
-                                    <a class="dropdown-item" href="#">Teenager (15+)</a>
-                                    <a class="dropdown-item" href="#">Adult (18+)</a>
+                                    <a class="dropdown-item" href="/age/0/page/1">Super NewBorn (0+)</a>
+                                    <a class="dropdown-item" href="/age/12/page/1">Grade School (12+)</a>
+                                    <a class="dropdown-item" href="/age/15/page/1">Teenager (15+)</a>
+                                    <a class="dropdown-item" href="/age/18/page/1">Adult (18+)</a>
                                 </div>
-                            </li>
-                            <!-- News -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">News</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Event</a>
-                                    <a class="dropdown-item" href="#">Event Calendar</a>
-                                    <a class="dropdown-item" href="#">Review</a>
-                                    <a class="dropdown-item" href="#">What's News</a>
-                                </div>
-                            </li>
-                            <!--forum-->
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Forum</a>
                             </li>
                             <!--about-->
                             <li class="nav-item dropdown">
@@ -82,7 +62,6 @@
                                 </div>
                             </li>
                         </ul>
-
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item" style="margin-right: 5px">
                                 <div class="nav-item">
@@ -180,11 +159,11 @@
                 <div class="pull-left">
                     <div class="time-author__item">
                         <!--Bài viết của Tạp chí Phái Đẹp ELLE-->
-                        Author: <a href="https://www.facebook.com/UnpredictableThing" title="" rel="author">Phuc Bui</a>
+                        Author: <%for(var i = 0;i<authors.length ; i++){%><a title="" rel="author"><%=authors[i].A_Name%>, </a><%}%>
                     </div>
                     <div class="time-author__item">
                         Published: <span itemprop="datePublished"><%= data.B_PublishDate %></span>
-                        | Modified:<span itemprop="dateModified"> 21/04/2018 11:08:34</span>
+                        
                     </div>
                 </div>
                 <div class="row">

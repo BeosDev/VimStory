@@ -98,6 +98,7 @@ function ConcatAudio(id,emitter) {
 }
 
 function TextToSpeech(id,text) {
+    console.log('id '+id);
     console.log(text);
     var Speech = new ApiTextToSpeech(text);
     Speech.once('result', links => {

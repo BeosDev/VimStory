@@ -4,11 +4,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title><%=title%></title>
-	<link rel="stylesheet" href="/assets/css/bootstrap.min.css" class="css">
+	
 	<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" class="css">
 	<link rel="stylesheet" href="/assets/img/Pokeball.ico" class="favicon">
 	<link rel="shortcut icon" type="image/x-icon" href="/assets/img/Pokeball.ico">
     <link rel="stylesheet" href="/assets/css/custom.css" class="css"> 
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" class="css">
 </head>
 <body>
 
@@ -22,7 +23,8 @@
                         <a class="navbar-brand" href="/">
                             <img src="/assets/img/logo1.jpg" alt="Logo" style="width:50px;">
                         </a>
-                        <ul class="navbar-nav">
+                 
+<ul class="navbar-nav">
                             <!-- home -->
                             <li class="nav-item">
                                 <a class="nav-link" href="/">Home</a>
@@ -59,13 +61,12 @@
                                 </div>
                             </li>
                         </ul>
-
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item" style="margin-right: 5px">
                                 <div class="nav-item">
                                     <div class="input-group">
                                     <form action="book" method="GET">
-                                        <input class="form-control" type="text" placeholder="Search" name="search">
+                                        <input class="form-control" style="width:250px;" type="text" placeholder="Search" name="search">
                                     </form>
                                         <div class="input-group-append">
                                             <button type="button" class="btn btn-outline-secondary">
@@ -248,14 +249,13 @@
             
         </div>
     </div>
-    <div class="container text-center">
-    <p>Lớp .active để kích hoạt trang đang hoạt động</p>
-    <ul class="pagination">
+    <div class="container" align="center" >
         <% for(var i=0;i<data.length/9;i++)
-        {%>
-            <li><a href="/page/<%=(i+1)%>"><%=(i+1)%></a></li>
-        <%}%>
-    </ul>
+        { if((i+1)==pageNum){%>
+            <a href="../page/<%=(i+1)%>" class="btn btn-default"><u><%=(i+1)%></u></a>
+            <%}else{%>
+            <a href="../page/<%=(i+1)%>" class="btn btn-default"><%=(i+1)%></a>
+        <%}}%>   
 </div>
     <!--footer-->
     <div class="container">

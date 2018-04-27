@@ -25,11 +25,16 @@ function deleteAuthor(id) {
     return new executeQuery(query);
 }
 
+function getAuthorsByBookId(id) {
+    var query = `SELECT author.A_Name FROM a_b_relationship inner join author on a_b_relationship.A_ID = author.A_ID  WHERE B_ID = ${id};`;
+    return new executeQuery(query);
+}
 module.exports = {
     getAuthors,
     addAuthor,
     deleteAuthor,
     updateAuthor,
-    getOneAuthor
+    getOneAuthor,
+    getAuthorsByBookId
 }
 
