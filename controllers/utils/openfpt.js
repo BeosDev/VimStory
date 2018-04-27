@@ -1,11 +1,14 @@
 var EventEmitter = require('events').EventEmitter,
     request = require("request"),
     fs = require('fs'),
-    pathDownload = '../../public/mp3/download/',
-    pathFinal = '../../public/mp3/final/',
+    path = require('path'),
+    pathDownload = path.join(__dirname,'../../','/public/mp3/download/'),
+    pathFinal = path.join(__dirname,'../../','/public/mp3/final/'),
     CombinedStream = require('combined-stream');
 
 function getSpeech(text) {
+    console.log(pathDownload);
+    console.log(pathFinal);
     return new Promise((resolve, reject) => {
         var options = {
             method: 'POST',
@@ -71,18 +74,20 @@ function CombineAudio(id, links, emitter) {
         fs.mkdirSync(pathDownload + id);
     var count = 0;
     for (var i = 0; i < links.length; i++) {
+        console.log(links[i]);
         request.get(links[i])
-            .pipe(fs.createWriteStream(`../../public/mp3/download/${id}/audio${i}.mp3`))
-            .on('finish', function () {
+            .pipe(fs.createWriteStream(path.join(pathDownload,`/${id}/audio${i}.mp3`)))
+            .once('finish', function () {
                 count++;
                 if (count === links.length) {
-                    ConcatAudio(id,emitter);
+                    ConcatAudio(id, emitter);
                 }
             })
+            .once('error', (err)=> console.log(err));
     }
 }
 
-function ConcatAudio(id,emitter) {
+function ConcatAudio(id, emitter) {
     var files = fs.readdirSync(pathDownload + id + '/');
     if (fs.existsSync(pathFinal + `audio${id}`))
         fs.rmdirSync(pathFinal + `audio${id}`);
@@ -92,15 +97,16 @@ function ConcatAudio(id,emitter) {
     });
     combinedStream
         .pipe(fs.createWriteStream(pathFinal + `audio${id}.mp3`))
-        .on('finish',() => {
+        .on('finish', () => {
             emitter.emit('done');
         });
 }
 
-function TextToSpeech(id,text) {
+function TextToSpeech(id, text) {
     var Speech = new ApiTextToSpeech(text);
+    var emitter = this;
     Speech.once('result', links => {
-        CombineAudio(id, links,this);
+        CombineAudio(id, links, emitter);
     })
 }
 
