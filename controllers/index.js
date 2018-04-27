@@ -1,6 +1,5 @@
 var bookModel = require('../models/book');
  var categoryModel = require('../models/category');
-
 function getBooks(req, res, next,num,ageNum,cid) {
     var books
     if((ageNum===null || ageNum ==='') && (cid === null || cid === '' ))

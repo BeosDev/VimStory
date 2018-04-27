@@ -2,9 +2,10 @@ var EventEmitter = require('events').EventEmitter,
     request = require("request"),
     fs = require('fs'),
     path = require('path'),
-    pathDownload = path.join(__dirname,'../../','/public/mp3/download/'),
-    pathFinal = path.join(__dirname,'../../','/public/mp3/final/'),
-    CombinedStream = require('combined-stream');
+    pathDownload = path.join(__dirname, '../../', '/public/mp3/download/'),
+    pathFinal = path.join(__dirname, '../../', '/public/mp3/final/'),
+    CombinedStream = require('combined-stream'),
+    bookModel = require('../../models/book');
 
 function getSpeech(text) {
     console.log(pathDownload);
@@ -76,14 +77,14 @@ function CombineAudio(id, links, emitter) {
     for (var i = 0; i < links.length; i++) {
         console.log(links[i]);
         request.get(links[i])
-            .pipe(fs.createWriteStream(path.join(pathDownload,`/${id}/audio${i}.mp3`)))
+            .pipe(fs.createWriteStream(path.join(pathDownload, `/${id}/audio${i}.mp3`)))
             .once('finish', function () {
                 count++;
                 if (count === links.length) {
                     ConcatAudio(id, emitter);
                 }
             })
-            .once('error', (err)=> console.log(err));
+            .once('error', (err) => console.log(err));
     }
 }
 
@@ -97,7 +98,10 @@ function ConcatAudio(id, emitter) {
     });
     combinedStream
         .pipe(fs.createWriteStream(pathFinal + `audio${id}.mp3`))
-        .on('finish', () => {
+        .once('finish', () => {
+            var book = new bookModel.updateBook({
+                'B_audiourl': `audio${id}.mp3`
+            }, id);
             emitter.emit('done');
         });
 }
@@ -112,8 +116,7 @@ function TextToSpeech(id, text) {
 
 
 TextToSpeech.prototype = new EventEmitter();
-/*
-var k = new TextToSpeech(1,`
+var k = new TextToSpeech(3, `
 Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
 Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
 Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
@@ -132,6 +135,6 @@ Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia là
 Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
 Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
 `);
-k.on('done',()=> console.log('exported'));
-*/
+k.on('done', () => console.log('exported'));
+
 module.exports = TextToSpeech;
