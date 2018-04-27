@@ -1,7 +1,7 @@
 var router = require('express').Router();;
-var authAdmin = require('../auth').authAdmin;
+var isLoggined = require('../auth').isLoggined;
 
-//router.use(authAdmin);
+router.use(isLoggined);
 
 router.use('/books',require('./books.admin'));
 router.use('/categories',require('./category.admin'));
