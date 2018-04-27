@@ -62,6 +62,14 @@ function updateUser(req,res){
     })
 }
 
+function getUpdateUserPage(req,res){
+    var user = new UserModel.getOneUser(req.params.id);
+    user.once('results',results => {
+        res.render('admin/updateUser',{User: results[0]});
+    })
+    user.once('error',err => res.end('err'));
+}
+
 function deleteUser(req,res){
     var user = UserModel.deleteUser(req.params.id);
     user.once('results',function(results){
@@ -80,5 +88,6 @@ module.exports = {
     addUser,
     updateUser,
     deleteUser,
-    getAddUserPage
+    getAddUserPage,
+    getUpdateUserPage
 }

@@ -101,26 +101,26 @@
             <!-- End Navbar -->
             <div class="container">
                 <h2>New Account</h2>
-                <form method="POST">
+                <form method="POST" action="/admin/users/update">
                     <div class="form-group">
                         <label for="usr">User Name:</label>
-                        <input type="text" class="form-control" id="UM-A-UserName" name="Username">
+                        <input type="text" class="form-control" id="UM-A-UserName" name="Username" value="<%= User.Username %>">
                     </div>
                     <div class="form-group">
                         <label for="usr">Full Name:</label>
-                        <input type="text" class="form-control" id="UM-A-FullName" name="U_Fullname">
+                        <input type="text" class="form-control" id="UM-A-FullName" name="U_Fullname" value="<%= User.U_Fullname %>">
                     </div>
                     <div class="form-group">
                         <label for="usr">Password:</label>
-                        <input type="password" class="form-control" id="UM-A-Password" name="Password">
+                        <input type="password" class="form-control" id="UM-A-Password" name="Password" value="<%= User.Password %>">
                     </div>
                     <div class="form-group">
                         <label for="usr">RE-Password:</label>
-                        <input type="password" class="form-control" id="UM-A-Re_Password" name="RePassword">
+                        <input type="password" class="form-control" id="UM-A-Re_Password" name="RePassword" value="<%= User.Password %>">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Address:</label>
-                        <input type="text" class="form-control" id="UM-A-Address" name="U_Address">
+                        <input type="text" class="form-control" id="UM-A-Address" name="U_Address" value="<%= User.U_Address %>">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Phone Number:</label>
@@ -130,28 +130,28 @@
                         <label for="usr">Gender :</label>
                         <div class="form-group">
                             <select class="form-control" id="UM-A-Gender" name="U_Sex">
-                                <option value="1">Male</option>
-                                <option value="0">Female</option>
+                                <option value="1">Mod</option>
+                                <option value="0">Admin</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="pwd">Email:</label>
-                        <input type="text" class="form-control" id="UM-A-Email" name="U_Email">
+                        <input type="text" class="form-control" id="UM-A-Email" name="U_Email" value="<%= User.U_Email %>">
                     </div>
                     <div class="form-group">
                         <label for="usr">Authorize:</label>
                         <div class="form-group">
                             <select class="form-control" id="UM-A-Authorize" name="U_authorization" >
-                                <option value="0">Admin</option>
-                                <option title="1">Mod</option>
+                                <option title="Admin">0</option>
+                                <option title="Admin">1</option>
                             </select>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-outline-secondary " ;>
-                        <p style="font-size:15px; ">ADD</p>
+                        <p style="font-size:15px; ">Update</p>
                     </button>
-                    <a href="UserManagement.html">
+                    <a href="/admin/users">
                         <button type="button" class="btn btn-outline-secondary " ;>
                             <p style="font-size:15px; ">CLOSE</p>
                         </button>
