@@ -4,6 +4,7 @@ var fs = require('fs');
 var createHTML = require('create-html');
 var openfpt = require('./utils/openfpt');
 var utils = require('util');
+var path = require('path');
 
 function getBooks(req, res, next) {
     var books = new bookModel.getBooks;
@@ -32,7 +33,7 @@ function addBook(req, res, next) {
     console.log('ok');
     var form = new formidable.IncomingForm();
     //set directory folder
-    form.uploadDir = "../public/img/";
+    form.uploadDir = path.join (__dirname,'../', '\\public\\img');
     //form.uploadDir = path.join (__dirname, '/public/img');
     //xử lý upload
     form.parse(req, function (err, fields, file) {
@@ -40,19 +41,19 @@ function addBook(req, res, next) {
         Content = fields.B_Content;
         Description = fields.B_Description;
         //path tmp in server
-        var path = file.B_imageurl.path;
+        var pathImg = file.B_imageurl.path;
         if (file.B_imageurl.name.toString() != '') {
             //set up new path
             console.log('save img file')
             newpath = form.uploadDir + file.B_imageurl.name;
 
-            fs.rename(path, newpath, function (err) {
+            fs.rename(pathImg, newpath, function (err) {
                 if (err) throw err;
             });
         } else {
-            fs.unlink(path, (err) => {
+            fs.unlink(pathImg, (err) => {
                 if (err) throw err;
-                console.log(path + ' was deleted');
+                console.log(pathImg + ' was deleted');
             });
         }
         var books = new bookModel.addBook({
@@ -168,11 +169,11 @@ function updateBook(req, res, next) {
 
 }
 
-function getOneBook(req, res, next, path, titleBook) {
+function getOneBook(req, res, next, pathRender, titleBook) {
     var books = new bookModel.getOneBook(req.params.id);
 
     books.once('results', function (data) {
-
+        console.log(data);
         if (data.length > 0) {
             var titleBook = data[0].B_Name;
             var html = createHTML({
@@ -180,12 +181,11 @@ function getOneBook(req, res, next, path, titleBook) {
                 head: '<meta name="description" content="example">',
                 body: data[0].B_Content
             })
-
-            fs.writeFile('../views/index/readBookContent.ejs', html, function (err) {
+            fs.writeFile(path.join(__dirname,'../','\\views\\index\\readBookContent.ejs'), html, function (err) {
                 if (err) console.log(err)
             })
             console.log(data[0].B_PublishDate);
-            res.render(path, {
+            res.render(pathRender, {
                 title: titleBook,
                 data: data[0]
             }, function (err, html) {
