@@ -18,7 +18,7 @@ module.exports = function () {
     }, function (username, password, done) {
         var User = new UserModel.getOneUserViaUserName(username);
         User.once('results', function (results) {
-            if (results.length !== 0 &&UserModel.validPassword(password,results[0].Password)){
+            if (results.length !== 0 && UserModel.validPassword(password,results[0].Password)){
                 return done(null,results[0]);
             }
             return done(null, false);

@@ -7,6 +7,8 @@ var EventEmitter = require('events').EventEmitter,
     CombinedStream = require('combined-stream'),
     bookModel = require('../../models/book');
 
+process.setMaxListeners(10); 
+
 function getSpeech(text) {
     console.log(pathDownload);
     console.log(pathFinal);
@@ -16,7 +18,7 @@ function getSpeech(text) {
             url: 'http://api.openfpt.vn/text2speech/v4',
             headers: {
                 'cache-control': 'no-cache',
-                api_key: '71b7c7d7d2764106a3b0a3f7fe0dbc71'
+                api_key: '62c801011dd447058a7d7c3b27bca060'
             },
             body: text
         };
@@ -58,6 +60,7 @@ function ApiTextToSpeech(text) {
     }
     Promise.all(promises)
         .then(result => {
+            console.log('api fpt: ' + result);
             emitter.emit('result', result);
         })
         .catch(err => emitter.emit('error'));
@@ -105,10 +108,10 @@ function ConcatAudio(id, emitter) {
             emitter.emit('done');
         });
 }
-
 function TextToSpeech(id, text) {
     var Speech = new ApiTextToSpeech(text);
     var emitter = this;
+    emitter.setMax
     Speech.once('result', links => {
         CombineAudio(id, links, emitter);
     })

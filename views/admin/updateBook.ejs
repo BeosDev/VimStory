@@ -27,35 +27,42 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar-wrapper" >
-            <div class="logo">
+        <div class="sidebar" data-image="/assets/img/sidebar-5.jpg" style="font-size: 20px">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
-                <a class="nav-link" href="/admin/books">
-                    <img src="/assets/img/logo1.jpg" class="rounded" alt="Cinque Terre" width="70px" , height="70px">
-                    <p>Vim Story</p>
-                </a>
-            </div>
-            <ul class="nav">
-                <li>
-                    <a class="nav-link" href="/admin/categories">
-                        <i class="nc-icon nc-chart-pie-35"></i>
-                        <p>Category Management</p>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" href="/admin/users">
-                        <i class="nc-icon nc-notes"></i>
-                        <p>User Management</p>
-                    </a>
-                </li>
-                <li class =" nav-item active">
+        Tip 2: you can also add an image using data-image tag
+    -->
+            <div class="sidebar-wrapper" >
+                <div class="logo">
+
                     <a class="nav-link" href="/admin/books">
-                        <i class="nc-icon nc-notes"></i>
-                        <p>Book Management</p>
+                        <img src="/assets/img/logo1.jpg" class="rounded" alt="Cinque Terre" width="70px" , height="70px">
+                        <p>Vim Story</p>
                     </a>
-                </li>
-                
-            </ul>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a class="nav-link" href="/admin/categories">
+                            <i class="nc-icon nc-chart-pie-35"></i>
+                            <p>Category Management</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/admin/users">
+                            <i class="nc-icon nc-notes"></i>
+                            <p>User Management</p>
+                        </a>
+                    </li>
+                    <li class =" nav-item active">
+                        <a class="nav-link" href="/admin/books">
+                            <i class="nc-icon nc-notes"></i>
+                            <p>Book Management</p>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
         </div>
 <div class="main-panel">
                 <!-- Navbar -->

@@ -105,7 +105,7 @@ function updateBook(req, res, next) {
     console.log('ok');
     var form = new formidable.IncomingForm();
     //set directory folder
-    form.uploadDir = "../public/img/";
+    form.uploadDir = path.join (__dirname,'../', '\\public\\img\\');
     //form.uploadDir = path.join (__dirname, '/public/img');
     //xử lý upload
     form.parse(req, function (err, fields, file) {
@@ -121,11 +121,11 @@ function updateBook(req, res, next) {
             newpath = form.uploadDir + file.B_imageurl.name;
 
             fs.rename(path, newpath, function (err) {
-                if (err) throw err;
+                if (err) console.log(err);
             });
         } else {
             fs.unlink(path, (err) => {
-                if (err) throw err;
+                if (err) console.log(err);
                 console.log(path + ' was deleted');
             });
         }
@@ -144,6 +144,7 @@ function updateBook(req, res, next) {
         books.once('results', function (results) {
             //console.log('maxbookid'+data[0].MaxVL);
             var textToSpeech = new openfpt(fields.B_ID, fields.B_Text);
+            textToSpeech.once('done',()=> console.log('exported'));
             if (results.affectedRows > 0) {
                 res.redirect('/admin/books');
             }
