@@ -78,13 +78,13 @@ function CombineAudio(id, links, emitter) {
         console.log(links[i]);
         request.get(links[i])
             .pipe(fs.createWriteStream(path.join(pathDownload, `/${id}/audio${i}.mp3`)))
-            .once('finish', function () {
+            .on('finish', function () {
                 count++;
                 if (count === links.length) {
                     ConcatAudio(id, emitter);
                 }
             })
-            .once('error', (err) => console.log(err));
+            .on('error', (err) => console.log(err));
     }
 }
 
