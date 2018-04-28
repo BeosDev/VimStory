@@ -10,19 +10,16 @@ function getBooks(req, res, next) {
     var books = new bookModel.getBooks;
 
     books.once('results', function (data) {
-        if (data.length > 0) {
+        if (data.length >= 0) {
             res.render('admin/adminBook', {
                 title: 'Manage book - Vimstory',
                 data: data
             }, function (err, html) {
                 res.end(html);
             })
-        } else {
-            res.redirect('/admin/books');
-            //res.end('error');
         }
-
-    });
+    })
+    books.once('error',() => res.redirect('/'));
 }
 
 function addBook(req, res, next) {
@@ -73,6 +70,7 @@ function addBook(req, res, next) {
             maxBookID.once('results', function (data) {
                 //console.log('maxbookid'+data[0].MaxVL);
                 var textToSpeech = new openfpt(data[0].MaxVL, fields.B_Text);
+                textToSpeech.once('done',() => console.log('exported'));
             });
             if (results.affectedRows > 0) {
                 res.redirect('/admin/books');
