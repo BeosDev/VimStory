@@ -21,7 +21,75 @@
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/custom.css" class="css"> 
+    <!--<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+  
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
 
+.interior {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+
+.modal-window {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.15);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.modal-window:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-window>div {
+  width: 400px;
+  position: relative;
+  margin: 10% auto;
+  padding: 2rem;
+  background: #fff;
+  color: #444;
+}
+
+.modal-window header {
+  font-weight: bold;
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.modal-window h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
+}
+  </style>
 </head>
 
 <body>
@@ -32,42 +100,36 @@
 
         Tip 2: you can also add an image using data-image tag
     -->
-            <div class="sidebar-wrapper" >
-                <div class="logo">
+    <div class="sidebar-wrapper" >
+        <div class="logo">
 
-                    <a class="nav-link" href="Admin.html">
-                        <img src="/assets/img/logo1.jpg" class="rounded" alt="Cinque Terre" width="70px" , height="70px">
-                        <p>Vim Story</p>
-                    </a>
-                </div>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="CategoryManagement.html">
-                            <i class="nc-icon nc-chart-pie-35"></i>
-                            <p>Category Management</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="AgetagManagement.html">
-                            <i class="nc-icon nc-circle-09"></i>
-                            <p>Agetag Management</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="UserManagement.html">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>User Management</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="BookManagement.html">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>Book Management</p>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
+            <a class="nav-link" href="/admin/books">
+                <img src="/assets/img/logo1.jpg" class="rounded" alt="Cinque Terre" width="70px" , height="70px">
+                <p>Vim Story</p>
+            </a>
+        </div>
+        <ul class="nav">
+            <li>
+                <a class="nav-link" href="/admin/categories">
+                    <i class="nc-icon nc-chart-pie-35"></i>
+                    <p>Category Management</p>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="/admin/users">
+                    <i class="nc-icon nc-notes"></i>
+                    <p>User Management</p>
+                </a>
+            </li>
+            <li class =" nav-item active">
+                <a class="nav-link" href="/admin/books">
+                    <i class="nc-icon nc-notes"></i>
+                    <p>Book Management</p>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
         </div>
 <div class="main-panel">
                 <!-- Navbar -->
@@ -107,19 +169,7 @@
                       <form action="/admin/books/add" method="post" enctype="multipart/form-data" id = "addBookForm">
                         <div class="form-group">
                           <label for="usr">BookName:</label>
-                          <input type="text" class="form-control" id = "B_Name" name="B_Name">
-                        </div>
-                        <div class="form-group">
-                          <label for="pwd">Author:</label>
-                           <div class="form-group">
-                                  <select class="form-control" id="A_ID" name = "A_ID" multiple onchange="getSelected(this)">
-                                    <%for(var i=0;i<authors.length;i++)
-                                     { %>
-                                    <option value ="<%=authors[i].A_ID%>"><%=authors[i].A_Name%></option>
-                                    <%}%>
-                                    
-                                  </select>
-                            </div>
+                          <input type="text" class="form-control" id = "B_Name" name="B_Name" required>
                         </div>
                         <div class="form-group">
                           <label for="usr">Type:</label>
@@ -134,6 +184,7 @@
                             </div>
                             
                         </div>
+                        
                         <div class="form-group">
                           <label for="pwd">Agetag:</label>
                            <div class="form-group">

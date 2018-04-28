@@ -1,16 +1,23 @@
-function authAdmin(req,res,next){
-    if (req.isAuthenticated() && req.user.roleId === 1)
+function isAdmin(req,res,next){
+    if (req.user.U_Authorization === 0)
         return next();
-    res.redirect('/');
+    res.redirect('/admin/books');
 }
 
-function authMod(req,res,next){
-    if (req.isAuthenticated() && req.user.roleId === 2)
+function isLoggined(req,res,next){
+    if (req.isAuthenticated())
         return next();
-    res.redirect('/');
+    res.redirect('/login');
+}
+
+function isMod(req,res,next){
+    if (req.user.U_Authorization === 1)
+        return next();
+    res.redirect('/admin/books');
 }
 
 module.exports = {
-    authAdmin,
-    authMod
+    isAdmin,
+    isMod,
+    isLoggined
 }

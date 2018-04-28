@@ -78,13 +78,13 @@ function CombineAudio(id, links, emitter) {
         console.log(links[i]);
         request.get(links[i])
             .pipe(fs.createWriteStream(path.join(pathDownload, `/${id}/audio${i}.mp3`)))
-            .once('finish', function () {
+            .on('finish', function () {
                 count++;
                 if (count === links.length) {
                     ConcatAudio(id, emitter);
                 }
             })
-            .once('error', (err) => console.log(err));
+            .on('error', (err) => console.log(err));
     }
 }
 
@@ -116,25 +116,24 @@ function TextToSpeech(id, text) {
 
 
 TextToSpeech.prototype = new EventEmitter();
-/*var k = new TextToSpeech(3, `
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
-`);
-k.on('done', () => console.log('exported'));*/
-
+// var k = new TextToSpeech(3, `
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// Có rất nhiều KPIs khác nhau, nhưng tóm gọn thì nó thường chia làm 2 loại KPI. Vậy 2 loại KPI đó là gì? Chúng ta cùng tham khảo bài chia sẻ của anh Bùi Quang Tinh Tú, Marketing Director của Ringier AG Vietnam - Classified Division, nhé!
+// `);
+// k.on('done', () => console.log('exported'));
 module.exports = TextToSpeech;
