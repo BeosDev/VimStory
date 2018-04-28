@@ -232,41 +232,32 @@
 
                                 <div class="container">
                                     <div class="row">
-                                        <%for(var i=0;i<data.length;i++){ %>
+                                        <%for(var i=0;i<data[0].length;i++){ %>
                                             <div class="bookcard">
-                                                <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="/<%=data[i].B_imageurl%>" data-holder-rendered="true">
+                                                <img alt="100%x280" style="height: 280px; width: 100%; display: block;" src="/<%=data[0][i].B_imageurl%>" data-holder-rendered="true">
                                                 <div style="min-height: 170px;">
                                                     <h4 id="book-title" class="max-lines-title">
-                                                        <%=data[i].B_Name%>
+                                                        <%=data[0][i].B_Name%>
                                                     </h4>
                                                     <span class="updTm" datetime="2018-04-04 10:38:46">
-                                                        <%=data[i].B_PublishDate%>
+                                                        <%=data[0][i].B_PublishDate%>
                                                     </span>
                                                     <p id="book-description" class="max-lines-des">
-                                                        <%=data[i].B_Description%>
+                                                        <%=data[0][i].B_Description%>
                                                     </p>
                                                 </div>
                                                 <div>
-                                                    <a href="/book/read/<%=data[i].B_ID%>" style="float: right;"> >>Read more</a>
+                                                    <a href="/book/read/<%=data[0][i].B_ID%>" style="float: right;"> >>Read more</a>
                                                 </div>
                                             </div>
                                             <% } %>
                                     </div>
                                 </div>
-
-
-
-
-
                             </article>
                         </div>
-                        <!-- <div class="col-md-3">
-                <aside>Right (3 cột)</aside>
-            </div> -->
                     </div>
                 </div>
                 <div class="container" align="center">
-                    <script>alert('<%=pageNum%>|<%=data.length%>')</script>
                     <%if(1!=pageNum){%>
                         <a href="?search=<%=keyword%>&page=<%=pageNum-1%>" >
                             <button class="btn btn-default">
@@ -274,7 +265,7 @@
                             </button>
                         </a>
                     <%}%>
-                    <%if(8==data.length){%>
+                    <%if(9==data[0].length){%>
                         <a href="?search=<%=keyword%>&page=<%=pageNum-(-1)%>">
                             <button class="btn btn-default">
                                     Next

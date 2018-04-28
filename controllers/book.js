@@ -269,13 +269,15 @@ function getUpdateBookPage(req, res, next) {
         if(cate.length > 0){
             searchBooks.once('results', function(results){
                 console.log(results);
-                res.render('index/searchBook',{
-                    title: 'Search book - Vimstory',
-                    categories: cate,
-                    data : results,
-                    pageNum: page,
-                    keyword: name,
-                })
+                if(results.length > 0){
+                    res.render('index/searchBook',{
+                        title: 'Search book - Vimstory',
+                        categories: cate,
+                        data : results,
+                        pageNum: page,
+                        keyword: name,
+                    })
+                }else res.end('error');
             });
         }else res.end('error');
     });
