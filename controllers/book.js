@@ -3,6 +3,8 @@ var formidable = require('formidable');
 var fs = require('fs');
 var createHTML = require('create-html');
 var openfpt = require('./utils/openfpt');
+var utils = require('util');
+var path = require('path');
 
 function getBooks(req, res, next) {
     var books = new bookModel.getBooks;
@@ -31,7 +33,7 @@ function addBook(req, res, next) {
     console.log('ok');
     var form = new formidable.IncomingForm();
     //set directory folder
-    form.uploadDir = "../public/img/";
+    form.uploadDir = path.join (__dirname,'../', '\\public\\img');
     //form.uploadDir = path.join (__dirname, '/public/img');
     //xử lý upload
     form.parse(req, function (err, fields, file) {
@@ -39,19 +41,19 @@ function addBook(req, res, next) {
         Content = fields.B_Content;
         Description = fields.B_Description;
         //path tmp in server
-        var path = file.B_imageurl.path;
+        var pathImg = file.B_imageurl.path;
         if (file.B_imageurl.name.toString() != '') {
             //set up new path
             console.log('save img file')
             newpath = form.uploadDir + file.B_imageurl.name;
 
-            fs.rename(path, newpath, function (err) {
+            fs.rename(pathImg, newpath, function (err) {
                 if (err) throw err;
             });
         } else {
-            fs.unlink(path, (err) => {
+            fs.unlink(pathImg, (err) => {
                 if (err) throw err;
-                console.log(path + ' was deleted');
+                console.log(pathImg + ' was deleted');
             });
         }
         var books = new bookModel.addBook({
@@ -155,12 +157,12 @@ function updateBook(req, res, next) {
 
 }
 
-function getOneBook(req, res, next, path, titleBook) {
+function getOneBook(req, res, next, pathRender, titleBook) {
     var books = new bookModel.getOneBook(req.params.id);
     //var author = new authorModel.getAuthorsByBookId(req.params.id);
     var category = new categoryModel.getCategories();
-
     books.once('results', function (data) {
+        console.log(data);
         if (data.length > 0) {
             //author.once('results',function(authorsData){
                 //if(authorsData.length > 0)
@@ -170,14 +172,13 @@ function getOneBook(req, res, next, path, titleBook) {
                         var html = createHTML({
                             title: 'Content',
                             head: '<meta name="description" content="example">',
-                            body: data[0].B_Content,
+                            body: data[0].B_Content
                         })
-
-                        fs.writeFile('../views/index/readBookContent.ejs', html, function (err) {
+                        fs.writeFile(path.join(__dirname,'../','\\views\\index\\readBookContent.ejs'), html, function (err) {
                             if (err) console.log(err)
                         })
                         console.log(data[0].B_PublishDate);
-                        res.render(path, {
+                        res.render(pathRender, {
                             title: titleBook,
                             data: data[0],
                             //authors : authorsData,
@@ -256,24 +257,36 @@ function getUpdateBookPage(req, res, next) {
         } else res.end('error');
 
     });
-    //});
-}
-
-function searchBooks(req, res, next){
+//});
+ }
+ function searchBooks(req,res,next){
     var name = req.query['search'];
-    var books = bookModel.searchBook(name);
+    if(utils.isNullOrUndefined(name)) name = "";
+    console.log(name);
+    var page = req.query['page'];
+    if(utils.isNullOrUndefined(page)) page = 1;
+    console.log(page);
+    var books = bookModel.searchBooks(name);
+    var categories = categoryModel.getCategories();
+    var categoriesData;
+    categories.once('results', function(data){
+        categoriesData = data;
+    });
     books.once('results', function(results){
         res.render('index/searchBook',{
-            title:'Search book - Vimstory',
-            data: results
+            title: 'Search book - Vimstory',
+            categories: categoriesData,
+            data : results,
+            pageNum: page,
+            keyword: name
         })
     });
-    books.once('error', function(err){
+    books.once('error',function(err){
         res.end('err');
-    });
+    })
 }
 
-module.exports = {
+ module.exports = {
     getBooks,
     addBook,
     deleteBook,

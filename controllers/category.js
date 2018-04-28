@@ -47,7 +47,7 @@ function deleteCategory(req,res,next){
 }
 
 function updateCategory(req,res,next){
-    var categories = categoryMoldel.updateCategory(req.body,req.body.U_ID);
+    var categories = categoryMoldel.updateCategory(req.body,req.body.C_ID);
     categories.once('results',function(results){
         console.log(results);
         if (results.affectedRows > 0)

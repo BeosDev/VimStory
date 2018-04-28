@@ -6,21 +6,26 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="./assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title><%=title%></title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <title>
+        <%=title%>
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'
+    />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <!-- CSS Files -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
-    
+
     <link href="/assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="./assets/css/demo.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+        crossorigin="anonymous">
 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/assets/css/custom.css" class="css"> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/assets/css/custom.css" class="css">
 </head>
 
 <body>
@@ -30,61 +35,55 @@
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
         Tip 2: you can also add an image using data-image tag
     -->
-            <div class="sidebar-wrapper" >
-                <div class="logo">
+        <div class="sidebar-wrapper" >
+            <div class="logo">
 
-                    <a class="nav-link" href="Admin.html">
-                        <img src="assets/img/logo1.jpg" class="rounded" alt="Cinque Terre" width="70px" , height="70px">
-                        <p>Vim Story</p>
-                    </a>
-                </div>
-                <ul class="nav">
-                    <li class =" nav-item active">
-                        <a class="nav-link" href="CategoryManagement.html">
-                            <i class="nc-icon nc-chart-pie-35"></i>
-                            <p>Category Management</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="AgetagManagement.html">
-                            <i class="nc-icon nc-circle-09"></i>
-                            <p>Agetag Management</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="UserManagement.html">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>User Management</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="BookManagement.html">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>Book Management</p>
-                        </a>
-                    </li>
-                    
-                </ul>
+                <a class="nav-link" href="/admin/books">
+                    <img src="/assets/img/logo1.jpg" class="rounded" alt="Cinque Terre" width="70px" , height="70px">
+                    <p>Vim Story</p>
+                </a>
             </div>
+            <ul class="nav">
+                <li class =" nav-item active">
+                    <a class="nav-link" href="/admin/categories">
+                        <i class="nc-icon nc-chart-pie-35"></i>
+                        <p>Category Management</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/admin/users">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>User Management</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/admin/books">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>Book Management</p>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
         </div>
 
-        
+
         <div class="main-panel">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class=" container-fluid  ">
-                    
+
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                        
+
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="#pablo">
                                     <span class="no-icon">Admin</span>
                                 </a>
                             </li>
-                            
+
                             <div class="nav-item">
-                                <img src="/assets/img/default-avatar.png" width="55px", height="55px">
+                                <img src="/assets/img/default-avatar.png" width="55px" , height="55px">
                             </div>
                         </ul>
                     </div>
@@ -92,192 +91,237 @@
             </nav>
             <!-- End Navbar -->
             <style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
-    
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-    
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
-</head>
-<body>
+                table {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                }
 
-    <div class="content">
-        
-        <div class="container">
-            <a href="#"><button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal"><p style="font-size:30px;margin:auto;">ADD New Category</p></button></a>
+                td,
+                th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                }
 
-            <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+                tr:nth-child(even) {
+                    background-color: #dddddd;
+                }
+            </style>
+            </head>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-            <form action="categories/add" method="post" class="form-inline">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add category</h4>
-      </div>
-      <div class="modal-body">
-          <div class="form-group">
-                <label for="">Name:</label>
-                <input type="text" name="name" id="" class="form-control">
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" data-dismiss="modal">Add</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </form>
-    </div>
+            <body>
 
-  </div>
-</div>
+                <div class="content">
 
-            <div class="unit w-2-3"><div class="hero-callout">
-                <div id="example_wrapper" class="dataTables_wrapper"><div class="dataTables_length" id="example_length"></div><div id="example_filter" class=           "dataTables_filter"></div>
-                
-                <table id="example" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
-                    <thead><tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 126px;" aria-sort="ascending" aria-label="ID_Agetag: activate to sort column descending">ID</th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 201px;" aria-label="Name_Agetag: activate to sort column ascending">Name</th>
-                            
-                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" aria-label="Phone number: activate to sort column ascending">Edit</th>
-                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" aria-label="Phone number: activate to sort column ascending">Delete</th>            </tr>
-                        </thead>
-                        <tbody>
-                            <%for(var i = 0; i < data.length; i++){%>
-                            <tr role="row" class="odd">
-                                <td><%=data[i].C_Name%></td>
-                                <td><%=data[i].C_Name%></td>
-                                <td><a href="EditCategory.html"><button  type="button" style="margin:auto;display: block;"><i class="fas fa-edit"></i></button> </a></td>
-                                <td><button  type="button" style="margin:auto;display: block;"><i class="fas fa-trash-alt"></i></button> </td>
-                            </tr>
-                            <%}%>
-                        </tbody></table>
-                            <center>
-                                <div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><a class="paginate_button previous disabled" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_previous">Previous</a>
-                                    <span>
-                                        <a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">1</a>
-                                        <a class="paginate_button " aria-controls="example" data-dt-idx="2" tabindex="0">2</a>
-                                        <a class="paginate_button " aria-controls="example" data-dt-idx="3" tabindex="0">3</a>
-                                        <a class="paginate_button " aria-controls="example" data-dt-idx="4" tabindex="0">4</a>
-                                        <a class="paginate_button " aria-controls="example" data-dt-idx="5" tabindex="0">5</a>
-                                        <a class="paginate_button " aria-controls="example" data-dt-idx="6" tabindex="0">6</a>
-                                    </span>
-                                    <a class="paginate_button next" aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next">Next</a>
-                                </div></div>
-                            </center>
-                        </div></div>
+                    <div class="container">
+                        <a href="#">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#addModal">
+                                <p style="font-size:30px;margin:auto;">ADD New Category</p>
+                            </button>
+                        </a>
+
+                        <!-- Modal add -->
+                        <div id="addModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal add content-->
+                                <div class="modal-content">
+                                    <form action="categories/add" method="post" class="form-inline">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Add category</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="">Name:</label>
+                                                <input type="text" name="C_Name" id="" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn btn-primary" value="Add"></input>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="unit w-2-3">
+                            <div class="hero-callout">
+                                <div id="example_wrapper" class="dataTables_wrapper">
+                                    <table id="table" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 126px;" aria-sort="ascending">ID</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 201px;" aria-label="">Name</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" aria-label="">Edit</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" aria-label="">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%for(var i = 0; i < data.length; i++){%>
+                                                <tr role="row" class="odd">
+                                                    <td>
+                                                        <%=data[i].C_ID%>
+                                                    </td>
+                                                    <td>
+                                                        <%=data[i].C_Name%>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" style="margin:auto;display: block;" data-toggle="modal" data-target="#editModal" onclick="editClick('<%=data[i].C_ID%>','<%=data[i].C_Name%>')">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <a href="categories/delete/<%=data[i].C_ID%>">
+                                                            <button type="button" style="margin:auto;display: block;">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <%}%>
+                                        </tbody>
+                                    </table>
+                                    <script>
+                                        function editClick(id, name) {
+                                            document.getElementById('editId').value = id;
+                                            document.getElementById('editName').value = name;
+                                        }
+                                    </script>
+                                    <!-- Modal edit -->
+                                    <div id="editModal" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal edit content-->
+                                            <div class="modal-content">
+                                                <form action="categories/update" method="post" class="form-inline">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Edit category</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="">Name:</label>
+                                                            <input type="hidden" name="C_ID" id="editId">
+                                                            <input type="text" name="C_Name" id="editName" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Edit</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
                     </div>
-            <footer class="footer">
-                <div class="container">
-                    <nav>                       
-                        <p class="copyright text-center">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>
-                            FROM DNVL2 With LOVE
-                        </p>
-                    </nav>
+                    <footer class="footer">
+                        <div class="container">
+                            <nav>
+                                <p class="copyright text-center">
+                                    ©
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script>
+                                    FROM DNVL2 With LOVE
+                                </p>
+                            </nav>
+                        </div>
+                    </footer>
                 </div>
-            </footer>
         </div>
-    </div>
-    <!-- Modal LOGIN -->
-    <div class="modal fade" id="myModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
+        <!-- Modal LOGIN -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <div class = " container-fluid">
-              <div class =" row">
-                <div class = "col-5">
-                  <img src = "/img/logo1.jpg" width="100" height="100"/>
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <div class=" container-fluid">
+                            <div class=" row">
+                                <div class="col-5">
+                                    <img src="/img/logo1.jpg" width="100" height="100" />
+                                </div>
+                                <div class="col-6">
+                                    <h4 class="modal-title" style="margin-top: 25px;color: darkblue;">LOGIN</h4>
+                                </div>
+                                <div class="col-1">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <span class="col-md-2"></span>
+                            <div class="col-md-8">
+                                <form action="" class="form-inline " style="background-color: white;">
+                                    <div class="row" style="padding-bottom: 10px;">
+                                        <div class="form-group ">
+
+                                            <div class="col-4">
+                                                <label for="">Username</label>
+                                            </div>
+                                            <div class="col-8">
+                                                <input type="text" name="" id="" class="form-control">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-4">
+                                                <label for="">Password</label>
+                                            </div>
+                                            <div class="col-8">
+                                                <input type="Password" name="" id="" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <span class="col-md-2"></span>
+                        </div>
+
+
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer" style="align-items: center;">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-left: 280px;background-color: blue;color: white">Login</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                    </div>
+
                 </div>
-                <div class = "col-6">
-                  <h4 class="modal-title" style="margin-top: 25px;color: darkblue;">LOGIN</h4>
-                </div>
-                <div class = "col-1">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-              </div>
             </div>
-            
-          </div>
-          <!-- Modal body -->
-          <div class="modal-body">
-              <div class="row">
-                <span class="col-md-2"></span>
-                <div class="col-md-8">
-                  <form action="" class="form-inline " style="background-color: white;">            
-                    <div class="row" style="padding-bottom: 10px;">
-                      <div class="form-group ">
-                        
-                        <div class="col-4">
-                          <label for="">Username</label>
-                        </div>
-                        <div class="col-8">                     
-                          <input type="text" name="" id="" class="form-control">  
-                        </div>
-                        
-                      </div>
-                    </div>
-                    <div class="row" style="">
-                      <div class="form-group">
-                        <div class="col-4">
-                          <label for="">Password</label>
-                        </div>
-                        <div class="col-8">                     
-                          <input type="Password" name="" id="" class="form-control">  
-                        </div>
-                      </div>
-                    </div>  
-                  </form>
-                </div>
-              <span class="col-md-2"></span>
-              </div>
-              
-                
-                
-          </div>
-
-          <!-- Modal footer -->
-          <div class="modal-footer" style="align-items: center;">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-left: 280px;background-color: blue;color: white">Login</button>
-            <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-          </div>
-
         </div>
-      </div>
-    </div>
-    
-    <!--   Core JS Files   -->
-    <script src="/assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-    <script src="/assets/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="/assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-    <script src="/assets/js/plugins/bootstrap-switch.js"></script>
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!--  Chartist Plugin  -->
-<script src="/assets/js/plugins/chartist.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="/assets/js/plugins/bootstrap-notify.js"></script>
-<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-<script src="/assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
-<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-<script src="/assets/js/demo.js"></script>
-</body>
+
+        <!--   Core JS Files   -->
+        <script src="/assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+        <script src="/assets/js/core/popper.min.js" type="text/javascript"></script>
+        <script src="/assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+        <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+        <script src="/assets/js/plugins/bootstrap-switch.js"></script>
+        <!--  Google Maps Plugin    -->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+        <!--  Chartist Plugin  -->
+        <script src="/assets/js/plugins/chartist.min.js"></script>
+        <!--  Notifications Plugin    -->
+        <script src="/assets/js/plugins/bootstrap-notify.js"></script>
+        <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+        <script src="/assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
+        <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+        <script src="/assets/js/demo.js"></script>
+        <link rel="stylesheet" type="text/css" href="/assets/css/jquery.dataTables.min.css"/>
+        <script type="text/javascript" src="/assets/js/jquery.dataTables.min.js"></script>
+
+
+        </body>
+
 </html>

@@ -6,8 +6,13 @@ function getUsers() {
     return new executeQuery(query);
 }
 
-function getOneUser(id) {
+function getOneUserViaId(id) {
     var query = `SELECT * FROM user WHERE U_ID = '${id}'`;
+    return new executeQuery(query);
+}
+
+function getOneUserViaUserName(username){
+    var query = `SELECT * FROM user WHERE Username = '${username}'`;
     return new executeQuery(query);
 }
 
@@ -43,7 +48,8 @@ module.exports = {
     addUser,
     deleteUser,
     updateUser,
-    getOneUser,
+    getOneUserViaId,
+    getOneUserViaUserName,
     genHash,
     validPassword
 }
