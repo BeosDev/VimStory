@@ -110,18 +110,7 @@
                           <label for="usr">BookName:</label>
                           <input type="text" class="form-control" id = "B_Name" name="B_Name" value = "<%=book[0].B_Name%>">
                         </div>
-                        <div class="form-group">
-                          <label for="pwd">Author:</label>
-                           <div class="form-group">
-                                  <select class="form-control" id="A_ID" name = "A_ID" multiple onchange="getSelected(this)">
-                                    <%for(var i=0;i<authors.length;i++)
-                                     { %>
-                                    <option value ="<%=authors[i].A_ID%>"><%=authors[i].A_Name%></option>
-                                    <%}%>
-                                    
-                                  </select>
-                            </div>
-                        </div>
+                        
                         <div class="form-group">
                           <label for="usr">Type:</label>
                           

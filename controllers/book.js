@@ -70,12 +70,6 @@ function addBook(req, res, next) {
             //console.log(mp3Link);
             maxBookID.once('results', function (data) {
                 //console.log('maxbookid'+data[0].MaxVL);
-                var authorArr = fields.hidden.split(",");
-                if (fields.hidden != "")
-                    for (var i = 0; i < authorArr.length; i++) {
-                        var rela = bookModel.setAuthor(data[0].MaxVL, authorArr[i]);
-                        console.log(data[0].MaxVL + 'x' + authorArr[i])
-                    }
                 var textToSpeech = new openfpt(data[0].MaxVL, fields.B_Text);
             });
             if (results.affectedRows > 0) {
@@ -145,16 +139,10 @@ function updateBook(req, res, next) {
             B_Age: fields.B_Age,
             B_PublishDate: fields.B_PublishDate
         }, fields.B_ID);
-        var maxBookID = new bookModel.getMaxID;
+        //var maxBookID = new bookModel.getMaxID;
         req.isRedirect = false;
         books.once('results', function (results) {
             //console.log('maxbookid'+data[0].MaxVL);
-            var authorArr = fields.hidden.split(",");
-            if (fields.hidden != "")
-                for (var i = 0; i < authorArr.length; i++) {
-                    var rela = bookModel.updateBookAuthor(fields.B_ID, authorArr[i]);
-                    console.log(fields.B_ID + ' update ' + authorArr[i])
-                }
             var textToSpeech = new openfpt(fields.B_ID, fields.B_Text);
             if (results.affectedRows > 0) {
                 res.redirect('/admin/books');
@@ -169,14 +157,14 @@ function updateBook(req, res, next) {
 
 function getOneBook(req, res, next, path, titleBook) {
     var books = new bookModel.getOneBook(req.params.id);
-    var author = new authorModel.getAuthorsByBookId(req.params.id);
+    //var author = new authorModel.getAuthorsByBookId(req.params.id);
     var category = new categoryModel.getCategories();
 
     books.once('results', function (data) {
         if (data.length > 0) {
-            author.once('results',function(authorsData){
-                if(authorsData.length > 0)
-                {
+            //author.once('results',function(authorsData){
+                //if(authorsData.length > 0)
+               // {
                     category.once('results',function(categoryData){
                         var titleBook = data[0].B_Name;
                         var html = createHTML({
@@ -192,18 +180,18 @@ function getOneBook(req, res, next, path, titleBook) {
                         res.render(path, {
                             title: titleBook,
                             data: data[0],
-                            authors : authorsData,
+                            //authors : authorsData,
                             categories: categoryData
                         }, function (err, html) {
                             res.end(html);
                         })
                     });
                     
-                }
-                else{
-                    res.end('error');
-                }
-        });
+               // }
+               //else{
+               //  //   res.end('error');
+               // }
+        //);
             
         } else res.end('error');
 

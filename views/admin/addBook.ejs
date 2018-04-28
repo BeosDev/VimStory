@@ -178,42 +178,6 @@
                           <input type="text" class="form-control" id = "B_Name" name="B_Name" required>
                         </div>
                         <div class="form-group">
-                          <label for="pwd">Author:(Hold ctrl to get mutilple select)</label>
-                           <div class="form-group">
-                                  <select class="form-control" id="A_ID" name = "A_ID" multiple onchange="getSelected(this)" style="height:100px;">
-                                    <%for(var i=0;i<authors.length;i++)
-                                     { %>
-                                    <option value ="<%=authors[i].A_ID%>"><%=authors[i].A_Name%></option>
-                                    <%}%>
-                                    
-                                  </select>
-                            </div>
-                        </div>
-                       <div class="container" >
-                        <div class="interior">
-                            <a class="btn" href="#open-modal">Add new author</a>
-                        </div>
-                        </div>
-                        <div id="open-modal" class="modal-window" >
-                            <div style="border:1px solid black;">
-                                <a href="#modal-close" title="Close" class="modal-close">Close</a>
-                                <h1>Add new author</h1>
-                                <div class="form-group">
-                                    <label for="usr">Author Name:</label>
-                                    <input type="text" class="form-control" id = "A_Name" name="A_Name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="usr">Description:</label>
-                                    <textarea  style="height:150px;" class="form-control" id = "A_Description" name="A_Description"></textarea >
-                                </div>
-                                <div class="form-group" align ="center">
-                                    <button type= "button" class = "btn btn-success" >ADD</button>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
                           <label for="usr">Type:</label>
                           
                             <div class="form-group">
