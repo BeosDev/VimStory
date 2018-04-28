@@ -3,6 +3,7 @@ var formidable = require('formidable');
 var fs = require('fs');
 var createHTML = require('create-html');
 var openfpt = require('./utils/openfpt');
+var utils = require('util');
 
 function getBooks(req, res, next) {
     var books = new bookModel.getBooks;
@@ -169,42 +170,27 @@ function updateBook(req, res, next) {
 
 function getOneBook(req, res, next, path, titleBook) {
     var books = new bookModel.getOneBook(req.params.id);
-    var author = new authorModel.getAuthorsByBookId(req.params.id);
-    var category = new categoryModel.getCategories();
 
     books.once('results', function (data) {
-        if (data.length > 0) {
-            author.once('results',function(authorsData){
-                if(authorsData.length > 0)
-                {
-                    category.once('results',function(categoryData){
-                        var titleBook = data[0].B_Name;
-                        var html = createHTML({
-                            title: 'Content',
-                            head: '<meta name="description" content="example">',
-                            body: data[0].B_Content,
-                        })
 
-                        fs.writeFile('../views/index/readBookContent.ejs', html, function (err) {
-                            if (err) console.log(err)
-                        })
-                        console.log(data[0].B_PublishDate);
-                        res.render(path, {
-                            title: titleBook,
-                            data: data[0],
-                            authors : authorsData,
-                            categories: categoryData
-                        }, function (err, html) {
-                            res.end(html);
-                        })
-                    });
-                    
-                }
-                else{
-                    res.end('error');
-                }
-        });
-            
+        if (data.length > 0) {
+            var titleBook = data[0].B_Name;
+            var html = createHTML({
+                title: 'Content',
+                head: '<meta name="description" content="example">',
+                body: data[0].B_Content
+            })
+
+            fs.writeFile('../views/index/readBookContent.ejs', html, function (err) {
+                if (err) console.log(err)
+            })
+            console.log(data[0].B_PublishDate);
+            res.render(path, {
+                title: titleBook,
+                data: data[0]
+            }, function (err, html) {
+                res.end(html);
+            })
         } else res.end('error');
 
     });
@@ -268,24 +254,36 @@ function getUpdateBookPage(req, res, next) {
         } else res.end('error');
 
     });
-    //});
-}
-
-function searchBooks(req, res, next){
+//});
+ }
+ function searchBooks(req,res,next){
     var name = req.query['search'];
-    var books = bookModel.searchBook(name);
+    if(utils.isNullOrUndefined(name)) name = "";
+    console.log(name);
+    var page = req.query['page'];
+    if(utils.isNullOrUndefined(page)) page = 1;
+    console.log(page);
+    var books = bookModel.searchBooks(name);
+    var categories = categoryModel.getCategories();
+    var categoriesData;
+    categories.once('results', function(data){
+        categoriesData = data;
+    });
     books.once('results', function(results){
         res.render('index/searchBook',{
-            title:'Search book - Vimstory',
-            data: results
+            title: 'Search book - Vimstory',
+            categories: categoriesData,
+            data : results,
+            pageNum: page,
+            keyword: name
         })
     });
-    books.once('error', function(err){
+    books.once('error',function(err){
         res.end('err');
-    });
+    })
 }
 
-module.exports = {
+ module.exports = {
     getBooks,
     addBook,
     deleteBook,
