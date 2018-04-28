@@ -5,8 +5,8 @@ function getBooks() {
     return new executeQuery(query);
 }
 
-function searchBooks(name){
-    var query = `select * from book where B_Name like '%${name}%'`;
+function searchBooks(page,pageLimit,name){
+    var query = `call searchBook(${page},${pageLimit},'${name}')`;
     return new executeQuery(query);
 }
 

@@ -181,7 +181,7 @@ function getOneBook(req, res, next, path, titleBook) {
                 body: data[0].B_Content
             })
 
-            fs.writeFile('../views/index/readBookContent.ejs', html, function (err) {
+            fs.writeFile('index/readBookContent', html, function (err) {
                 if (err) console.log(err)
             })
             console.log(data[0].B_PublishDate);
@@ -257,31 +257,30 @@ function getUpdateBookPage(req, res, next) {
 //});
  }
  function searchBooks(req,res,next){
+    var categories = categoryModel.getCategories();
+    var pageLimit = 9;
     var name = req.query['search'];
     if(utils.isNullOrUndefined(name)) name = "";
-    console.log(name);
     var page = req.query['page'];
     if(utils.isNullOrUndefined(page)) page = 1;
-    console.log(page);
-    var books = bookModel.searchBooks(name);
-    var categories = categoryModel.getCategories();
-    var categoriesData;
-    categories.once('results', function(data){
-        categoriesData = data;
+    var searchBooks = bookModel.searchBooks(page,pageLimit,name); //#2
+    categories.once('results', function(cate){
+        if(cate.length > 0){
+            searchBooks.once('results', function(results){
+                console.log(results);
+                res.render('index/searchBook',{
+                    title: 'Search book - Vimstory',
+                    categories: cate,
+                    data : results,
+                    pageNum: page,
+                    keyword: name,
+                })
+            });
+        }else res.end('error');
     });
-    books.once('results', function(results){
-        res.render('index/searchBook',{
-            title: 'Search book - Vimstory',
-            categories: categoriesData,
-            data : results,
-            pageNum: page,
-            keyword: name
-        })
-    });
-    books.once('error',function(err){
-        res.end('err');
-    })
 }
+
+
 
  module.exports = {
     getBooks,
