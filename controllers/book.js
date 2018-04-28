@@ -30,7 +30,7 @@ function addBook(req, res, next) {
     console.log('ok');
     var form = new formidable.IncomingForm();
     //set directory folder
-    form.uploadDir = path.join (__dirname,'../', '\\public\\img');
+    form.uploadDir = path.join (__dirname,'../', '\\public\\img\\');
     //form.uploadDir = path.join (__dirname, '/public/img');
     //xử lý upload
     form.parse(req, function (err, fields, file) {
