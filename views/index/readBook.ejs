@@ -10,9 +10,6 @@
 	<link rel="shortcut icon" type="image/x-icon" href="/assets/img/Pokeball.ico">
     <link rel="stylesheet" href="/assets/css/custom.css" class="css"> 
 </head>
-
-
-
 <body >
     <!--header-->
 	<div class="container-fluid">
@@ -65,14 +62,16 @@
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item" style="margin-right: 5px">
                                 <div class="nav-item">
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="Search">
-                                        <div class="input-group-append">
-                                            <button type="button" class="btn btn-outline-secondary">
-                                                <i class="fa fa-search"></i>
-                                            </button>
+                                    <form action="/book" method="GET">
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" placeholder="Search" name="search">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-outline-secondary">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </li>
                             
@@ -188,7 +187,7 @@
 
                     <div class="col-md-4 ">
                         <p>
-                            <audio src="<%=data.B_audiourl%>" controls>
+                            <audio src="/mp3/final/<%=data.B_audiourl%>" controls>
                             </audio>
                             
                         </p>
