@@ -10,6 +10,9 @@
 	<link rel="shortcut icon" type="image/x-icon" href="/assets/img/Pokeball.ico">
     <link rel="stylesheet" href="/assets/css/custom.css" class="css"> 
 </head>
+
+
+
 <body >
     <!--header-->
 	<div class="container-fluid">
@@ -62,16 +65,16 @@
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item" style="margin-right: 5px">
                                 <div class="nav-item">
-                                    <form action="/book" method="GET">
-                                        <div class="input-group">
-                                            <input class="form-control" type="text" placeholder="Search" name="search">
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-outline-secondary">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
+                                    <div class="input-group">
+                                        <form action="book" method="GET">
+                                        <input class="form-control" style="width:250px;" type="text" placeholder="Search" name="search">
                                     </form>
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-outline-secondary">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
                             
@@ -243,4 +246,4 @@ function setIframeHeight(id) {
     ifrm.style.height = getDocHeight( doc ) + 4 + "px";
     ifrm.style.visibility = 'visible';
 }
-</script> 
+</script>
