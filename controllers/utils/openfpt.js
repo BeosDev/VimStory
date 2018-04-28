@@ -7,8 +7,6 @@ var EventEmitter = require('events').EventEmitter,
     CombinedStream = require('combined-stream'),
     bookModel = require('../../models/book');
 
-process.setMaxListeners(10); 
-
 function getSpeech(text) {
     console.log(pathDownload);
     console.log(pathFinal);
@@ -109,6 +107,8 @@ function ConcatAudio(id, emitter) {
         });
 }
 function TextToSpeech(id, text) {
+    if (this.getMaxListeners() < 12)
+      this.setMaxListeners(12);
     var Speech = new ApiTextToSpeech(text);
     var emitter = this;
     emitter.setMax

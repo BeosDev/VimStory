@@ -7,15 +7,18 @@ var con = mysql.createConnection({
   database: 'vimstory'
 });
 function executeQuery(cmd,paramters){ 
+    if (this.getMaxListeners() < 12)
+      this.setMaxListeners(12);
     var emitter = this; 
     con.query(cmd,paramters,function(err,results){
       console.log(cmd);
       if (err){
         emitter.emit('error',err);
-        throw err;
+        console.log(err);
       }
       emitter.emit('results',results);
     });
 }
 executeQuery.prototype = new EventEmitter();
+
 module.exports = executeQuery;
