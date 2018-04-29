@@ -18,9 +18,9 @@ function getBooks(req, res, next,num,ageNum,cid) {
     var category = new categoryModel.getCategories();
     
     books.on('results', function (data) {
-        if (data.length > 0) {
+        if (data.length >= 0) {
             category.once('results', function (categoryData) {
-                if (categoryData.length > 0) {
+                if (categoryData.length >= 0) {
                    console.log('ahiahi');
                     res.render('index', {
                         title: 'Home - VimStory',

@@ -78,7 +78,7 @@ function CombineAudio(id, links, emitter) {
     for (var i = 0; i < links.length; i++) {
         console.log(links[i]);
         request.get(links[i])
-            .pipe(fs.createWriteStream(path.join(pathDownload, `/${id}/audio${i}.mp3`)))
+            .pipe(fs.createWriteStream(path.join(pathDownload, `/${id}/${i}.mp3`)))
             .on('finish', function () {
                 count++;
                 if (count === links.length) {
@@ -91,17 +91,18 @@ function CombineAudio(id, links, emitter) {
 
 function ConcatAudio(id, emitter) {
     var files = fs.readdirSync(pathDownload + id + '/');
-    if (fs.existsSync(pathFinal + `audio${id}`))
-        fs.rmdirSync(pathFinal + `audio${id}`);
+    if (fs.existsSync(pathFinal + `${id}.mp3`))
+        fs.unlinkSync(pathFinal + `${id}.mp3`);
     var combinedStream = CombinedStream.create();
+    files.sort(function(a, b){return parseInt(a.split('.')[0])-parseInt(b.split('.')[0])});
     files.forEach(file => {
         combinedStream.append(fs.createReadStream(pathDownload + id + '/' + file));
     });
     combinedStream
-        .pipe(fs.createWriteStream(pathFinal + `audio${id}.mp3`))
+        .pipe(fs.createWriteStream(pathFinal + `${id}.mp3`))
         .once('finish', () => {
             var book = new bookModel.updateBook({
-                'B_audiourl': `audio${id}.mp3`
+                'B_audiourl': `${id}.mp3`
             }, id);
             emitter.emit('done');
         });
