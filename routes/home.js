@@ -3,9 +3,9 @@ var router = express.Router();
 var indexController = require('../controllers/index');
 
 /* GET home page. */
-/*router.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
   indexController.getBooks(req,res,next,1,null,null);
-});*/
+});
 
 router.get('/page/:num', function(req, res, next) {
   indexController.getBooks(req,res,next,req.params.num,null,null);
