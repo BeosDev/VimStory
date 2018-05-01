@@ -63,10 +63,10 @@ function updateUser(req,res){
     })
 }
 
-function getUpdateUserPage(req,res){
-    var user = new UserModel.getOneUserViaId(req.params.id);
+function getUpdateUserPage(req,res,id,path){
+    var user = new UserModel.getOneUserViaId(id);
     user.once('results',results => {
-        res.render('admin/updateUser',{User: results[0], title: 'Update User'});
+        res.render(path,{User: results[0], title: 'Update User'});
     })
     user.once('error',err => res.end('err'));
 }

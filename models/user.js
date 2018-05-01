@@ -23,7 +23,7 @@ function addUser(paramters) {
 }
 
 function updateUser(paramters, id) {
-    if (paramters.password !== undefined && paramters.password.length > 0)
+    if (paramters.Password !== undefined && paramters.Password.length > 0)
         paramters.Password = genHash(paramters.Password);
     var query = `UPDATE user SET ? WHERE U_ID = ${id};`;
     return new executeQuery(query, paramters);
@@ -41,7 +41,6 @@ function genHash(password) {
 function validPassword(rawPw, pwHashed) {
     return bcrypt.compareSync(rawPw, pwHashed);
 }
-
 
 module.exports = {
     getUsers,

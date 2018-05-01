@@ -38,7 +38,7 @@ router.get('/delete/:id', function (req, res) {
 })
 
 router.get('/update/:id', function (req, res) {
-    userController.getUpdateUserPage(req, res);
+    userController.getUpdateUserPage(req, res,req.params.id,'admin/updateUser');
 })
 
 router.post('/update', validUser, function (req, res) {

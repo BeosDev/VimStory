@@ -6,5 +6,5 @@ router.use(Auth.isLoggined);
 router.use('/books',require('./books.admin'));
 router.use('/categories',require('./category.admin'));
 router.use('/users',Auth.isAdmin,require('./users.admin'));
-
+router.use('/account',require('./account.admin'));
 module.exports = router;
