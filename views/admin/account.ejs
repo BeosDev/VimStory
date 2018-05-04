@@ -86,9 +86,9 @@
             </nav>
             <!-- End Navbar -->
             <div class="container">
-                <h2>New Account</h2>
+                <h2>My Account</h2>
                 <form method="POST" action="/admin/users/update">
-                    <input type="text" class="form-control hidden" id="UM-A-UserName" name="U_ID" value="<%= User.U_ID %>">
+                    <input type="text" class="form-control" style="display: none" id="UM-A-UserName" name="U_ID" value="<%= User.U_ID %>">
                     <div class="form-group">
                         <label for="usr">User Name:</label>
                         <input type="text" class="form-control" id="UM-A-UserName" name="Username" value="<%= User.Username %>">
