@@ -49,7 +49,7 @@ function getBooksAge(ageNum) {
 }
 
 function getBooksCategory(C_ID) {
-    var query = `SELECT * FROM v_book WHERE C_ID =  ${C_ID}`;
+    var query = `SELECT * FROM book WHERE C_ID =  ${C_ID}`;
     return new executeQuery(query);
 }
 //var k = new getBooks();
