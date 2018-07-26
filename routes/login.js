@@ -8,7 +8,7 @@ router.get('/',function(req,res){
         if (req.user.U_Authorization === 0)
             return res.redirect('/admin/books');
         else
-            return res.redirect('/user');
+            return res.redirect('/profile');
     }
     res.render('login');
 })
