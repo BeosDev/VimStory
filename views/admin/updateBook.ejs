@@ -91,43 +91,37 @@
             <!-- End Navbar -->
                 <div class="container">
                       <h2>Update Book </h2>
-                      
                       <form action="/admin/books/update" method="post" enctype="multipart/form-data" id="updateBookForm">
-                        <div class="form-group">
-                          <label for="usr">BookName:</label>
-                          <input type="text" class="form-control" id = "B_Name" name="B_Name" value = "<%=book[0].B_Name%>">
-                        </div>
-                        
-                        <div class="form-group">
-                          <label for="usr">Type:</label>
-                          
-                            <div class="form-group">
-                                  <select class="form-control" id="C_ID" name="C_ID">
-                                  <%for(var i=0;i<categories.length;i++)
-                                { %>
-                                    <option value ="<%=categories[i].C_ID%>"><%=categories[i].C_Name%></option>
-                                  <%}%>
-                                  </select>
-                            </div>
-                            
+                          <div class="form-group">
+                                <label for="usr">BookName:</label>
+                                <input type="text" class="form-control" id = "B_Name" name="B_Name" value = "<%=book[0].B_Name%>">
                         </div>
                         <div class="form-group">
-                          <label for="pwd">Agetag:</label>
-                           <div class="form-group">
-                                  <select class="form-control" id="B_Age" name = "B_Age">
-                                    <option value ="0">0</option>
-                                    <option value ="12">12</option>
-                                    <option value ="15">15</option>
-                                    <option value ="18">18</option>
-                                  </select>
-                            </div>
+                                <label for="usr">Type:</label>
+                                <div class="form-group">
+                                      <select class="form-control" id="C_ID" name="C_ID">
+                                      <%for(var i=0;i<categories.length;i++)
+                                    { %>
+                                        <option value ="<%=categories[i].C_ID%>"><%=categories[i].C_Name%></option>
+                                      <%}%>
+                                      </select>
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="pwd">Agetag:</label>
+                                <div class="form-group">
+                                        <select class="form-control" id="B_Age" name = "B_Age">
+                                            <option value ="0">0</option>
+                                            <option value ="12">12</option>
+                                            <option value ="15">15</option>
+                                            <option value ="18">18</option>
+                                        </select>
+                                </div>
                         </div>
                         <div class="form-group">
                           <label for="usr">PublishDate:</label>
                           <input type="date" class="form-control" id="B_PublishDate" name = "B_PublishDate" >
                         </div>
-                        
-                        
                         <div class="form-group">
                             <label for="usr">Short Description:</label>
                             <textarea class="form-control" id = "B_Description" name = "B_Description" style="height:150px;"><%=book[0].B_Description%></textarea>
@@ -141,10 +135,8 @@
                             <input type="file" id = "B_imageurl" name = "B_imageurl" accept="image/*" />
                         </div>
                             <button type="button" class="btn btn-outline-secondary " onclick = "getText();">UPDATE</button>
-                        
                             <a href="/admin/books" class="btn btn-outline-secondary ">CLOSE</a>
 
-                        </div>
                         <input type="hidden" name ="hidden" id ="hidden"/>
                         <input type="hidden" name ="B_ID" id ="B_ID"/>
                         <input type="hidden" name ="B_Text" id ="B_Text"/>
