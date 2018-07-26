@@ -79,7 +79,7 @@
                                 <span class="no-icon">Account</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/admin/account">Change password</a>
+                                <a class="dropdown-item" href="/user/change/pass">Change password</a>
                                 <div class="divider"></div>
                                 <a class="dropdown-item" href="/logout">Log out</a>
                             </div>
@@ -118,7 +118,7 @@
                                 <td id ="td_agetr<%=i%>"><%= data[i].B_Age %></td>
                                 <td id ="td_pubdatetr<%=i%>"><%= data[i].B_PublishDate %></td>
                                 <td><a href='/user/books/edit/<%= data[i].B_ID %>' ><i class="fas fa-edit"></a></td>
-                                <td><a href='/VimStory-backend/views/user/delete/' ><i class="fas fa-trash-alt"></a></td>
+                                <td><a href='/user/books/delete/<%= data[i].B_ID %>' ><i class="fas fa-trash-alt"></a></td>
                             </tr>
                             <% } %>
                             </tbody></table>

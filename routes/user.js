@@ -37,5 +37,13 @@ router.post('/change/password',(req,res,next)=>{
   router.post('/books/add', function (req, res, next) {
       bookController.userAddBook(req, res, next);
   });
+  //delete book
+  router.get('/books/delete/:id', function (req, res, next) {
+    bookController.deleteBook(req,res,next);
+  }, function (req, res, next) {
+      if (req.isRedirect === true)
+          res.redirect('/user/books');
+  });
+
 
 module.exports = router;
