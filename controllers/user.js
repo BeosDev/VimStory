@@ -87,7 +87,11 @@ function changUserPassword(req,res){
                     req.flash('errorMessage','');
                 }
             }else{
-                console.log('loi');
+                res.render('index/user/userChangePassword', {
+                    title: "Manage Account - vimstory",
+                    data: sessionUser,
+                    errorMessage: "Password is invalid!"
+                });
             }
         }else{
             return res.send('loi');
