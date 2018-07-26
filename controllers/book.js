@@ -491,7 +491,6 @@ function verifyBook(req,res,next)
     });
 }
 
- module.exports = {
 module.exports = {
     getBooks,
     addBook,
