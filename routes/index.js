@@ -11,4 +11,6 @@ router.use('/user',require('./user'));
 router.get('/profile', function(req, res) {
     userController.getOneUser(req,res);
   });
+
+
 module.exports = router;

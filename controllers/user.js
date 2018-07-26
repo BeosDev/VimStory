@@ -111,14 +111,37 @@ function deleteUser(req,res){
 function getOneUser(req, res) {
     console.log('get one user');
     var sessionUser = req.user;
-        console.log(sessionUser);
         if(sessionUser!=null){
-            res.render('index/user/profile', {
-                title: "Manage Account - vimstory",
-                data: sessionUser
-            });
+            var user = UserModel.getOneUserViaUserName(sessionUser.Username);
+            user.once('results', function (results) {
+                if (results.length > 0) {
+                    res.render('index/user/profile', {
+                        title: "Manage Account - vimstory",
+                        data: results
+                    });
+                }
+                else
+                    res.end('err');
+            })
+            user.once('error',function(err){
+                res.end('err');
+            })
         }
         else res.redirect('/');
+}
+
+
+function updateProfileUser(req,res){
+    var user = UserModel.updateUser(req.body,req.user.U_ID);
+    user.once('results',function(results){
+        console.log(results);
+        if (results.affectedRows > 0)
+            res.redirect('/profile');
+        else res.end('error');
+    });
+    user.once('error',function(err){
+        res.end('error');
+    })
 }
 
 module.exports = {
@@ -129,5 +152,6 @@ module.exports = {
     getAddUserPage,
     getUpdateUserPage,
     getOneUser,
-    changUserPassword
+    changUserPassword,
+    updateProfileUser
 }

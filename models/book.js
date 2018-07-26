@@ -56,6 +56,10 @@ function getBooksCategory(C_ID) {
 //k.on('results',function(results){
   //  console.log(results[1]);
 //})
+function getUserBooks(U_ID) {
+    var query = `SELECT * FROM v_book where U_ID = ${U_ID}`;
+    return new executeQuery(query);
+}
 
 module.exports = {
     getBooks,
@@ -68,6 +72,7 @@ module.exports = {
     searchBooks,
     updateBookAuthor,
     getBooksAge,
-    getBooksCategory
+    getBooksCategory,
+    getUserBooks
 }
 
