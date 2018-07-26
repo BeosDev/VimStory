@@ -61,6 +61,16 @@ function getUserBooks(U_ID) {
     return new executeQuery(query);
 }
 
+function getVerifyBook() {
+    var query = `SELECT * FROM v_book where B_Active = 1`;
+    return new executeQuery(query);
+}
+
+function verifyBook(B_ID) {
+    var query = `Update book set B_Active = 0 where B_ID = ${B_ID}`;
+    return new executeQuery(query);
+}
+
 module.exports = {
     getBooks,
     addBook,
@@ -73,6 +83,8 @@ module.exports = {
     updateBookAuthor,
     getBooksAge,
     getBooksCategory,
-    getUserBooks
+    getUserBooks,
+    getVerifyBook,
+    verifyBook
 }
 

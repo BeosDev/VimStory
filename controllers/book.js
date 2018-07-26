@@ -423,6 +423,38 @@ function getUserAddBookPage(req, res, next) {
     });
 }
 
+function getVerifyBooks(req,res,next)
+{
+    var books = new bookModel.getVerifyBook;
+
+    books.once('results', function (data) {
+        if (data.length >= 0) {
+            res.render('admin/verifyBook', {
+                title: 'Verify book - Vimstory',
+                data: data
+            }, function (err, html) {
+                res.end(html);
+            })
+        }
+    })
+    books.once('error',() => res.redirect('/'));
+}
+
+function verifyBook(req,res,next)
+{
+    var books = new bookModel.verifyBook(req.params.id);
+    req.isRedirect = false;
+    books.once('results', function (results) {
+        if (results.affectedRows > 0) {
+            req.isRedirect = true;
+            next();
+        }
+    });
+    books.once('error', function (err) {
+        next();
+    });
+}
+
  module.exports = {
     getBooks,
     addBook,
@@ -435,5 +467,7 @@ function getUserAddBookPage(req, res, next) {
     getUserBooks,
     getUserUpdateBookPage,
     userAddBook,
-    getUserAddBookPage
+    getUserAddBookPage,
+    getVerifyBooks,
+    verifyBook
 }
