@@ -66,28 +66,25 @@ function updateUser(req,res){
 function changUserPassword(req,res){
     if(req.user != null){
         var sessionUser = req.user;
-        if(sessionUser.Password == req.body.OldPassword){
             if(req.body.NewPassword == req.body.ConfirmNewPassword){
-                var user = UserModel.updateUser(sessionUser.U_ID,req.body.newPassword);
+                console.log(req.body.NewPassword);
+                var user = UserModel.updateUser({Password: req.body.NewPassword},sessionUser.U_ID);
                 user.once('results',function(results){
+                    console.log("123");
                     console.log(results);
                     if (results.affectedRows > 0)
-                        res.redirect('/users');
+                        res.redirect('/');
                     else res.end('error');
                 });
                 user.once('error',function(err){
                     res.end('error');
                 });
             }else{
-                res.send('Looi');
+                console.log('loi');
             }
         }else{
-            res.send('Loi');
+            return res.send('loi    ');
         }
-    }else{
-        res.redirect('/');
-    }
-
 }
 
 function getUpdateUserPage(req,res,id,path){
