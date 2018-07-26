@@ -84,11 +84,25 @@ function deleteUser(req,res){
     })
 }
 
+function getOneUser(req, res) {
+    console.log('get one user');
+    var sessionUser = req.user;
+        console.log(sessionUser);
+        if(sessionUser!=null){
+            res.render('index/user/profile', {
+                title: "Manage Account - vimstory",
+                data: sessionUser
+            });
+        }
+        else res.redirect('/');
+}
+
 module.exports = {
     getUsers,
     addUser,
     updateUser,
     deleteUser,
     getAddUserPage,
-    getUpdateUserPage
+    getUpdateUserPage,
+    getOneUser
 }
