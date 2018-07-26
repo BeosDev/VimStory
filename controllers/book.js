@@ -138,7 +138,8 @@ function updateBook(req, res, next) {
             B_imageurl: 'img/' + file.B_imageurl.name,
             C_ID: fields.C_ID,
             B_Age: fields.B_Age,
-            B_PublishDate: fields.B_PublishDate
+            B_PublishDate: fields.B_PublishDate,
+            U_ID : req.user.U_ID
         }, fields.B_ID);
         //var maxBookID = new bookModel.getMaxID;
         req.isRedirect = false;
@@ -307,6 +308,32 @@ function getUserBooks(req, res, next) {
     else res.redirect('/');
 }
 
+function getUserUpdateBookPage(req, res, next) {
+    var category = new categoryModel.getCategories();
+    var author = new authorModel.getAuthors();
+    var book = new bookModel.getOneBook(req.params.id);
+
+    category.once('results', function (data) {
+        if (data.length > 0) {
+            author.once('results', function (results) {
+                if (results.length > 0) {
+                    book.once('results', function (bookData) {
+                        res.render('index/user/editBook', {
+                            title: 'Update book - Vimstory',
+                            categories: data,
+                            authors: results,
+                            book: bookData
+                        });
+                    });
+
+                } else res.end('error');
+
+            })
+        } else res.end('error');
+
+    });
+//});
+ }
  module.exports = {
     getBooks,
     addBook,
@@ -316,5 +343,6 @@ function getUserBooks(req, res, next) {
     getAddBookPage,
     searchBooks,
     getUpdateBookPage,
-    getUserBooks
+    getUserBooks,
+    getUserUpdateBookPage
 }
