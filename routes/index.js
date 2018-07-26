@@ -12,5 +12,8 @@ router.get('/profile', function(req, res) {
     userController.getOneUser(req,res);
   });
 
+  router.get('/register', function(req, res) {
+    res.render('register');
+  });
 
 module.exports = router;

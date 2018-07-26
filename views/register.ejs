@@ -1,0 +1,180 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="../public/assets/js/jquery-CheckPhone.js"></script>
+    <style>
+        body {
+            background: #eee !important;
+        }
+
+        .wrapper {
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+
+        .form-signin {
+            max-width: 420px;
+            padding: 15px 35px 45px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+            margin-bottom: 30px;
+        }
+
+        .form-signin .checkbox {
+            font-weight: normal;
+        }
+
+        .form-signin .form-control {
+            position: relative;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <form class="form-signin" method="POST" id="form" action = "/register">
+            <h2 class="form-signin-heading">Register</h2>
+            <div class="form-group">
+                <label for="usr">Username:</label>
+                <input type="text" class="form-control" name="U_Username" placeholder="User Name(8-20 kí tự)" required="" autofocus="" />
+            </div>
+            <div class="form-group">
+                <label for="usr">PassWord:</label>
+                <input type="password" class="form-control" id="U_Password" name="U_Password" placeholder="Password" required="" />
+            </div>
+            <div class="form-group">
+                <label for="usr">Re-PassWord:</label>
+                <input type="password" class="form-control" id="U_RePassword" name="U_RePassword" placeholder="Re-Password" required="" />
+            </div>
+            <div class="form-group">
+                <label for="usr">Gender:</label>
+                <select class="selectpicker btn btn-default" style="border: 1px solid #ced4da" name="U_Sex">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="usr">Fullname:</label>
+                <input type="text" class="form-control" name="U_FullName" placeholder="Full Name" required="" autofocus="" />
+            </div>
+            <div class="form-group">
+                <label for="usr">Email:</label>
+                <input type="text" class="form-control" name="U_Email" placeholder="Email" required="" autofocus="" />
+            </div>
+            <div class="form-group">
+                <label for="usr">Phone Number:</label>
+                <input type="text" class="form-control" id="U_Phone" name="U_Phone" placeholder="Phone Number" required="" autofocus="" />
+            </div>
+            <div>
+                <button class="btn btn-lg btn-primary" type="submit">Register</button>
+                <a href="/login">
+                    <button class="btn btn-lg " type="button" style="background-color:darkgray)">Login</button>
+                </a>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+<!--script kiem tra sdt -->
+<script>
+    $('#form').submit(function (e) { // ID của Form
+        console.log('asdasdadd');
+
+        if (!checkPhoneNumber()) {
+            $('#U_Phone').parents('div.form-group').addClass('has-error'); // ID của trường Số điện thoại
+            $('#U_Phone').focus(); // ID của trường Số điện thoại
+            e.preventDefault();
+        }
+    });
+
+    $('#U_Phone').keypress(function () { // ID của trường Số điện thoại
+        $(this).parents('div.form-group').removeClass('has-error');
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+<script>
+    $(document).ready(function () {
+        console.log('1');
+        $("#form").validate({
+            rules: {
+                U_Username: {   // đây là trường name của input
+                    required: true,  // không được để trống
+                    minlength: 8,
+                    maxlength: 20
+                },
+                U_Pasword: {
+                    required: true,
+
+                },
+                U_Phone: {
+                    required: true,
+                    number: true, //  bắt buộc là kiểu số
+                    digits: true,  // không được tồn tại số âm
+                    maxlength: 20 // giới hạn số ký tự được nhập vào
+                },
+                U_RePassword: {
+                    required: true,
+                    equalTo: "#U_Password" // phải giống với input có id email
+                },
+                U_Email: {
+                    required: true,
+                    email: true // bắt lỗi định dạng mail
+                }
+
+
+
+            },
+            messages: {
+                name: {
+                    required: "Xin vui lòng nhập tên !",
+                    minlength: "Tên được nhập quá 20 ký tự !",
+                    maxlength: "Tên không được nhập quá 20 ký tự !"
+                },
+                email: {
+                    required: "Xin vui lòng nhập email !",
+                    email: "Email sai định dạng, xin vui lòng kiểm tra lại !"
+                },
+
+                U_Phone: {
+                    required: "Xin vui lòng nhập số điện thoại !",
+                    number: "Số điện thoại bắt buộc là kiểu số !",
+                    digits: "Số điện thoại không được nhập số âm !",
+                    maxlength: "Số điện thoại không được nhập quá 20 ký tự !"
+                },
+                U_RePassword: {
+                    required: "Xin vui lòng nhập Mật khẩu xác nhận !",
+
+                    equalTo: "Mật khẩu xác nhận không khớp với Mật khẩu, xin vui lòng kiểm tra lại !"
+                }
+
+            },
+        });
+    });
+</script>
+
+</html>
