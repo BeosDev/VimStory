@@ -44,7 +44,15 @@ router.get('/verify/:id', function (req, res, next) {
     bookController.verifyBook(req,res,next);
 }, function (req, res, next) {
     if (req.isRedirect === true)
-        res.redirect('admin/books/verify');
+        res.redirect('/admin/books/verify');
+});
+
+router.get('/deny/:id', function (req, res, next) {
+    //console.log('route'+req.params.id);
+    bookController.deleteBook(req,res,next);
+}, function (req, res, next) {
+    if (req.isRedirect === true)
+        res.redirect('/admin/books/verify');
 });
 
 module.exports = router;

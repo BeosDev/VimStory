@@ -1,7 +1,7 @@
 var executeQuery = require('../config/database');
 
 function getBooks() {
-    var query = 'SELECT * FROM v_book';
+    var query = 'SELECT * FROM v_book where B_Active=0';
     return new executeQuery(query);
 }
 
@@ -44,12 +44,12 @@ function updateBookAuthor(book_id,author_id) {
 }
 
 function getBooksAge(ageNum) {
-    var query = `SELECT * FROM v_book WHERE B_Age =  ${ageNum}`;
+    var query = `SELECT * FROM v_book WHERE B_Age =  ${ageNum} and B_Active=0`;
     return new executeQuery(query);
 }
 
 function getBooksCategory(C_ID) {
-    var query = `SELECT * FROM book WHERE C_ID =  ${C_ID}`;
+    var query = `SELECT * FROM book WHERE C_ID =  ${C_ID} and B_Active=0`;
     return new executeQuery(query);
 }
 //var k = new getBooks();

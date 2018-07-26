@@ -429,7 +429,7 @@ function getVerifyBooks(req,res,next)
 
     books.once('results', function (data) {
         if (data.length >= 0) {
-            res.render('admin/verifyBook', {
+            res.render('admin/penddingBook', {
                 title: 'Verify book - Vimstory',
                 data: data
             }, function (err, html) {
