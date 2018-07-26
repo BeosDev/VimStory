@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var userController = require('../controllers/user');
 
-router.get('/change/password',(req,res,next)=>{
+router.get('/change/pass',(req,res,next)=>{
     var sessionUser = req.user;
     if(req.user != null){
         res.render('index/user/userChangePassword', {
@@ -16,7 +16,7 @@ router.get('/change/password',(req,res,next)=>{
     }
 });
 
-router.post('/change/password',(req,res,next)=>{
+router.post('/change/pass',(req,res,next)=>{
     userController.changUserPassword(req,res);
 });
 
