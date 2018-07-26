@@ -60,7 +60,34 @@ function updateUser(req,res){
     });
     user.once('error',function(err){
         res.end('error');
-    })
+    });
+}
+
+function changUserPassword(req,res){
+    if(req.user != null){
+        var sessionUser = req.user;
+        if(sessionUser.Password == req.body.OldPassword){
+            if(req.body.NewPassword == req.body.ConfirmNewPassword){
+                var user = UserModel.updateUser(sessionUser.U_ID,req.body.newPassword);
+                user.once('results',function(results){
+                    console.log(results);
+                    if (results.affectedRows > 0)
+                        res.redirect('/users');
+                    else res.end('error');
+                });
+                user.once('error',function(err){
+                    res.end('error');
+                });
+            }else{
+                res.send('Looi');
+            }
+        }else{
+            res.send('Loi');
+        }
+    }else{
+        res.redirect('/');
+    }
+
 }
 
 function getUpdateUserPage(req,res,id,path){
@@ -104,5 +131,6 @@ module.exports = {
     deleteUser,
     getAddUserPage,
     getUpdateUserPage,
-    getOneUser
+    getOneUser,
+    changUserPassword
 }
