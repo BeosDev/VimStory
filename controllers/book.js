@@ -389,12 +389,37 @@ function getUserUpdateBookPage(req, res, next) {
                 textToSpeech.once('done',() => console.log('exported'));
             });
             if (results.affectedRows > 0) {
-                res.redirect('/admin/books');
+                res.redirect('/user/books');
             }
         });
         books.once('error', function (err) {
-            res.redirect('/admin/books');
+            res.redirect('/user/books');
         });
+    });
+}
+
+function getUserAddBookPage(req, res, next) {
+    var category = new categoryModel.getCategories();
+    var author = new authorModel.getAuthors();
+    category.once('results', function (data) {
+        if (data.length > 0) {
+            console.log(data);
+            //console.log(listCategory);
+            author.once('results', function (results) {
+                if (results.length > 0) {
+
+                    console.log(results);
+                    res.render('index/user/addBook', {
+                        title: 'Add new book - Vimstory',
+                        categories: data,
+                        authors: results
+
+                    });
+                } else res.end('error');
+
+            })
+        } else res.end('error');
+
     });
 }
 
@@ -409,5 +434,6 @@ function getUserUpdateBookPage(req, res, next) {
     getUpdateBookPage,
     getUserBooks,
     getUserUpdateBookPage,
-    userAddBook
+    userAddBook,
+    getUserAddBookPage
 }
