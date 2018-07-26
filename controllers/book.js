@@ -5,6 +5,43 @@ var createHTML = require('create-html');
 var openfpt = require('./utils/openfpt');
 var utils = require('util');
 var path = require('path');
+var likeModel = require('../models/like');
+
+function likeBook(req, res) {
+    console.log(req.params["bid"]);
+    console.log(req.user.U_ID);
+    var liker = new likeModel.isLike(req.params["bid"], req.user.U_ID);
+    console.log('ok');
+    liker.once('results', function (results) {
+        console.log(results);
+        if (results.length > 0) {
+            var removeLike = new likeModel.removeLike(req.params["bid"], req.user.U_ID);
+            removeLike.once('results', function (resRemoveLike) {
+                console.log(resRemoveLike);
+                if (resRemoveLike.affectedRows > 0)
+                    return res.json({isLike: 'false'});
+                return res.json({isLike: 'true'});
+            });
+            removeLike.once('error', function (error) {
+                res.json({isLike: 'true'});
+            });
+        } else {
+            var addLike = new likeModel.addLike({
+                B_ID: req.params["bid"],
+                U_ID: req.user.U_ID
+            });
+            addLike.once('results', function (resAddLike) {
+                console.log(resAddLike);
+                if (resAddLike.affectedRows > 0)
+                    return res.json({isLike: 'true'});
+                return res.json({isLike: 'false'});
+            });
+            addLike.once('error', function (error) {
+                return res.json({isLike: 'false'});
+            });
+        }
+    })
+}
 
 function getBooks(req, res, next) {
     var books = new bookModel.getBooks;
@@ -19,7 +56,7 @@ function getBooks(req, res, next) {
             })
         }
     })
-    books.once('error',() => res.redirect('/'));
+    books.once('error', () => res.redirect('/'));
 }
 
 function addBook(req, res, next) {
@@ -30,7 +67,7 @@ function addBook(req, res, next) {
     console.log('ok');
     var form = new formidable.IncomingForm();
     //set directory folder
-    form.uploadDir = path.join (__dirname,'../', '\\public\\img\\');
+    form.uploadDir = path.join(__dirname, '../', '\\public\\img\\');
     //form.uploadDir = path.join (__dirname, '/public/img');
     //xử lý upload
     form.parse(req, function (err, fields, file) {
@@ -72,7 +109,7 @@ function addBook(req, res, next) {
             maxBookID.once('results', function (data) {
                 //console.log('maxbookid'+data[0].MaxVL);
                 var textToSpeech = new openfpt(data[0].MaxVL, fields.B_Text);
-                textToSpeech.once('done',() => console.log('exported'));
+                textToSpeech.once('done', () => console.log('exported'));
             });
             if (results.affectedRows > 0) {
                 res.redirect('/admin/books');
@@ -107,7 +144,7 @@ function updateBook(req, res, next) {
     console.log('ok');
     var form = new formidable.IncomingForm();
     //set directory folder
-    form.uploadDir = path.join (__dirname,'../', '\\public\\img\\');
+    form.uploadDir = path.join(__dirname, '../', '\\public\\img\\');
     //form.uploadDir = path.join (__dirname, '/public/img');
     //xử lý upload
     form.parse(req, function (err, fields, file) {
@@ -147,7 +184,7 @@ function updateBook(req, res, next) {
         books.once('results', function (results) {
             //console.log('maxbookid'+data[0].MaxVL);
             var textToSpeech = new openfpt(fields.B_ID, fields.B_Text);
-            textToSpeech.once('done',()=> console.log('exported'));
+            textToSpeech.once('done', () => console.log('exported'));
             if (results.affectedRows > 0) {
                 res.redirect('/admin/books');
             }
@@ -167,35 +204,35 @@ function getOneBook(req, res, next, pathRender, titleBook) {
         console.log(data);
         if (data.length > 0) {
             //author.once('results',function(authorsData){
-                //if(authorsData.length > 0)
-               // {
-                    category.once('results',function(categoryData){
-                        var titleBook = data[0].B_Name;
-                        var html = createHTML({
-                            title: 'Content',
-                            head: '<meta name="description" content="example">',
-                            body: data[0].B_Content
-                        })
-                        fs.writeFile(path.join(__dirname,'../','\\views\\index\\readBookContent.ejs'), html, function (err) {
-                            if (err) console.log(err)
-                        })
-                        console.log(data[0].B_PublishDate);
-                        res.render(pathRender, {
-                            title: titleBook,
-                            data: data[0],
-                            //authors : authorsData,
-                            categories: categoryData
-                        }, function (err, html) {
-                            res.end(html);
-                        })
-                    });
-                    
-               // }
-               //else{
-               //  //   res.end('error');
-               // }
-        //);
-            
+            //if(authorsData.length > 0)
+            // {
+            category.once('results', function (categoryData) {
+                var titleBook = data[0].B_Name;
+                var html = createHTML({
+                    title: 'Content',
+                    head: '<meta name="description" content="example">',
+                    body: data[0].B_Content
+                })
+                fs.writeFile(path.join(__dirname, '../', '\\views\\index\\readBookContent.ejs'), html, function (err) {
+                    if (err) console.log(err)
+                })
+                console.log(data[0].B_PublishDate);
+                res.render(pathRender, {
+                    title: titleBook,
+                    data: data[0],
+                    //authors : authorsData,
+                    categories: categoryData
+                }, function (err, html) {
+                    res.end(html);
+                })
+            });
+
+            // }
+            //else{
+            //  //   res.end('error');
+            // }
+            //);
+
         } else res.end('error');
 
     });
@@ -259,38 +296,38 @@ function getUpdateBookPage(req, res, next) {
         } else res.end('error');
 
     });
-//});
- }
- function searchBooks(req,res,next){
+    //});
+}
+
+function searchBooks(req, res, next) {
     var categories = categoryModel.getCategories();
     var pageLimit = 9;
     var name = req.query['search'];
-    if(utils.isNullOrUndefined(name)) name = "";
+    if (utils.isNullOrUndefined(name)) name = "";
     var page = req.query['page'];
-    if(utils.isNullOrUndefined(page)) page = 1;
-    var searchBooks = bookModel.searchBooks(page,pageLimit,name); //#2
-    categories.once('results', function(cate){
-        if(cate.length > 0){
-            searchBooks.once('results', function(results){
+    if (utils.isNullOrUndefined(page)) page = 1;
+    var searchBooks = bookModel.searchBooks(page, pageLimit, name); //#2
+    categories.once('results', function (cate) {
+        if (cate.length > 0) {
+            searchBooks.once('results', function (results) {
                 console.log(results);
-                if(results.length > 0){
-                    res.render('index/searchBook',{
+                if (results.length > 0) {
+                    res.render('index/searchBook', {
                         title: 'Search book - Vimstory',
                         categories: cate,
-                        data : results,
+                        data: results,
                         pageNum: page,
                         keyword: name,
                     })
-                }else res.end('error');
+                } else res.end('error');
             });
-        }else res.end('error');
+        } else res.end('error');
     });
 }
 
 function getUserBooks(req, res, next) {
     console.log('get user books');
-    if(req.user !=null)
-    {
+    if (req.user != null) {
         var books = new bookModel.getUserBooks(req.user.U_ID);
         console.log(req.user.U_ID);
         books.once('results', function (data) {
@@ -304,9 +341,8 @@ function getUserBooks(req, res, next) {
                 })
             }
         })
-        books.once('error',() => res.redirect('/'));
-    }
-    else res.redirect('/');
+        books.once('error', () => res.redirect('/'));
+    } else res.redirect('/');
 }
 
 function getUserUpdateBookPage(req, res, next) {
@@ -456,6 +492,7 @@ function verifyBook(req,res,next)
 }
 
  module.exports = {
+module.exports = {
     getBooks,
     addBook,
     deleteBook,
@@ -469,5 +506,6 @@ function verifyBook(req,res,next)
     userAddBook,
     getUserAddBookPage,
     getVerifyBooks,
-    verifyBook
+    verifyBook,
+    likeBook
 }

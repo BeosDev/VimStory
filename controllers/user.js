@@ -1,4 +1,5 @@
 var UserModel = require('../models/user');
+var userSchema = require('../config/validator').userSchema;
 
 function getUsers(req, res) {
     console.log('ok');
@@ -164,5 +165,5 @@ module.exports = {
     getUpdateUserPage,
     getOneUser,
     changUserPassword,
-    updateProfileUser
+    updateProfileUser,
 }

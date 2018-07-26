@@ -5,7 +5,7 @@ var userSchema = Joi.object().keys({
     Password: Joi.string().min(6).max(20).required(),
     U_Email: Joi.string().email().allow(''),
     U_Address: Joi.string().allow(''),
-    U_Phone: Joi.string().alphanum().min(10).max(13).allow('')
+    U_Phone: Joi.string().regex(/^[0-9]{8,13}$/).allow('')
 })
 
 module.exports = {
