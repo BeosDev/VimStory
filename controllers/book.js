@@ -284,7 +284,27 @@ function getUpdateBookPage(req, res, next) {
     });
 }
 
-
+function getUserBooks(req, res, next) {
+    console.log('get user books');
+    if(req.user !=null)
+    {
+        var books = new bookModel.getUserBooks(req.user.U_ID);
+        console.log(req.user.U_ID);
+        books.once('results', function (data) {
+            if (data.length >= 0) {
+                console.log(data);
+                res.render('index/user/books', {
+                    title: 'Manage book - Vimstory',
+                    data: data
+                }, function (err, html) {
+                    res.end(html);
+                })
+            }
+        })
+        books.once('error',() => res.redirect('/'));
+    }
+    else res.redirect('/');
+}
 
  module.exports = {
     getBooks,
@@ -294,5 +314,6 @@ function getUpdateBookPage(req, res, next) {
     getOneBook,
     getAddBookPage,
     searchBooks,
-    getUpdateBookPage
+    getUpdateBookPage,
+    getUserBooks
 }
