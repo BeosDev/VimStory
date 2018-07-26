@@ -60,7 +60,9 @@ function addBook(req, res, next) {
             B_imageurl: 'img/' + file.B_imageurl.name,
             C_ID: fields.C_ID,
             B_Age: fields.B_Age,
-            B_PublishDate: fields.B_PublishDate
+            B_PublishDate: fields.B_PublishDate,
+            U_ID : req.user.U_ID,
+            B_Active : 0
         });
         var maxBookID = new bookModel.getMaxID;
 
@@ -137,7 +139,8 @@ function updateBook(req, res, next) {
             B_imageurl: 'img/' + file.B_imageurl.name,
             C_ID: fields.C_ID,
             B_Age: fields.B_Age,
-            B_PublishDate: fields.B_PublishDate
+            B_PublishDate: fields.B_PublishDate,
+            U_ID : req.user.U_ID
         }, fields.B_ID);
         //var maxBookID = new bookModel.getMaxID;
         req.isRedirect = false;
@@ -306,6 +309,152 @@ function getUserBooks(req, res, next) {
     else res.redirect('/');
 }
 
+function getUserUpdateBookPage(req, res, next) {
+    var category = new categoryModel.getCategories();
+    var author = new authorModel.getAuthors();
+    var book = new bookModel.getOneBook(req.params.id);
+
+    category.once('results', function (data) {
+        if (data.length > 0) {
+            author.once('results', function (results) {
+                if (results.length > 0) {
+                    book.once('results', function (bookData) {
+                        res.render('index/user/editBook', {
+                            title: 'Update book - Vimstory',
+                            categories: data,
+                            authors: results,
+                            book: bookData
+                        });
+                    });
+
+                } else res.end('error');
+
+            })
+        } else res.end('error');
+
+    });
+//});
+ }
+
+ function userAddBook(req, res, next) {
+    var Name;
+    var Content;
+    var Description;
+    var newpath;
+    console.log('ok');
+    var form = new formidable.IncomingForm();
+    //set directory folder
+    form.uploadDir = path.join (__dirname,'../', '\\public\\img\\');
+    //form.uploadDir = path.join (__dirname, '/public/img');
+    //xử lý upload
+    form.parse(req, function (err, fields, file) {
+        Name = fields.B_Name;
+        Content = fields.B_Content;
+        Description = fields.B_Description;
+        //path tmp in server
+        var pathImg = file.B_imageurl.path;
+        if (file.B_imageurl.name.toString() != '') {
+            //set up new path
+            console.log('save img file')
+            newpath = form.uploadDir + file.B_imageurl.name;
+
+            fs.rename(pathImg, newpath, function (err) {
+                if (err) throw err;
+            });
+        } else {
+            fs.unlink(pathImg, (err) => {
+                if (err) throw err;
+                console.log(pathImg + ' was deleted');
+            });
+        }
+        var books = new bookModel.addBook({
+            B_Name: Name,
+            B_Content: Content,
+            B_Description: Description,
+            B_imageurl: 'img/' + file.B_imageurl.name,
+            C_ID: fields.C_ID,
+            B_Age: fields.B_Age,
+            B_PublishDate: fields.B_PublishDate,
+            U_ID : req.user.U_ID,
+            B_Active : 1
+        });
+        var maxBookID = new bookModel.getMaxID;
+
+        req.isRedirect = false;
+        books.once('results', function (results) {
+            //console.log(mp3Link);
+            maxBookID.once('results', function (data) {
+                //console.log('maxbookid'+data[0].MaxVL);
+                var textToSpeech = new openfpt(data[0].MaxVL, fields.B_Text);
+                textToSpeech.once('done',() => console.log('exported'));
+            });
+            if (results.affectedRows > 0) {
+                res.redirect('/user/books');
+            }
+        });
+        books.once('error', function (err) {
+            res.redirect('/user/books');
+        });
+    });
+}
+
+function getUserAddBookPage(req, res, next) {
+    var category = new categoryModel.getCategories();
+    var author = new authorModel.getAuthors();
+    category.once('results', function (data) {
+        if (data.length > 0) {
+            console.log(data);
+            //console.log(listCategory);
+            author.once('results', function (results) {
+                if (results.length > 0) {
+
+                    console.log(results);
+                    res.render('index/user/addBook', {
+                        title: 'Add new book - Vimstory',
+                        categories: data,
+                        authors: results
+
+                    });
+                } else res.end('error');
+
+            })
+        } else res.end('error');
+
+    });
+}
+
+function getVerifyBooks(req,res,next)
+{
+    var books = new bookModel.getVerifyBook;
+
+    books.once('results', function (data) {
+        if (data.length >= 0) {
+            res.render('admin/penddingBook', {
+                title: 'Verify book - Vimstory',
+                data: data
+            }, function (err, html) {
+                res.end(html);
+            })
+        }
+    })
+    books.once('error',() => res.redirect('/'));
+}
+
+function verifyBook(req,res,next)
+{
+    var books = new bookModel.verifyBook(req.params.id);
+    req.isRedirect = false;
+    books.once('results', function (results) {
+        if (results.affectedRows > 0) {
+            req.isRedirect = true;
+            next();
+        }
+    });
+    books.once('error', function (err) {
+        next();
+    });
+}
+
  module.exports = {
     getBooks,
     addBook,
@@ -315,5 +464,10 @@ function getUserBooks(req, res, next) {
     getAddBookPage,
     searchBooks,
     getUpdateBookPage,
-    getUserBooks
+    getUserBooks,
+    getUserUpdateBookPage,
+    userAddBook,
+    getUserAddBookPage,
+    getVerifyBooks,
+    verifyBook
 }

@@ -24,42 +24,39 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="sidebar" data-image="/assets/img/sidebar-5.jpg" style="font-size: 20px">
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-        Tip 2: you can also add an image using data-image tag
-    -->
-    <div class="sidebar-wrapper" >
-        <div class="logo">
-            <a class="nav-link" href="/views/index/index.ejs">
-                <img src="/assets/img/logo1.jpg" class="rounded" alt="Cinque Terre" width="70px" , height="70px">
-                <p>Vim Story</p>
-            </a>
+<div class="wrapper">
+    <div class="sidebar" data-image="/assets/img/sidebar-5.jpg" style="font-size: 20px">
+        <div class="sidebar-wrapper" >
+            <div class="logo">
+
+                <a class="nav-link" href="/">
+                    <img src="/assets/img/logo1.jpg" class="rounded" alt="Cinque Terre" width="70px" , height="70px">
+                    <p>Vim Story</p>
+                </a>
+            </div>
+            <ul class="nav">
+                <li>
+                    <a class="nav-link" href="/user/books">
+                        <i class="nc-icon nc-chart-pie-35"></i>
+                        <p>Book Management</p>
+                    </a>
+                </li>
+                <li class = "nav-item">
+                    <a class="nav-link" href="/profile">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li class =" nav-item">
+                    <a class="nav-link" href="/user/change/pass">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>Change Password</p>
+                    </a>
+                </li>
+
+            </ul>
         </div>
-        <ul class="nav">
-            <li>
-                <a class="nav-link" href="#">
-                    <i class="nc-icon nc-chart-pie-35"></i>
-                    <p>Category Management</p>
-                </a>
-            </li>
-            <li class =" nav-item">
-                <a class="nav-link" href="../../views/user/userProfile.html">
-                    <i class="nc-icon nc-notes"></i>
-                    <p>User Management</p>
-                </a>
-            </li>
-            <li>
-                <a class="nav-link" href="#">
-                    <i class="nc-icon nc-notes"></i>
-                    <p>Book Management</p>
-                </a>
-            </li>
-            
-        </ul>
     </div>
-        </div>
         <div class="main-panel">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
@@ -75,7 +72,7 @@
                                     <span class="no-icon">Account</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="/admin/account">Change password</a>
+                                    <a class="dropdown-item" href="/user/change/pass">Change password</a>
                                     <div class="divider"></div>
                                     <a class="dropdown-item" href="/logout">Log out</a>
                                 </div>

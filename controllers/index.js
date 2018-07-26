@@ -26,7 +26,8 @@ function getBooks(req, res, next,num,ageNum,cid) {
                         title: 'Home - VimStory',
                         data: data,
                         categories: categoryData,
-                        pageNum: num
+                        pageNum: num,
+                        session : req.user
                     }, function (err, html) {
                         res.end(html);
                     });

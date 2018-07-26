@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="/assets/css/light-bootstrap-dashboard.css">
     <link rel="stylesheet" href="/assets/css/jquery.dataTables.min.css">
     <script src="/assets/js/jquery.dataTables.min.js"></script>
-
+    <script src="/assets/ckeditor/ckeditor.js"></script>
 
 
 </head>
@@ -93,37 +93,57 @@
 
 
             <div class="container">
-                <a href="/user/books/add"><button type="button" class="btn btn-outline-secondary"><p style="font-size:30px;margin:auto;">ADD New-Book</p></button></a>
+                <h2>Update Book </h2>
+                <form action="/admin/books/update" method="post" enctype="multipart/form-data" id="updateBookForm">
+                    <div class="form-group">
+                        <label for="usr">BookName:</label>
+                        <input type="text" class="form-control" id = "B_Name" name="B_Name" value = "<%=book[0].B_Name%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Type:</label>
+                        <div class="form-group">
+                            <select class="form-control" id="C_ID" name="C_ID">
+                                <%for(var i=0;i<categories.length;i++)
+                                { %>
+                                <option value ="<%=categories[i].C_ID%>"><%=categories[i].C_Name%></option>
+                                <%}%>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Agetag:</label>
+                        <div class="form-group">
+                            <select class="form-control" id="B_Age" name = "B_Age">
+                                <option value ="0">0</option>
+                                <option value ="12">12</option>
+                                <option value ="15">15</option>
+                                <option value ="18">18</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">PublishDate:</label>
+                        <input type="date" class="form-control" id="B_PublishDate" name = "B_PublishDate" >
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Short Description:</label>
+                        <textarea class="form-control" id = "B_Description" name = "B_Description" style="height:150px;"><%=book[0].B_Description%></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Content:</label>
+                        <textarea class="ckeditor" id = "B_Content" name = "B_Content" ><%=book[0].B_Content%></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Image files:</label>
+                        <input type="file" id = "B_imageurl" name = "B_imageurl" accept="image/*" />
+                    </div>
+                    <button type="button" class="btn btn-outline-secondary " onclick = "getText();">UPDATE</button>
+                    <a href="/user/books" class="btn btn-outline-secondary ">CLOSE</a>
 
-                <div class="unit w-2-3"><div class="hero-callout">
-                    <div id="example_wrapper" class="dataTables_wrapper"><div class="dataTables_length" id="example_length"></div><div id="example_filter" class=           "dataTables_filter"></div>
-
-                        <table id="table" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
-                            <thead><tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 126px;" aria-sort="ascending" >ID</th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 201px;" >Name</th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" >type</th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" >Agetag</th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" >publishdate</th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" >Edit</th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 84px;" >Delete</th>            </tr>
-                            </thead>
-                            <tbody>
-                            <%for(var i=0;i<data.length;i++)
-                            { %>
-                            <tr role="row" class="odd"  id ="tr<%=i%>">
-                                <td id ="td_idtr<%=i%>"><%= data[i].B_ID %></td>
-                                <td id ="td_nametr<%=i%>"><%= data[i].B_Name %></td>
-                                <td id ="td_c_nametr<%=i%>"><%= data[i].C_Name %></td>
-                                <td id ="td_agetr<%=i%>"><%= data[i].B_Age %></td>
-                                <td id ="td_pubdatetr<%=i%>"><%= data[i].B_PublishDate %></td>
-                                <td><a href='/user/books/edit/<%= data[i].B_ID %>' ><i class="fas fa-edit"></a></td>
-                                <td><a href='/user/books/delete/<%= data[i].B_ID %>' ><i class="fas fa-trash-alt"></a></td>
-                            </tr>
-                            <% } %>
-                            </tbody></table>
-                    </div></div>
-                </div>
+                    <input type="hidden" name ="hidden" id ="hidden"/>
+                    <input type="hidden" name ="B_ID" id ="B_ID"/>
+                    <input type="hidden" name ="B_Text" id ="B_Text"/>
+                </form>
                 <footer class="footer">
                     <div class="container">
                         <nav>
@@ -151,10 +171,71 @@
 
 
 </body>
+<script>
+
+    function getSelected(select) {
+
+        var result = [];
+        var options = select && select.options;
+        var opt;
+
+        for (var i=0, iLen=options.length; i<iLen; i++) {
+            opt = options[i];
+
+            if (opt.selected) {
+                result.push(opt.value || opt.text);
+            }
+        }
+        document.getElementById("hidden").value = result;
+
+    }
+    function getText()
+    {
+        var B_Text = document.getElementById("B_Text");
+        B_Text.value = CKEDITOR.instances.B_Content.document.getBody().getText();
+        document.getElementById("updateBookForm").submit();
+    }
+</script>
+
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="/assets/js/core/jquery.3.2.1.min.js"></script>
 <script src="/assets/js/light-bootstrap-dashboard.js"></script>
 <script src="/assets/js/core/popper.min.js"></script>
+<script>
+    $(function() {
+        $("#C_ID").val("<%=book[0].C_ID%>");
+        $("#B_Age").val("<%=book[0].B_Age%>");
+        $("#B_ID").val("<%=book[0].B_ID%>");
+        var today  = new Date("<%=book[0].B_PublishDate%>");
+        var pdate = today.toLocaleDateString("en-US");
+        var x = pdate.substr(pdate.lastIndexOf('/')+1,5)+'-'+pad2(pdate.substring(0,pdate.indexOf('/')))+'-'+pad2(today.getDate());
+        // $("B_PublishDate").val(x);
+        document.getElementById("B_PublishDate").value = x;
+        //alert(x);
+        //alert(pdate.substring(0,pdate.indexOf('/')));
 
+
+    });
+    function pad2(number)
+    {
+        return (number < 10 ? '0' : '') + number
+    }
+    function getSelected(select) {
+
+        var result = [];
+        var options = select && select.options;
+        var opt;
+
+        for (var i=0, iLen=options.length; i<iLen; i++) {
+            opt = options[i];
+
+            if (opt.selected) {
+                result.push(opt.value || opt.text);
+            }
+        }
+        document.getElementById("hidden").value = result;
+
+    }
+</script>
 </html>
