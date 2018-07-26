@@ -7,6 +7,7 @@ router.use('/logout',require('./logout'));
 router.use('/book',require('./book'));
 router.use('/admin',require('./admin'));
 router.use('/user',require('./user'));
+router.use('/register',require('./register'));
 
 router.get('/profile', function(req, res) {
     userController.getOneUser(req,res);
