@@ -34,22 +34,28 @@
                 </a>
             </div>
             <ul class="nav">
-                <li>
-                    <a class="nav-link" href="/VimStory-backend/views/user/userBook.html">
+                <li class =" nav-item ">
+                    <a class="nav-link" href="/admin/categories">
                         <i class="nc-icon nc-chart-pie-35"></i>
+                        <p>Category Management</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/admin/users">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>User Management</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/admin/books">
+                        <i class="nc-icon nc-notes"></i>
                         <p>Book Management</p>
                     </a>
                 </li>
-                <li class = "nav-item">
-                    <a class="nav-link" href="/admin/users">
-                        <i class="nc-icon nc-notes"></i>
-                        <p>User Profile</p>
-                    </a>
-                </li>
                 <li class =" nav-item active">
-                    <a class="nav-link" href="/VimStory-backend/views/user/userChangePassword.html">
+                    <a class="nav-link" href="/VimStory-backend/views/admin/pendingBook.html">
                         <i class="nc-icon nc-notes"></i>
-                        <p>Change Password</p>
+                        <p>Pending Books</p>
                     </a>
                 </li>
 
@@ -85,27 +91,53 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1>Change Password</h1>
+                        <h1>Pending books</h1>
                     </div>
                 </div>
                 <hr/>
-                <div class="row">
-                    <div class="col-sm-6">
-
-                        <form method="post" id="passwordForm">
-                            <input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="New Password" autocomplete="off">
-                            <span id="6char" class="fa fa-times" style="color:#FF0004;"></span> 6 to 20 characters long<br>
-
-                            <input type="password" class="input-lg form-control" name="password2" id="password2" placeholder="Repeat Password" autocomplete="off">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <span id="pwmatch" class="fa fa-times" style="color:#FF0004;"></span> Passwords Match
-                                </div>
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-10 border rounded">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3>ten book</h3>
+                                <p>Short description here Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, assumenda! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, ut.</p>
                             </div>
-                            <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Changing Password..." value="Change Password">
-                        </form>
+                            <div class="col-sm-3" style="padding-top: 15px">
+                                <input type="submit" class="col-xs-12 btn btn-primary btn-lg"  value="Publish">
+                                <input type="submit" class="col-xs-12 btn btn-warning btn-lg" value="Deny">
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-10 border rounded">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3>ten book</h3>
+                                <p>Short description here Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, assumenda! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, ut.</p>
+                            </div>
+                            <div class="col-sm-3" style="padding-top: 15px">
+                                <input type="submit" class="col-xs-12 btn btn-primary btn-lg"  value="Publish">
+                                <input type="submit" class="col-xs-12 btn btn-warning btn-lg" value="Deny">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-10 border rounded">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3>ten book</h3>
+                                <p>Short description here Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, assumenda! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, ut.</p>
+                            </div>
+                            <div class="col-sm-3" style="padding-top: 15px">
+                                <input type="submit" class="col-xs-12 btn btn-primary btn-lg"  value="Publish">
+                                <input type="submit" class="col-xs-12 btn btn-warning btn-lg" value="Deny">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -122,30 +154,4 @@
 <script src="../../public/assets/js/light-bootstrap-dashboard.js"></script>
 <script src="../../public/assets/js/core/popper.min.js"></script>
 
-<script>
-    $("input[type=password]").keyup(function(){
-        var ucase = new RegExp("[A-Z]+");
-        var num = new RegExp("[0-9]+")
-
-        if($("#password1").val().length >= 6 && $("#password1").val().length <= 20 ){
-            $("#6char").removeClass("fa-times");
-            $("#6char").addClass("fa-check");
-            $("#6char").css("color","#00A41E");
-        }else{
-            $("#6char").removeClass("fa-check");
-            $("#6char").addClass("fa-times");
-            $("#6char").css("color","#FF0004");
-        }
-
-        if($("#password1").val() == $("#password2").val()){
-            $("#pwmatch").removeClass("fa-times");
-            $("#pwmatch").addClass("fa-check");
-            $("#pwmatch").css("color","#00A41E");
-        }else{
-            $("#pwmatch").removeClass("fa-check");
-            $("#pwmatch").addClass("fa-times");
-            $("#pwmatch").css("color","#FF0004");
-        }
-    });
-</script>
 </html>
