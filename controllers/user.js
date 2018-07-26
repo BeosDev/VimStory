@@ -67,23 +67,30 @@ function changUserPassword(req,res){
     if(req.user != null){
         var sessionUser = req.user;
             if(req.body.NewPassword == req.body.ConfirmNewPassword){
-                console.log(req.body.NewPassword);
-                var user = UserModel.updateUser({Password: req.body.NewPassword},sessionUser.U_ID);
-                user.once('results',function(results){
-                    console.log("123");
-                    console.log(results);
-                    if (results.affectedRows > 0)
-                        res.redirect('/');
-                    else res.end('error');
-                });
-                user.once('error',function(err){
-                    res.end('error');
-                });
+                if(req.body.NewPassword.toString().length >5 && req.body.NewPassword.toString().length <21){
+                    var user = UserModel.updateUser({Password: req.body.NewPassword},sessionUser.U_ID);
+                    user.once('results',function(results){
+                        console.log(results);
+                        if (results.affectedRows > 0)
+                            return res.redirect('/');
+                        else res.end('error');
+                    });
+                    user.once('error',function(err){
+                        return res.end('error');
+                    });
+                }else{
+                    res.render('index/user/userChangePassword', {
+                        title: "Manage Account - vimstory",
+                        data: sessionUser,
+                        errorMessage: "Password is invalid!"
+                    });
+                    req.flash('errorMessage','');
+                }
             }else{
                 console.log('loi');
             }
         }else{
-            return res.send('loi    ');
+            return res.send('loi');
         }
 }
 

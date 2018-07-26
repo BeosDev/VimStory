@@ -5,10 +5,12 @@ var userController = require('../controllers/user');
 router.get('/change/password',(req,res,next)=>{
     var sessionUser = req.user;
     if(req.user != null){
-    res.render('index/user/userChangePassword',{
-        title: "Manage Account - vimstory",
-        data: sessionUser
-    });
+        res.render('index/user/userChangePassword', {
+            title: "Manage Account - vimstory",
+            data: sessionUser,
+            errorMessage: req.flash('errorMessage')
+        });
+        req.flash('errorMessage','');
     }else{
         res.redirect('/');
     }
