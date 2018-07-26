@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="/public/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="/public/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../public/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../../public/assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>User Profile</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'
@@ -13,19 +13,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <!-- CSS Files --> 
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="/public/assets/css/demo.css" rel="stylesheet" />
+    <link href="../../public/assets/css/demo.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/public/assets/css/custom.css" class="css"> 
+    <link rel="stylesheet" href="../../public/assets/css/custom.css" class="css"> 
    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
-    <link href="/public/assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
+    <link href="../../public/assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
 
 </head>
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="/public/assets/img/sidebar-5.jpg" style="font-size: 20px">
+        <div class="sidebar" data-image="/assets/img/sidebar-5.jpg" style="font-size: 20px">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
         Tip 2: you can also add an image using data-image tag
@@ -33,25 +33,25 @@
     <div class="sidebar-wrapper" >
         <div class="logo">
             <a class="nav-link" href="/views/index/index.ejs">
-                <img src="/public/assets/img/logo1.jpg" class="rounded" alt="Cinque Terre" width="70px" , height="70px">
+                <img src="../../public/assets/img/logo1.jpg" class="rounded" alt="Cinque Terre" width="70px" , height="70px">
                 <p>Vim Story</p>
             </a>
         </div>
         <ul class="nav">
             <li>
-                <a class="nav-link" href="/admin/categories">
+                <a class="nav-link" href="#">
                     <i class="nc-icon nc-chart-pie-35"></i>
                     <p>Category Management</p>
                 </a>
             </li>
             <li class =" nav-item">
-                <a class="nav-link" href="/admin/users">
+                <a class="nav-link" href="../../views/user/userProfile.html">
                     <i class="nc-icon nc-notes"></i>
                     <p>User Management</p>
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="/admin/books">
+                <a class="nav-link" href="#">
                     <i class="nc-icon nc-notes"></i>
                     <p>Book Management</p>
                 </a>
@@ -64,7 +64,7 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class=" container-fluid  ">
-
+    
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <ul class="navbar-nav ml-auto">
                             <div class="nav-item">
@@ -88,34 +88,31 @@
             <div class="container">
                 <h2>My Account</h2>
                 <form method="POST" action="/admin/users/update">
-                    <input type="text" class="form-control" style="display: none" id="UM-A-UserName" name="U_ID" value="<%= User.U_ID %>">
+                    <input type="text" class="form-control" style="display: none" id="UM-A-UserName" name="U_ID" value="">
                     <div class="form-group">
                         <label for="usr">User Name:</label>
-                        <input type="text" class="form-control" id="UM-A-UserName" name="Username" value="<%= User.Username %>">
+                        <input type="text" class="form-control" id="UM-A-UserName" name="U_Username" value="" readonlys>
                     </div>
                     <div class="form-group">
                         <label for="usr">Full Name:</label>
-                        <input type="text" class="form-control" id="UM-A-FullName" name="U_FullName" value="<%= User.U_FullName %>">
+                        <input type="text" class="form-control" id="UM-A-FullName" name="U_FullName" placeholder="Full Name" autocomplete="off" value="">
                     </div>
                     <div class="form-group">
                         <label for="usr">Password:</label>
-                        <input type="password" class="form-control" id="UM-A-Password" name="Password" value="">
+                        <input type="password" class="form-control" id="UM-A-Password" name="U_Password" placeholder="New Password" autocomplete="off"value="">
                     </div>
-                    <div class="form-group">
-                        <label for="usr">RE-Password:</label>
-                        <input type="password" class="form-control" id="UM-A-Re_Password" name="RePassword" value="">
-                    </div>
+                    
                     <div class="form-group">
                         <label for="pwd">Address:</label>
-                        <input type="text" class="form-control" id="UM-A-Address" name="U_Address" value="<%= User.U_Address %>">
+                        <input type="text" class="form-control" id="UM-A-Address" name="U_Address" placeholder="Address" autocomplete="off"value="">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Phone Number:</label>
-                        <input type="text" class="form-control" id="UM-A-Tel" name="U_Phone">
+                        <input type="text" class="form-control" id="UM-A-Tel" name="U_Phone"placeholder="Phone Number" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Email:</label>
-                        <input type="text" class="form-control" id="UM-A-Email" name="U_Email" value="<%= User.U_Email %>">
+                        <input type="text" class="form-control" id="UM-A-Email" name="U_Email" placeholder="Email" autocomplete="off"value="">
                     </div>
                     <button type="submit" class="btn btn-outline-secondary " ;>
                         <p style="font-size:15px; ">Update</p>
@@ -153,8 +150,8 @@
 
 </body>
 <!--   Core JS Files   -->
-<script src="/public/assets/js/core/jquery.3.2.1.min.js"></script>
-<script src="/public/assets/js/core/popper.min.js"></script>
-<script src="/public/assets/js/core/bootstrap.min.js"></script>
+<script src="../../public/assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="../../public/assets/js/core/popper.min.js"></script>
+<script src="../../public/assets/js/core/bootstrap.min.js"></script>
 
 </html>
