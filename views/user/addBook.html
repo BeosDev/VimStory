@@ -1,10 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../../public/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../../publics/assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title><%=title%></title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../public/assets/css/custom.css">
+    <link rel="stylesheet" href="../../public/assets/css/light-bootstrap-dashboard.css">
+    <link rel="stylesheet" href="../../public/assets/css/jquery.dataTables.min.css">
+    <script src="../../public/assets/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="../../public/assets/css/demo.css">
+    <link rel="stylesheet" href="../../public/assets/css/fontawesome-all.css">
+    <link rel="stylesheet" href="../../public/assets/css/bootstrap.css">
+    <script src="../../public/assets/ckeditor/ckeditor.js"></script>
+
+
 </head>
+
 <body>
+<div class="wrapper">
+    <div class="sidebar" data-image="/assets/img/sidebar-5.jpg" style="font-size: 20px">
+        <div class="sidebar-wrapper" >
+            <div class="logo">
+
+                <a class="nav-link" href="/admin/books">
+                    <img src="../../public/assets/img/logo1.jpg" class="rounded" alt="Cinque Terre" width="70px" , height="70px">
+                    <p>Vim Story</p>
+                </a>
+            </div>
+            <ul class="nav">
+                <li>
+                    <a class="nav-link" href="/VimStory-backend/views/user/userBook.html">
+                        <i class="nc-icon nc-chart-pie-35"></i>
+                        <p>Book Management</p>
+                    </a>
+                </li>
+                <li class = "nav-item">
+                    <a class="nav-link" href="/admin/users">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li class =" nav-item">
+                    <a class="nav-link" href="/VimStory-backend/views/user/userChangePassword.html">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>Change Password</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+            <div class=" container-fluid  ">
+
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <ul class="navbar-nav ml-auto">
+                        <div class="nav-item">
+                            <!-- <img src="assets/img/default-avatar.png" width="55px", height="55px"> -->
+                        </div>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="no-icon">Account</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/admin/account">Change password</a>
+                                <div class="divider"></div>
+                                <a class="dropdown-item" href="/logout">Log out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container">
+                <h2>ADD New-Book </h2>
+
+                <form action="/admin/books/add" method="post" enctype="multipart/form-data" id = "addBookForm">
+                    <div class="form-group">
+                        <label for="usr">BookName:</label>
+                        <input type="text" class="form-control" id = "B_Name" name="B_Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Type:</label>
+
+                        <div class="form-group">
+                            <select class="form-control" id="C_ID" name="C_ID">
+                                <%for(var i=0;i<categories.length;i++)
+                                { %>
+                                <option value ="<%=categories[i].C_ID%>"><%=categories[i].C_Name%></option>
+                                <%}%>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Agetag:</label>
+                        <div class="form-group">
+                            <select class="form-control" id="B_Age" name = "B_Age">
+                                <option value ="0">0</option>
+                                <option value ="12">12</option>
+                                <option value ="15">15</option>
+                                <option value ="18">18</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">PublishDate:</label>
+                        <input type="date" class="form-control" id="B_PublishDate" name = "B_PublishDate">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="usr">Short Description:</label>
+                        <textarea class="form-control" id = "B_Description" name = "B_Description" style="height:150px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Content:</label>
+                        <textarea class="ckeditor" id = "B_Content" name = "B_Content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Image files:</label>
+                        <input type="file" id = "B_imageurl" name = "B_imageurl" accept="image/*" />
+                    </div>
+                    <button type="button" class="btn btn-outline-secondary " onclick = "getText();">ADD</button>
+
+                    <a href="/VimStory-backend/views/user/userBook.html" class="btn btn-outline-secondary ">CLOSE</a>
+
+
+                    <input type="hidden" name ="hidden" id ="hidden"/>
+                    <input type="hidden" name ="B_Text" id ="B_Text"/>
+                </form>
+                <footer class="footer">
+                    <div class="container">
+                        <nav>
+                            <p class="copyright text-center">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>
+                                FROM VimStory With LOVE
+                            </p>
+                        </nav>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
 
 </body>
+<script>
+
+    function getSelected(select) {
+
+        var result = [];
+        var options = select && select.options;
+        var opt;
+
+        for (var i=0, iLen=options.length; i<iLen; i++) {
+            opt = options[i];
+
+            if (opt.selected) {
+                result.push(opt.value || opt.text);
+            }
+        }
+        document.getElementById("hidden").value = result;
+
+    }
+
+    function getText()
+    {
+        var B_Text = document.getElementById("B_Text");
+        B_Text.value = CKEDITOR.instances.B_Content.document.getBody().getText();
+        document.getElementById("addBookForm").submit();
+    }
+</script>
+<script src="../../public/assets/js/core/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="../../public/assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="../../public/assets/js/light-bootstrap-dashboard.js"></script>
+<script src="../../public/assets/js/core/popper.min.js"></script>
 </html>
