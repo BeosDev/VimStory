@@ -21,4 +21,9 @@ router.post('/change/password',(req,res,next)=>{
     userController.updateProfileUser(req,res);
   });
 
+  //add book
+  router.post('/books/add', function(req, res) {
+    bookController.addBook(req,res);
+  });
+
 module.exports = router;

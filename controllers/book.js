@@ -60,7 +60,8 @@ function addBook(req, res, next) {
             B_imageurl: 'img/' + file.B_imageurl.name,
             C_ID: fields.C_ID,
             B_Age: fields.B_Age,
-            B_PublishDate: fields.B_PublishDate
+            B_PublishDate: fields.B_PublishDate,
+            U_ID : req.user.U_ID
         });
         var maxBookID = new bookModel.getMaxID;
 
