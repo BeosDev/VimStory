@@ -7,6 +7,11 @@ router.get('/read/:id', function(req, res, next) {
     var path = 'index/readBook';
     bookController.getOneBook(req,res,next,path);
 });
+router.get('/read/:bid/like', function(req, res) {
+    if (req.isAuthenticated())
+        bookController.likeBook(req,res);
+    else return res.json({isLike: 'false'});
+});
 router.get('/bookContent', function(req, res, next) {
     //var path = 'index/readBookContent';
     //bookController.getOneBook(req,res,next,path);
