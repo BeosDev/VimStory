@@ -1,7 +1,7 @@
 var executeQuery = require("../config/database");
 
-function addComment(comment){
-    var query = 'insert u_comment set ?';
+function addComment(comment,B_ID){
+    var query = `insert u_comment set ?`;
     return new executeQuery(query, comment);
 }
 
