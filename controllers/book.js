@@ -15,16 +15,17 @@ function likeBook(req, res) {
     liker.once('results', function (results) {
         console.log(results);
         if (results.length > 0) {
-            var removeLike = new likeModel.removeLike(req.params["bid"], req.user.U_ID);
-            removeLike.once('results', function (resRemoveLike) {
-                console.log(resRemoveLike);
-                if (resRemoveLike.affectedRows > 0)
-                    return res.json({isLike: 'false'});
-                return res.json({isLike: 'true'});
-            });
-            removeLike.once('error', function (error) {
-                res.json({isLike: 'true'});
-            });
+            // var removeLike = new likeModel.removeLike(req.params["bid"], req.user.U_ID);
+            // removeLike.once('results', function (resRemoveLike) {
+            //     console.log(resRemoveLike);
+            //     if (resRemoveLike.affectedRows > 0)
+            //         return res.json({isLike: 'false'});
+            //     return res.json({isLike: 'true'});
+            // });
+            // removeLike.once('error', function (error) {
+            //     res.json({isLike: 'true'});
+            // });
+            res.json({isLike: 'false'});
         } else {
             var addLike = new likeModel.addLike({
                 B_ID: req.params["bid"],

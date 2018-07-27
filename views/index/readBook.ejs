@@ -206,9 +206,10 @@
                 <div class="post-footer">
                  <%if(User_ID!=-1){%>
                     <div class="stats" style="padding-bottom: 10px">
-                        <a href="#" class="btn btn-primary stat-item">
-                            <i class="fa fa-thumbs-up icon"> Like</i><p id="likeCount"></p>
+                        <a href="#" onclick="likeBook();" class="btn btn-primary stat-item">
+                            <i class="fa fa-thumbs-up icon" id="likeCount"></i>
                         </a>
+                        
                     </div>
                    
                         <div class="input-group">
@@ -221,6 +222,13 @@
                                 </button>
                             </div>
                         </div>
+                    <%}else{%>
+                    <div class="stats" style="padding-bottom: 10px">
+                        <a onclick="notice();" class="btn btn-primary stat-item">
+                            <i class="fa fa-thumbs-up icon" id="likeCount1"></i>
+                        </a>
+                        
+                    </div>
                     <%}%>
                     <ul class="comments-list" id="listcmt">
                     </ul>
@@ -297,6 +305,39 @@ $(document).ready(function(){
             console.log("Data: " + data[0].C_Content);
             for(var i=0;i<data.length;i++){
             $( "#listcmt" ).prepend( '<li class="comment"><div class="row"><div class="col-1" style="padding-top: 8px"><a class="pull-left" href="#"><img class="avatar" src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg" alt="avatar"></a></div><div class="col-11" style="padding-left: 35px; padding-top: 5px"><div class="comment-body"><div class="comment-heading"><h4 class="user">'+data[i].U_FullName+'</h4></div><p>'+data[i].C_Content+'</p></div></div></div></li>' );
-        }});
+            
+        }
+        $.get("/book/read/"+$("#bookid").val()+"/countlike", function(data1){
+                console.log(data1.numLike);
+                $("#likeCount").html(' Like : '+data1.numLike);
+                $("#likeCount1").html(' Like : '+data1.numLike);
+            });
+        });
 });
+
+function notice()
+{
+    alert("Vui lòng đăng nhập để sử dụng chức năng này ! ");
+}
+function likeBook()
+{
+    $.get("/book/read/"+$("#bookid").val()+"/like",
+    {
+        B_ID: $("#bookid").val(),
+    },
+    function(data, status){
+        console.log(data.isLike);
+        if(data.isLike == 'true'){
+            console.log('like success');
+            var lc = $("#likeCount").text().substring(8,$("#likeCount").text().length);
+            $("#likeCount").text(' Like : '+(parseInt(lc)+1));
+        }
+        else
+        {
+            console.log('da like');
+        }
+       
+    });
+    
+}
 </script>
