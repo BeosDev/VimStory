@@ -45,7 +45,7 @@ module.exports = function () {
         passReqToCallback: true
     }, function (req, username, password, done) {
         if (!isValided(username, password)) {
-            return done(null, false, req.flash('loginMessage', "Tài khoản hoặc mật khẩu không hợp lệ"));
+            return done(null, false, req.flash('loginMessage', "Tài khoản hoặc mật khẩu không đúng, xin vui lòng kiểm tra lại"));
         }
         var User = new UserModel.getOneUserViaUserName(username);
         User.once('results', function (results) {
