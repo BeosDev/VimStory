@@ -10,6 +10,7 @@ router.use('/user',require('./user'));
 router.use('/register',require('./register'));
 
 router.get('/profile', function(req, res, next) {
+  console.log('profile: ',req.user);
     userController.getOneUser(req,res);
   });
 

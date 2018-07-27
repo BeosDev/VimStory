@@ -73,7 +73,7 @@ module.exports = function () {
             if (results.length > 0) {
                 return done(null, false, req.flash('registerMessage','Tài khoản hoặc mật khẩu đã tồn tại'));
             }
-            var newUser = new UserModel.addUser({
+            var ssUser = {
                 Username: req.body.U_Username,
                 Password: req.body.U_Password,
                 U_Email: req.body.U_Email,
@@ -81,11 +81,14 @@ module.exports = function () {
                 U_Phone: req.body.U_Phone,
                 U_Authorization: 1,
                 U_FullName: req.body.U_FullName
-            });
+            };
+            var newUser = new UserModel.addUser(ssUser);
             newUser.once('results', function (results) {
                 console.log('register: ',results);
                 if (results.affectedRows > 0) {
-                    return done(null, true);
+                    ssUser['U_ID'] =  results.insertId;
+                    console.log(ssUser);
+                    return done(null, ssUser);
                 } else
                     return done(null, false, req.flash('registerMessage', 'Thông tin vừa nhập không hợp lệ, xin vui lòng kiểm tra lại'));
             })
@@ -97,8 +100,6 @@ module.exports = function () {
             return done(null, false, req.flash('registerMessage', 'Thông tin vừa nhập không hợp lệ, xin vui lòng kiểm tra lại'));
         })
     }))
-
-
 
 
 }
