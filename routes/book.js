@@ -28,4 +28,8 @@ router.get('/',function(req,res,next){
     bookController.searchBooks(req,res,next);
 })
 
+router.get('/getcomment/:id',function(req,res,next){
+    commentController.getComments(req,res);
+})
+
 module.exports = router;
