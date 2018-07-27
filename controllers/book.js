@@ -217,11 +217,16 @@ function getOneBook(req, res, next, pathRender, titleBook) {
                     if (err) console.log(err)
                 })
                 console.log(data[0].B_PublishDate);
+                var userid;
+                if(req.user!=null) userid=req.user.U_ID;
+                else userid=-1;
                 res.render(pathRender, {
                     title: titleBook,
                     data: data[0],
                     //authors : authorsData,
-                    categories: categoryData
+                    categories: categoryData,
+                    User_ID : userid,
+                    Book_ID : req.params.id 
                 }, function (err, html) {
                     res.end(html);
                 })

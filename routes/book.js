@@ -26,6 +26,14 @@ router.get('/bookContent', function(req, res, next) {
 
 router.get('/',function(req,res,next){
     bookController.searchBooks(req,res,next);
+});
+
+router.post('/read/:id/cmt',(req,res)=>{
+    commentController.addComment(req,res);
+});
+
+router.get('/getcomment/:id',function(req,res,next){
+    commentController.getComments(req,res);
 })
 
 module.exports = router;

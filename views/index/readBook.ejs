@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="/assets/img/Pokeball.ico" class="favicon">
 	<link rel="shortcut icon" type="image/x-icon" href="/assets/img/Pokeball.ico">
     <link rel="stylesheet" href="/assets/css/custom.css" class="css"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 
@@ -210,71 +212,16 @@
 
                         <div class="input-group">
 
-                            <input class="form-control" style="width:250px;" type="text" placeholder="Leave a comment" name="comment">
+                            <input class="form-control" style="width:250px;" type="text" placeholder="Leave a comment" name="C_Content" id ="c_content">
 
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-outline-secondary">
+                                <button class="btn btn-outline-secondary" onclick = "sendComment();">
                                     <i class="fa fa-edit"></i>
                                 </button>
                             </div>
                         </div>
 
-                    <ul class="comments-list">
-
-                        <li class="comment">
-                            <div class="row">
-                                <div class="col-1" style="padding-top: 8px">
-                                    <a class="pull-left" href="#">
-                                        <img class="avatar" src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg" alt="avatar">
-                                    </a>
-                                </div>
-                                <div class="col-11" style="padding-left: 35px; padding-top: 5px">
-                                    <div class="comment-body">
-                                        <div class="comment-heading">
-                                            <h4 class="user">Gavino Free</h4>
-                                        </div>
-                                        <p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </li>
-                        <li class="comment">
-                            <div class="row">
-                                <div class="col-1" style="padding-top: 8px">
-                                    <a class="pull-left" href="#">
-                                        <img class="avatar" src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg" alt="avatar">
-                                    </a>
-                                </div>
-                                <div class="col-11" style="padding-left: 35px; padding-top: 5px">
-                                    <div class="comment-body">
-                                        <div class="comment-heading">
-                                            <h4 class="user">Gavino Free</h4>
-                                        </div>
-                                        <p>Sure, ooooooooooooooo Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi consequuntur doloribus nostrum obcaecati odio provident veniam. Aspernatur inventore nihil reiciendis. ohhhhhhhhhhhhhhhh</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </li>
-                        <li class="comment">
-                            <div class="row">
-                                <div class="col-1" style="padding-top: 8px">
-                                    <a class="pull-left" href="#">
-                                        <img class="avatar" src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg" alt="avatar">
-                                    </a>
-                                </div>
-                                <div class="col-11" style="padding-left: 35px; padding-top: 5px">
-                                    <div class="comment-body">
-                                        <div class="comment-heading">
-                                            <h4 class="user">Gavino Free</h4>
-                                        </div>
-                                        <p>Sure, ooooooooooooooooh Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur expedita illum iste odit officia porro possimus praesentium qui quis ut? Hic illo iusto nostrum pariatur. Corporis, cumque ipsum iure magnam molestias nobis optio perspiciatis qui sed velit veritatis voluptatum? Adipisci consequuntur et magnam molestias necessitatibus numquam quas quo? Doloremque, saepe! hhhhhhhhhhhhhhh</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </li>
+                    <ul class="comments-list" id="listcmt">
                     </ul>
                 </div>
             </div>
@@ -299,7 +246,8 @@
             
 		</div>
 	</div>
-
+    <input type = "hidden" value="<%=Book_ID%>" id = "bookid">
+    <input type = "hidden" value="<%=User_ID%>" id = "userid">
 	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -328,5 +276,26 @@ function setIframeHeight(id) {
     ifrm.style.height = getDocHeight( doc ) + 4 + "px";
     ifrm.style.visibility = 'visible';
 }
-
+function sendComment()
+{
+    $.post("/book/read/id/cmt",
+    {
+        U_ID: $("#userid").val(),
+        B_ID: $("#bookid").val(),
+        C_Content: $("#c_content").val()
+    },
+    function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+        
+    });
+}
+$(document).ready(function(){
+    
+        $.get("/book/getcomment/"+$("#bookid").val(), function(data){
+            console.log("Data: " + data[0].C_Content);
+            for(var i=0;i<data.length;i++){
+            $( "#listcmt" ).append( '<li class="comment"><div class="row"><div class="col-1" style="padding-top: 8px"><a class="pull-left" href="#"><img class="avatar" src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg" alt="avatar"></a></div><div class="col-11" style="padding-left: 35px; padding-top: 5px"><div class="comment-body"><div class="comment-heading"><h4 class="user">'+data[i].U_FullName+'</h4></div><p>'+data[i].C_Content+'</p></div></div></div></li>' );
+        }});
+    
+});
 </script>
