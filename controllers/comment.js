@@ -37,12 +37,11 @@ function getCommentsByBookId(bookId){
     var comments = commentMoldel.getCommentsByBookId(bookId);
     comments.once('results', function(data){
         if(data.length>0){
+            console.log(data);
             return data;
         }
     });
 }
-
-console.log(getCommentsByBookId(72));
 
 module.exports = {
     addComment,
