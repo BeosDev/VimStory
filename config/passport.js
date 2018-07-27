@@ -71,7 +71,7 @@ module.exports = function () {
         var User = new UserModel.getOneUserViaUserName(username);
         User.once('results', function (results) {
             if (results.length > 0) {
-                return done(null, false, req.flash('registerMessage','Tài khoản hoặc mật khẩu đã tồn tại'));
+                return done(null, false, req.flash('registerMessage','Tài khoản đã tồn tại'));
             }
             var ssUser = {
                 Username: req.body.U_Username,
