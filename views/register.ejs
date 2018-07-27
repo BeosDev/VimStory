@@ -56,6 +56,11 @@
     <div class="wrapper">
         <form class="form-signin" method="POST" id="form" action = "/register">
             <h2 class="form-signin-heading">Register</h2>
+            <% if (registerMessage.length > 0) { %>
+                <div class="alert alert-warning">
+                    <%= registerMessage %>
+                  </div>
+              <% } %>   
             <div class="form-group">
                 <label for="usr">Username:</label>
                 <input type="text" class="form-control" name="U_Username" placeholder="User Name(8-20 kí tự)" required="" autofocus="" />

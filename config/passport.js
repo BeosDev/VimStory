@@ -71,7 +71,7 @@ module.exports = function () {
         var User = new UserModel.getOneUserViaUserName(username);
         User.once('results', function (results) {
             if (results.length > 0) {
-                return done(null, false, req.flash('Tài khoản hoặc mật khẩu đã tồn tại'));
+                return done(null, false, req.flash('registerMessage','Tài khoản hoặc mật khẩu đã tồn tại'));
             }
             var newUser = new UserModel.addUser({
                 Username: req.body.U_Username,
@@ -79,7 +79,8 @@ module.exports = function () {
                 U_Email: req.body.U_Email,
                 U_Address: req.body.U_Address,
                 U_Phone: req.body.U_Phone,
-                U_Authorization: 1
+                U_Authorization: 1,
+                U_FullName: req.body.U_FullName
             });
             newUser.once('results', function (results) {
                 console.log('register: ',results);
