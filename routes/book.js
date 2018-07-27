@@ -18,6 +18,11 @@ router.get('/read/:bid/like', function(req, res) {
         bookController.likeBook(req,res);
     else return res.json({isLike: 'false'});
 });
+
+router.get('/read/:bid/countlike', function(req, res) {
+    bookController.countLike(req,res);
+});
+
 router.get('/bookContent', function(req, res, next) {
     //var path = 'index/readBookContent';
     //bookController.getOneBook(req,res,next,path);

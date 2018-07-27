@@ -496,6 +496,12 @@ function verifyBook(req,res,next)
     });
 }
 
+function countLike(req,res){
+    var numLike = new likeModel.getLikeByBid(req.params.bid);
+    numLike.once("results",num => res.json({numLike:num.length}));
+    numLike.once("error",err => res.json({numLike:0}));
+}
+
 module.exports = {
     getBooks,
     addBook,
@@ -511,5 +517,6 @@ module.exports = {
     getUserAddBookPage,
     getVerifyBooks,
     verifyBook,
-    likeBook
+    likeBook,
+    countLike
 }
