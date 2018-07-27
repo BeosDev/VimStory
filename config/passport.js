@@ -80,7 +80,8 @@ module.exports = function () {
                 U_Address: req.body.U_Address,
                 U_Phone: req.body.U_Phone,
                 U_Authorization: 1,
-                U_FullName: req.body.U_FullName
+                U_FullName: req.body.U_FullName,
+                U_Sex: req.body.U_Sex
             };
             var newUser = new UserModel.addUser(ssUser);
             newUser.once('results', function (results) {

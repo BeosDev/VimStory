@@ -129,12 +129,13 @@
             rules: {
                 U_Username: {   // đây là trường name của input
                     required: true,  // không được để trống
-                    minlength: 8,
+                    minlength: 6,
                     maxlength: 20
                 },
-                U_Pasword: {
+                U_Password: {
                     required: true,
-
+                    minlength: 6,
+                    maxlength: 20
                 },
                 U_Phone: {
                     required: true,
@@ -155,10 +156,15 @@
 
             },
             messages: {
-                name: {
+                U_Username: {
                     required: "Xin vui lòng nhập tên !",
-                    minlength: "Tên được nhập quá 20 ký tự !",
+                    minlength: "Tên không được nhập ít hơn 8 ký tự !",
                     maxlength: "Tên không được nhập quá 20 ký tự !"
+                },
+                U_Password: {
+                    required: "Xin vui lòng nhập tên !",
+                    minlength: "Mật khẩu không được nhập ít hơn 8 ký tự !",
+                    maxlength: "Mật khẩu không được nhập quá 20 ký tự !"
                 },
                 email: {
                     required: "Xin vui lòng nhập email !",
