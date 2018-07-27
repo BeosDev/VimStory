@@ -221,26 +221,7 @@
                             </div>
                         </div>
 
-                    <ul class="comments-list">
-
-                        <li class="comment">
-                            <div class="row">
-                                <div class="col-1" style="padding-top: 8px">
-                                    <a class="pull-left" href="#">
-                                        <img class="avatar" src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg" alt="avatar">
-                                    </a>
-                                </div>
-                                <div class="col-11" style="padding-left: 35px; padding-top: 5px">
-                                    <div class="comment-body">
-                                        <div class="comment-heading">
-                                            <h4 class="user">Gavino Free</h4>
-                                        </div>
-                                        <p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </li>
+                    <ul class="comments-list" id="listcmt">
                     </ul>
                 </div>
             </div>
@@ -305,6 +286,16 @@ function sendComment()
     },
     function(data, status){
         alert("Data: " + data + "\nStatus: " + status);
+        
     });
 }
+$(document).ready(function(){
+    
+        $.get("/book/getcomment/"+$("#bookid").val(), function(data){
+            console.log("Data: " + data[0].C_Content);
+            for(var i=0;i<data.length;i++){
+            $( "#listcmt" ).append( '<li class="comment"><div class="row"><div class="col-1" style="padding-top: 8px"><a class="pull-left" href="#"><img class="avatar" src="https://cdn.arstechnica.net/wp-content/uploads/2016/02/5718897981_10faa45ac3_b-640x624.jpg" alt="avatar"></a></div><div class="col-11" style="padding-left: 35px; padding-top: 5px"><div class="comment-body"><div class="comment-heading"><h4 class="user">'+data[i].U_FullName+'</h4></div><p>'+data[i].C_Content+'</p></div></div></div></li>' );
+        }});
+    
+});
 </script>

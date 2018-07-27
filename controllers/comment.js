@@ -18,10 +18,10 @@ function addComment(req,res){
 }
 
 function getComments(req,res,next){
-    var comment = commentMoldel.getcomment();
+    var comment = commentMoldel.getCommentsByBookId(req.params.id);
     comment.once('results', function(data){
         if(data.length>0){
-            return data;
+            res.send(data);
         }
         else res.end("error");
     });
@@ -39,6 +39,7 @@ function getCommentsByBookId(bookId){
         }
     });
 }
+
 
 module.exports = {
     addComment,

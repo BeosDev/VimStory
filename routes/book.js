@@ -32,4 +32,8 @@ router.post('/read/:id/cmt',(req,res)=>{
     commentController.addComment(req,res);
 });
 
+router.get('/getcomment/:id',function(req,res,next){
+    commentController.getComments(req,res);
+})
+
 module.exports = router;
