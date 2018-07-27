@@ -23,8 +23,10 @@ function removeLike(bid,uid){
 function isLike(bid,uid){
     var query = `SELECT * FROM u_like WHERE B_ID = ${bid} AND U_ID = ${uid}`;
     return new executeQuery(query);
-}
+};
 
+// var k = new getLikeByBid(158);
+// k.once("results",res => console.log(res.length));
 module.exports = {
     countLikes,
     addLike,
