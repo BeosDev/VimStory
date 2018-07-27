@@ -1,16 +1,14 @@
 var commentMoldel = require("../models/comment");
 
 function addComment(req,res){
-    var comment = commentMoldel.addcomment(req.body);
+    
     var commnetLength = req.body.C_Content.toString().length;
     if(commnetLength > 250){
         return res.send('Error');
     }
+    var comment = new commentMoldel.addComment(req.body);
     comment.once('results',function(results){
-        console.log(results);
-        if (results.affectedRows > 0)
-            return 0;
-        else res.end('error');
+        return 0;
     });
     comment.once('error',function(err){
         res.end('error');
