@@ -21,7 +21,7 @@ function addComment(req,res){
 }
 
 function getComments(req,res,next){
-    var comment = categoryMoldel.getcomment();
+    var comment = commentMoldel.getcomment();
     comment.once('results', function(data){
         if(data.length>0){
             return data;
@@ -33,7 +33,19 @@ function getComments(req,res,next){
     })
 }
 
+function getCommentsByBookId(bookId){
+    var comments = commentMoldel.getCommentsByBookId(bookId);
+    comments.once('results', function(data){
+        if(data.length>0){
+            return data;
+        }
+    });
+}
+
+console.log(getCommentsByBookId(72));
+
 module.exports = {
     addComment,
-    getComments
+    getComments,
+    getCommentsByBookId
 }
