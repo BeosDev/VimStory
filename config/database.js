@@ -6,9 +6,10 @@ var con = mysql.createConnection({
   password: '',
   database: 'vimstory'
 });
+
 function executeQuery(cmd,paramters){ 
     if (this.getMaxListeners() < 12)
-      this.setMaxListeners(12);
+      this.setMaxListeners(30);
     var emitter = this; 
     con.query(cmd,paramters,function(err,results){
       console.log(cmd);
