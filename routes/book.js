@@ -29,6 +29,7 @@ router.get('/',function(req,res,next){
 });
 
 router.post('/read/:id/cmt',(req,res)=>{
+    console.log(req.body.C_Content);
     commentController.addComment(req,res);
 });
 
