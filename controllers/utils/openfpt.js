@@ -16,7 +16,7 @@ function getSpeech(text) {
             url: 'http://api.openfpt.vn/text2speech/v4',
             headers: {
                 'cache-control': 'no-cache',
-                api_key: '62c801011dd447058a7d7c3b27bca060'
+                api_key: '721d7ee2c42d40239c355445c7cc0576'
             },
             body: text
         };
